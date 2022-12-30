@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\admin\AdminPagesController;
+use App\Http\Controllers\user\UserPagesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +18,23 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-Route::get('/admin', [AdminPagesController::class, 'index']);
-Route::get('/', [AdminPagesController::class, 'index']);
+//normal routes
+Route::get('/', [UserPagesController::class, 'index']);
+
+
+
+// authenticated routes
+Route::middleware('auth')->group(function () {
+
+});
+
+
+
+
+// admin routes
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+
+
+
+    Route::get('/admin', [AdminPagesController::class, 'index']);
+  });
