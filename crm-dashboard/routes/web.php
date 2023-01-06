@@ -1,5 +1,9 @@
 <?php
 use App\Http\Controllers\admin\AdminPagesController;
+use App\Http\Controllers\admin\customers\CustomersController;
+use App\Http\Controllers\admin\staff\StaffController;
+use App\Http\Controllers\admin\product\ProductController;
+use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\user\UserPagesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -37,4 +41,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
     Route::get('/admin', [AdminPagesController::class, 'index']);
+    Route::resource('/admin/customers',CustomersController::class);
+    Route::resource('/admin/staffs',StaffController::class);
+    Route::resource('/admin/products',ProductController::class);
+    Route::resource('/admin/productsCategory',ProductCategoryController::class);
+
+
+
   });

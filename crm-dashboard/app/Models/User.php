@@ -6,7 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\staffs;
+
+
 
 class User extends Authenticatable
 {
@@ -20,6 +24,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'address',
         'gender',
         'dob',
         'role',
@@ -27,6 +32,8 @@ class User extends Authenticatable
         'password',
     ];
 
+
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -45,4 +52,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+/**
+ * Get the Staff associated with the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+public function staff(): HasOne
+{
+    return $this->hasOne(staffs::class);
+}
 }
