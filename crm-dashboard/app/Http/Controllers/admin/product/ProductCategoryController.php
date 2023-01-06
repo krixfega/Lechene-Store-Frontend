@@ -4,6 +4,11 @@ namespace App\Http\Controllers\admin\product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
+use App\Models\ProductsCategory;
+use Illuminate\Support\Facades\File;
 
 class ProductCategoryController extends Controller
 {
@@ -15,8 +20,9 @@ class ProductCategoryController extends Controller
     public function index()
     {
         //
-        return view('admin.pages.products.index');
+        $categories = ProductsCategory::all();
 
+        return view('admin.pages.products.index',compact('categories'));
     }
 
     /**
@@ -27,6 +33,9 @@ class ProductCategoryController extends Controller
     public function create()
     {
         //
+        
+        return view('admin.pages.products.category.create');
+
     }
 
     /**
@@ -38,6 +47,29 @@ class ProductCategoryController extends Controller
     public function store(Request $request)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'image' => ['required', 'image'],
+        ]);
+
+        if ($validator->fails()) {
+            // Validation failed
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+        } else {
+            // Validation succeeded, create the category
+            $category = new ProductsCategory();
+
+            // Save the image
+            $image = $request->file('image');
+            $image->move(public_path('images/categories'), $image->getClientOriginalName());
+            $category->name = $request->name;
+            $category->image = $image->getClientOriginalName();
+            $category->save();
+
+            return redirect('admin/productsCategory')->with('success', 'Products Category Created Successfully');
+        }
     }
 
     /**
@@ -60,6 +92,10 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         //
+        $category = ProductsCategory::findorfail($id);
+
+        return view('admin.pages.products.category.edit',compact('category'));
+
     }
 
     /**
@@ -72,6 +108,34 @@ class ProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'image' => ['image'],
+        ]);
+
+        if ($validator->fails()) {
+            // Validation failed
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+        } else {
+        // Update the category
+$category = ProductsCategory::find($id);
+
+// Check if the user has uploaded a new image
+if ($request->hasFile('image')) {
+    // Save the new image
+    $image = $request->file('image');
+    $image->move(public_path('images/categories'), $image->getClientOriginalName());
+    $category->image = $image->getClientOriginalName();
+}
+
+$category->name = $request->name;
+$category->save();
+
+return redirect('admin/productsCategory')->with('success', 'Products Category Updated Successfully');
+        }
+
     }
 
     /**
@@ -83,5 +147,11 @@ class ProductCategoryController extends Controller
     public function destroy($id)
     {
         //
+        $category = ProductsCategory::findOrFail($id);
+
+       
+     File::delete(public_path('images/categories/' . $category->image));
+      $category->delete();
+        return redirect('admin/productsCategory')->with('success', 'Category deleted successfully');
     }
 }

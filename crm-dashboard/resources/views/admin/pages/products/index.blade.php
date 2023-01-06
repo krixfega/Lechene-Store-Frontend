@@ -13,7 +13,7 @@
                                 <h6>Product Category Table</h6>
                             </div>
                             <div class="p-1">
-                                <a href=""
+                                <a href="{{ route('productsCategory.create') }}"
                                     class="btn btn-link bg-primary text-white  text-center">
                                     <h6 class="text-white text-center">Create</h6>
                                 </a>
@@ -25,92 +25,71 @@
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Name</th>
+                                                Image
+                                            </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Email</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Address</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                DOB</th>
+                                                Name l
+                                            </th>
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Phone</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Date Joined</th>
+                                                Date Created</th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
-                                                        <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
-                                                            alt="user1">
-                                                    </div> --}}
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            {{-- <h6 class="mb-0 text-sm text-primary">John Michael</h6> --}}
-                                                            <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                               </p>
-                                                        </div>
+                                        @foreach ($categories as $category)
+
+
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    <div>
+                                                        <img src="{{asset('images/categories/'.$category->image)}}" class="avatar avatar-sm me-3"
+                                                            alt="{{$category->name}} image">
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="text-secondary text-xs font-weight-bold"></span>
-                                                </td>
-                                                {{-- <td class="align-middle">
+
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                    {{$category->name}}
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
+                                            </td>
+
+
+                                            <td>
+                                                <span class="text-secondary text-xs font-weight-bold">{{ date('Y-m-d', strtotime($category->created_at)) }}</span>
+                                            </td>
+                                            {{-- <td class="align-middle">
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
 
                                                 </a>
                                             </td> --}}
-                                                <td class="align-middle">
-                                                    <a href=""
-                                                        class="text-success font-weight-bold text-xs" data-toggle="tooltip"
-                                                        data-original-title="Edit user">
-                                                       <i class="fa fa-pen"></i>
-                                                    </a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <form action=""
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="text-danger  border-0 font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Delete user">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                            <td class="align-middle">
+                                                <a href="{{route('productsCategory.edit',$category->id)}}" class="text-success font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="{{url('admin/productsCategory/'.$category->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-danger  border-0 font-weight-bold text-xs"
+                                                        data-toggle="tooltip" data-original-title="Delete user">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
 
 
 
-                                            </tr>
-                                        
+                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -118,7 +97,7 @@
                     </div>
                 </div>
             </div>
-          
+
             <div class="row">
                 <div class="col-12">
                     <div class="card mb-4">
@@ -127,8 +106,7 @@
                                 <h6>Products Table</h6>
                             </div>
                             <div class="p-1">
-                                <a href=""
-                                    class="btn btn-link bg-primary text-white  text-center">
+                                <a href="" class="btn btn-link bg-primary text-white  text-center">
                                     <h6 class="text-white text-center">Create</h6>
                                 </a>
                             </div>
@@ -158,73 +136,71 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex px-2 py-1">
-                                                        {{-- <div>
+
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex px-2 py-1">
+                                                    {{-- <div>
                                                         <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3"
                                                             alt="user1">
                                                     </div> --}}
-                                                        <div class="d-flex flex-column justify-content-center">
-                                                            {{-- <h6 class="mb-0 text-sm text-primary">John Michael</h6> --}}
-                                                            <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                               </p>
-                                                        </div>
+                                                    <div class="d-flex flex-column justify-content-center">
+                                                        {{-- <h6 class="mb-0 text-sm text-primary">John Michael</h6> --}}
+                                                        <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                        </p>
                                                     </div>
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                    {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
-                                                </td>
-                                                <td>
-                                                    <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        </p>
-                                                </td>
-                                                <td>
-                                                    <span
-                                                        class="text-secondary text-xs font-weight-bold"></span>
-                                                </td>
-                                                {{-- <td class="align-middle">
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <span class="text-secondary text-xs font-weight-bold"></span>
+                                            </td>
+                                            {{-- <td class="align-middle">
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
 
                                                 </a>
                                             </td> --}}
-                                                <td class="align-middle">
-                                                    <a href=""
-                                                        class="text-success font-weight-bold text-xs" data-toggle="tooltip"
-                                                        data-original-title="Edit user">
-                                                       <i class="fa fa-pen"></i>
-                                                    </a>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <form action=""
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="text-danger  border-0 font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Delete user">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                </td>
+                                            <td class="align-middle">
+                                                <a href="" class="text-success font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Edit user">
+                                                    <i class="fa fa-pen"></i>
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-danger  border-0 font-weight-bold text-xs"
+                                                        data-toggle="tooltip" data-original-title="Delete user">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </td>
 
 
 
-                                            </tr>
-                                        
+                                        </tr>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -232,7 +208,7 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </main>
 @endsection
