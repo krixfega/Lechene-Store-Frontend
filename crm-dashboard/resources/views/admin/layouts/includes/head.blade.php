@@ -20,5 +20,8 @@
     {{-- <link  href="assets/css/style.css?v=2.0.4" rel="stylesheet" /> --}}
     <link id="pagestyle" rel="stylesheet" href="{{asset('assets/css/style.css?v=2.0.4')}}">
 <link href="{{ asset('assets/js/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css"  >
+<!-- Include Dropzone.js CSS and js-->
+<link href="{{asset('assets/js/plugins/dropzone/dropzone.css')}}" rel="stylesheet">
+
 
 </head>

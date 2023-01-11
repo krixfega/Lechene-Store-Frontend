@@ -44,6 +44,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('/admin/customers',CustomersController::class);
     Route::resource('/admin/staffs',StaffController::class);
     Route::resource('/admin/products',ProductController::class);
+    Route::post('/admin/products/img',[ProductController::class, 'image_upload'])->name('products.img');
     Route::resource('/admin/productsCategory',ProductCategoryController::class);
 
 

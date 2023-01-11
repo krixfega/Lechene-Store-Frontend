@@ -71,7 +71,7 @@
                                             <td class="align-middle">
                                                 <a href="{{route('productsCategory.edit',$category->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
-                                                    <i class="fa fa-pen"></i>
+                                                    <i class="fa fa-pen"></i> Edit
                                                 </a>
                                             </td>
                                             <td class="align-middle">
@@ -81,7 +81,7 @@
                                                     <button type="submit"
                                                         class="text-danger  border-0 font-weight-bold text-xs"
                                                         data-toggle="tooltip" data-original-title="Delete user">
-                                                        <i class="fa fa-trash"></i>
+                                                        <i class="fa fa-trash"></i>Delete
                                                     </button>
                                                 </form>
                                             </td>
@@ -106,7 +106,7 @@
                                 <h6>Products Table</h6>
                             </div>
                             <div class="p-1">
-                                <a href="" class="btn btn-link bg-primary text-white  text-center">
+                                <a href="{{route('products.create')}}" class="btn btn-link bg-primary text-white  text-center">
                                     <h6 class="text-white text-center">Create</h6>
                                 </a>
                             </div>
@@ -119,23 +119,27 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Name</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Email</th>
+                                                Category</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Address</th>
+                                               Qty</th>
+                                                <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Seliing Price</th>
                                             <th
                                                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                DOB</th>
+                                                Discounted Price</th>
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Phone</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Date Joined</th>
+                                            Created Date</th>
+                                            <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($products as $product)
+
 
                                         <tr>
                                             <td>
@@ -147,31 +151,41 @@
                                                     <div class="d-flex flex-column justify-content-center">
                                                         {{-- <h6 class="mb-0 text-sm text-primary">John Michael</h6> --}}
                                                         <p class="text-xs font-weight-bold mb-0 text-secondary">
+
+                                                            {{$product->name}}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                    {{$product->Category->name}}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                {{$product->qty}}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                {{$product->selling_price}}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                {{$product->discounted_price}}
+
                                                 </p>
                                             </td>
                                             <td>
-                                                <span class="text-secondary text-xs font-weight-bold"></span>
+                                                <span class="text-secondary text-xs font-weight-bold">
+                                                    {{ date('Y-m-d', strtotime($product->created_at)) }}
+
+                                                </span>
                                             </td>
                                             {{-- <td class="align-middle">
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
@@ -180,19 +194,25 @@
                                                 </a>
                                             </td> --}}
                                             <td class="align-middle">
-                                                <a href="" class="text-success font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-                                                    <i class="fa fa-pen"></i>
+                                                <a href="{{route('products.edit',$product->id)}}" class="text-success font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="Edit Product">
+                                                    <i class="fa fa-pen"></i>Edit
                                                 </a>
                                             </td>
                                             <td class="align-middle">
-                                                <form action="" method="POST">
+                                                <a href="{{route('products.show',$product->id)}}" class="text-success font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="View More">
+                                                    <i class="fa fa-eye"></i>View
+                                                </a>
+                                            </td>
+                                            <td class="align-middle">
+                                                <form action="{{route('products.destroy',$product->id)}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
                                                         class="text-danger  border-0 font-weight-bold text-xs"
                                                         data-toggle="tooltip" data-original-title="Delete user">
-                                                        <i class="fa fa-trash"></i>
+                                                        <i class="fa fa-trash"></i>Delete
                                                     </button>
                                                 </form>
                                             </td>
@@ -201,6 +221,8 @@
 
                                         </tr>
 
+
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
