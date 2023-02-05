@@ -9,6 +9,7 @@ use App\Models\ProductsCategory;
 use App\Models\Products;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
+use App\Models\fibrics;
 
 class ProductController extends Controller
 {
@@ -20,9 +21,10 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $fibrics = fibrics::all();
         $categories = ProductsCategory::all();
         $products = Products::with('Category')->get();
-        return view('admin.pages.products.index',compact('categories','products'));
+        return view('admin.pages.products.index',compact('categories','products','fibrics'));
     }
 
     /**
@@ -110,6 +112,10 @@ class ProductController extends Controller
     public function show($id)
     {
         //
+        $product = Products::findOrFail($id);
+        $images = ProductImages::where('products_id',$id)->get();
+        return view('admin.pages.products.show',compact('product','images'));
+
     }
 
     /**
@@ -185,10 +191,12 @@ class ProductController extends Controller
                     // echo($product_images->name);
                 }
             }
-                return redirect()->route('products.index')->with('success', 'Product updated successfully!');
+                
 
         }
-    }
+  return redirect()->route('products.index')->with('success', 'Product updated successfully!'); 
+ }
+    
     }
     /**
      * Remove the specified resource from storage.

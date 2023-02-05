@@ -7,6 +7,7 @@ use App\Models\staffs;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
@@ -32,7 +33,12 @@ class StaffController extends Controller
     public function create()
     {
         //
+        if(Auth::user()->role == 'Admin'){
         return view('admin.pages.staff.create');
+        }else{
+            return redirect()->back()->with('error','Access Denialed!!');
+        }
+
     }
 
     /**
@@ -63,6 +69,7 @@ class StaffController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         } else {
+            if(Auth::user()->role == 'Admin'){
            $user = User::create([
                 'name' => $request['name'],
                 'gender' => $request['gender'],
@@ -81,7 +88,11 @@ class StaffController extends Controller
 
 
             return redirect('admin/staffs')->with('successs', 'Staff Created Successfully');
+        }else{
+            return redirect()->back()->with('error','Access Denialed!!');
+
         }
+    }
     }
 
     /**
@@ -104,8 +115,14 @@ class StaffController extends Controller
     public function edit($id)
     {
         //
+        if(Auth::user()->role == 'Admin'){
+
         $staff = User::findorfail($id);
         return view('admin.pages.staff.edit', compact('staff'));
+        }else{
+            return redirect()->back()->with('error','Access Denialed!!');
+
+        }
     }
 
 
@@ -138,6 +155,8 @@ class StaffController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         } else {
+        if(Auth::user()->role == 'Admin'){
+
            $user = User::where('id',$id)->update([
                 'name' => $request['name'],
                 'gender' => $request['gender'],
@@ -156,7 +175,11 @@ class StaffController extends Controller
 
 
             return redirect('admin/staffs')->with('successs', 'Staff Updated Successfully');
+        }else{
+            return redirect()->back()->with('error','Access Denialed!!');
+
         }
+    }
     }
 
     /**
@@ -168,9 +191,15 @@ class StaffController extends Controller
     public function destroy($id)
     {
         //
+        if(Auth::user()->role == 'Admin'){
+
         $user = User::findorfail($id);
         $user->delete();
         return redirect('admin/staffs')->with('successs', 'Staff Deleted Successfully');
+        }
+       else{
+        return redirect()->back()->with('error','Access Denialed!!');
 
+        }
     }
 }
