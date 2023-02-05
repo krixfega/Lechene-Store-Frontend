@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use App\Models\ProductsCategory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
 
 class ProductCategoryController extends Controller
 {
@@ -92,10 +93,14 @@ class ProductCategoryController extends Controller
     public function edit($id)
     {
         //
+        if(Auth::user()->role == 'Admin'){
         $category = ProductsCategory::findorfail($id);
 
         return view('admin.pages.products.category.edit',compact('category'));
+        }else{
+            return redirect()->back()->with('error','Access Denied!!');
 
+        }
     }
 
     /**
@@ -108,6 +113,8 @@ class ProductCategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        if(Auth::user()->role == 'Admin'){
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'image' => ['image'],
@@ -135,6 +142,10 @@ $category->save();
 
 return redirect('admin/productsCategory')->with('success', 'Products Category Updated Successfully');
         }
+    }else{
+        return redirect()->back()->with('error','Access Denied!!');
+
+    }
 
     }
 
@@ -147,11 +158,17 @@ return redirect('admin/productsCategory')->with('success', 'Products Category Up
     public function destroy($id)
     {
         //
+        if(Auth::user()->role == 'Admin'){
+
         $category = ProductsCategory::findOrFail($id);
 
        
      File::delete(public_path('images/categories/' . $category->image));
       $category->delete();
         return redirect('admin/productsCategory')->with('success', 'Category deleted successfully');
+    }else{
+        return redirect()->back()->with('error','Access Denied!!');
+
     }
+}
 }

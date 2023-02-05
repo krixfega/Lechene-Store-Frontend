@@ -12,8 +12,9 @@ $(document).ready(function() {
     } );
     
     var table = $('#example2').DataTable( {
-        "scrollY": "200px",
-        "paging": false
+        "scrollX": "true",
+
+        "paging": true
     } );
  
     $('a.toggle-vis').on( 'click', function (e) {

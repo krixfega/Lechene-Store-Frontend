@@ -13,10 +13,14 @@
                                 <h6>Staffs Table</h6>
                             </div>
                             <div class="p-1">
+                            @if (Auth::user()->role == 'Admin')
+
                                 <a href="{{ route('staffs.create') }}"
                                     class="btn btn-link bg-primary text-white  text-center">
                                     <h6 class="text-white text-center">Create</h6>
                                 </a>
+                            @endif
+
                             </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
@@ -47,8 +51,11 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date Joined</th>
+                                                @if (Auth::user()->role == 'Admin')
+
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -114,6 +121,8 @@
 
                                                 </a>
                                             </td> --}}
+                                            @if (Auth::user()->role == 'Admin')
+
                                             <td class="align-middle">
                                                 <a href="{{url('admin/staffs/'.$item->id.'/edit')}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
@@ -132,7 +141,7 @@
                                                 </form>
                                             </td>
 
-
+                                            @endif
 
                                         </tr>
                                         @endforeach

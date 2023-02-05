@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class CustomersController extends Controller
@@ -145,8 +146,13 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         //
+        if( Auth::user()->role == 'Admin'){
         $customer = User::findOrFail($id);
         $customer->delete();
         return redirect()->back()->with('success', 'Customer deleted successfully');
+        }else{
+            return redirect()->back()->with('error', 'Access Denialed!!!');
+
+        }
     }
 }

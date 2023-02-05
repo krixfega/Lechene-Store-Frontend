@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\staffs;
+use App\Models\Tailor;
 
 
 
@@ -33,7 +34,7 @@ class User extends Authenticatable
     ];
 
 
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -60,5 +61,14 @@ class User extends Authenticatable
 public function staff(): HasOne
 {
     return $this->hasOne(staffs::class);
+}
+/**
+ * Get the Tailor associated with the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+public function tailor(): HasOne
+{
+    return $this->hasOne(Tailor::class);
 }
 }

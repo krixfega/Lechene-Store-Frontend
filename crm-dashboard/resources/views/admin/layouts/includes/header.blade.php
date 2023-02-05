@@ -26,8 +26,36 @@
             <span class="nav-link-text ms-1">Customers Management</span>
           </a>
         </li>
+        <li class="nav-item dropdown position-relative" id=" ">
+            <span class="nav-link dropdown-toggle"  id="BookingDropdown" role="button"  data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-image text-danger text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1" data-bs-dismiss="modal">Staff Management</span>
+            </span>
+            <div class="dropdown-menu bg-secondary text-white mt-0 " aria-labelledby="StaffDropdown">
+              <a class="dropdown-item" href="{{url('admin/staffs')}}">All Staffs</a>
+              @if(Auth::user()->role == 'Admin')
+              <a class="dropdown-item" href="{{url('admin/staffs/create')}}">Create Staff</a>
+              @endif
+            </div>
+          </li>
+        <li class="nav-item dropdown position-relative" id=" ">
+            <span class="nav-link dropdown-toggle"  id="BookingDropdown" role="button"  data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-image text-secondary text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1" data-bs-dismiss="modal">Tailor Management</span>
+            </span>
+            <div class="dropdown-menu bg-secondary text-white mt-0 " aria-labelledby="StaffDropdown">
+              <a class="dropdown-item" href="{{route('tailor.index')}}">index</a>
+              {{-- <a class="dropdown-item" href="{{url('')}}">Create Tailors</a> --}}
+              <a class="dropdown-item" href="{{route('tailor.create')}}">Assign Tailors</a>
+
+            </div>
+          </li>
         <li class="nav-item">
-          <a class="nav-link " href="../pages/account.html">
+          <a class="nav-link " href="{{route('account.index')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-money-coins text-primary text-sm opacity-10"></i>
             </div>
@@ -42,26 +70,51 @@
             <span class="nav-link-text ms-1">Shop Management</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="{{url('admin/staffs')}}">
-            <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-image text-danger text-sm opacity-10"></i>
+        <li class="nav-item dropdown position-relative" id=" ">
+            <span class="nav-link dropdown-toggle"  id="StaffDropdown" role="button"  data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-basket text-primary text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1" data-bs-dismiss="modal">Point Of Sales</span>
+            </span>
+            <div class="dropdown-menu bg-secondary  mt-0 " aria-labelledby="StaffDropdown">
+              <a class="dropdown-item "  href="{{route('shop.index')}}">Shop</a>
+              <a class="dropdown-item"  href="{{route('orders.index')}}">Orders</a>
+              <a class="dropdown-item"  href="{{route('orders.history')}}">History</a>
             </div>
-            <span class="nav-link-text ms-1">Staff Management</span>
-          </a>
         </li>
+
+
+        <li class="nav-item dropdown position-relative" id=" ">
+            <span class="nav-link dropdown-toggle"  id="StaffDropdown" role="button"  data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+              <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="ni ni-image text-danger text-sm opacity-10"></i>
+              </div>
+              <span class="nav-link-text ms-1" data-bs-dismiss="modal">Booking</span>
+            </span>
+            <div class="dropdown-menu bg-secondary  mt-0 " aria-labelledby="StaffDropdown">
+              <a class="dropdown-item "  href="{{route('booking.index')}}">All Bookings</a>
+              <a class="dropdown-item"  href="{{route('booking.create')}}">Create Booking</a>
+              <a class="dropdown-item"  href="{{route('booking.history')}}">Booking History </a>
+            </div>
+        </li>
+
+
+
+
+
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
-        <li class="nav-item">
-          <a class="nav-link " href="../pages/profile.html">
+        <li class="nav-item">.
+          <a class="nav-link " href="{{route('admin.profile')}}">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
           <a class="nav-link " href="../pages/sign-in.html">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-single-copy-04 text-warning text-sm opacity-10"></i>
@@ -76,7 +129,7 @@
             </div>
             <span class="nav-link-text ms-1">Sign Up</span>
           </a>
-        </li>
+        </li> --}}
       </ul>
     </div>
 
