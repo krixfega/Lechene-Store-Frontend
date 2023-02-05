@@ -93,7 +93,7 @@
                                     <select name="gender"
                                         class="form-control form-control-lg @error('gender') is-invalid @enderror"
                                         value="{{ old('gender') }}">
-
+                
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>

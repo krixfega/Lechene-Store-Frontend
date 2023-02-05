@@ -31,7 +31,7 @@
 
 <body class="bg-light ">
     <div class="container h-100 d-flex flex-column justify-content-center">
-      <h1 class="text-center text-primary">Fashion Brand</h1>
+      <h1 class="text-center text-primary">LECHEENE LANDING PAGE</h1>
       <p class="text-center lead">
         Coming Soon
       </p>

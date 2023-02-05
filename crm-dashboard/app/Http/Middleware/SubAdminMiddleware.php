@@ -17,11 +17,11 @@ class SubAdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
-        if (Auth::user()->role == 'SubAdmin'){
-            return $next($request);
-          } else {
-            return redirect('/');
-          }
-    }
+        // return $next($request);
+    //     if (Auth::user()->role == 'SubAdmin'){
+    //         return $next($request);
+    //       } else {
+    //         return redirect('/');
+    //       }
+    // }
 }
