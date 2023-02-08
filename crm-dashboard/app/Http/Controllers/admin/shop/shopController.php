@@ -262,7 +262,7 @@ class shopController extends Controller
         $pdf = Pdf::loadView('admin.pages.shop.orders.invoice', compact('order'));
         // dd($_dompf_warnings);
         return $pdf->download($order->order_no . '.pdf');
-    
-        
+
+
     }
 }

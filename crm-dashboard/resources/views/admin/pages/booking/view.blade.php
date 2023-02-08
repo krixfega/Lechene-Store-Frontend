@@ -12,259 +12,265 @@
                 <h2>Booking Details</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                      <li class="breadcrumb-item"><a href="{{url('/admin')}}">Home</a></li>
-                      <li class="breadcrumb-item"><a href="{{route('booking.index')}}">All Booking</a></li>
-                      <li class="breadcrumb-item active" aria-current="page">View booking</li>
+                        <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('booking.index') }}">All Booking</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">View booking</li>
                     </ol>
-                  </nav>
-                  
-
-                <div class="col-12  col-lg-6 mt-10 mb-3 ">
-                    <h4 class="">User Details</h4>
-                    <table class="text-primary table-responsive">
-                        <tr class="d-flex flex-wrap">
-                            <td>Full Name:</td>
-                            <td class="text-secondary">{{ $booking->fullname }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Phone Number:</td>
-                            <td class="text-secondary">{{ $booking->phoneNumber }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Address:</td>
-                            <td class="text-secondary">{{ $booking->address }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Email:</td>
-                            <td class="text-secondary">{{ $booking->email }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Gender:</td>
-                            <td class="text-secondary">{{ $booking->gender }}</td>
-                        </tr>
+                </nav>
 
 
-                        <!-- All other fields -->
-                    </table>
-                </div>
-                <div class="col-12  col-lg-6 mt-lg-10 mt-3 my-0">
-                    <h4 class="r ">Product details</h4>
-
-                    <table class="text-primary table-responsive">
-                        <tr class="d-flex flex-wrap">
-                            <td>Booking Number:</td>
-                            <td class="text-secondary">{{ $booking->booking_no }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Fibric:</td>
-                            <td class="text-secondary">{{ $booking->fabric->name }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Price:</td>
-                            <td>NGN{{ $booking->fabric->selling_price }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Quantity:</td>
-                            <td class="text-secondary">{{ $booking->qty }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Quantity:</td>
-                            <td class="text-secondary">{{ $booking->booking_status }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Pickup Date:</td>
-                            <td class="text-secondary">{{ $booking->pickupDate }}</td>
-                        </tr>
-
-                    </table>
-                </div>
-                <div class="col-12  col-lg-12 my-lg-2 my-2">
-                    <h4 class="">Measurement details</h4>
-                    <div class="row">
-                    <table class="text-primary table-responsive col-12 col-lg-3">
-                        <tr class="d-flex flex-wrap">
-                            <td>Burst Front Arc:</td>
-                            <td class="text-secondary">{{ $booking->bustFrontArc }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Burst Back Arc:</td>
-                            <td class="text-secondary">{{ $booking->bustBackArc }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Corset Lenght:</td>
-                            <td>{{ $booking->corsetLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>3/4 Lenght:</td>
-                            <td class="text-secondary">{{ $booking->Length3_4 }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Short Sleeve Elbow:</td>
-                            <td class="text-secondary">{{ $booking->shortSleeveElbow }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Short Sleeve Round Elbow:</td>
-                            <td class="text-secondary">{{ $booking->shortSleeveRoundlbow }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Short Sleeve Full Sleeve Length:</td>
-                            <td class="text-secondary">{{ $booking->shortSleeveFullSleeveLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Neck:</td>
-                            <td class="text-secondary">{{ $booking->neck }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Shoulder:</td>
-                            <td class="text-secondary">{{ $booking->shoulder }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>OffShoulder:</td>
-                            <td class="text-secondary">{{ $booking->OffShoulder }}</td>
-                        </tr>
-
-
-
-                    </table>
-                    <table class="text-primary table-responsive col-lg-3 col-12">
-
-                        <tr class="d-flex flex-wrap">
-                            <td>UpperBust:</td>
-                            <td class="text-secondary">{{ $booking->upperBust }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Bust:</td>
-                            <td class="text-secondary">{{ $booking->bust }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>UnderBust:</td>
-                            <td class="text-secondary">{{ $booking->underBust }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>BustPoint:</td>
-                            <td class="text-secondary">{{ $booking->bustPoint }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>N-N:</td>
-                            <td class="text-secondary">{{ $booking->N_N }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>acrossF/B:</td>
-                            <td class="text-secondary">{{ $booking->acrossF_B }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>HalfLengthF/B:</td>
-                            <td class="text-secondary">{{ $booking->halfLengthF_B }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Top Length:</td>
-                            <td class="text-secondary">{{ $booking->topLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Waist/Highwaist:</td>
-                            <td class="text-secondary">{{ $booking->waist_highwaist }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>hip/hipLength:</td>
-                            <td class="text-secondary">{{ $booking->hip_hipLength }}</td>
-                        </tr>
-                    </table>
-                    <table class="text-primary table-responsive col-12 col-lg-3">
-
-
-                        <tr class="d-flex flex-wrap">
-                            <td>thigh/knee_ankle:</td>
-                            <td class="text-secondary">{{ $booking->thigh_knee_ankle }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>knee Circumfrence:</td>
-                            <td class="text-secondary">{{ $booking->kneeCircumfrence }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>shoulderToHip/knee:</td>
-                            <td class="text-secondary">{{ $booking->shoulderToHip_knee }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>waistToknee:</td>
-                            <td class="text-secondary">{{ $booking->waistToknee }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>armhole/hicep:</td>
-                            <td class="text-secondary">{{ $booking->armhole_hicep }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>sleeve:</td>
-                            <td class="text-secondary">{{ $booking->sleeve }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>roundSleeve:</td>
-                            <td class="text-secondary">{{ $booking->roundSleeve }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>wrist:</td>
-                            <td class="text-secondary">{{ $booking->wrist }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>trouserLength:</td>
-                            <td class="text-secondary">{{ $booking->trouserLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>fullLength:</td>
-                            <td class="text-secondary">{{ $booking->fullLength }}</td>
-                        </tr>
-
-                    </table>
-
-
-                    <table class="text-primary table-responsive col-12 col-lg-3">
-
-                        <tr class="d-flex flex-wrap">
-                            <td>dressLength:</td>
-                            <td class="text-secondary">{{ $booking->dressLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>shirt/Trouser:</td>
-                            <td class="text-secondary">{{ $booking->shirt_Trouser }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>Length:</td>
-                            <td class="text-secondary">{{ $booking->Length }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>RoundKnee:</td>
-                            <td class="text-secondary">{{ $booking->RoundKnee }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>KneeLength:</td>
-                            <td class="text-secondary">{{ $booking->KneeLength }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>waist/hips:</td>
-                            <td class="text-secondary">{{ $booking->waist_hips }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>thigh:</td>
-                            <td class="text-secondary">{{ $booking->thigh }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>ankle:</td>
-                            <td class="text-secondary">{{ $booking->ankle }}</td>
-                        </tr>
-                        <tr class="d-flex flex-wrap">
-                            <td>crotch F/B:</td>
-                            <td class="text-secondary">{{ $booking->crotchF_B }}</td>
-                        </tr>
-
-                    </table>
+                <div class="row px-3">
+                    <div class="col-12 col-lg-6 mb-3 shadow p-3 mb-5  bg-white ">
+                        {{-- <h4>User Details</h4> --}}
+                        <table class="table  table-striped table-responsive-sm">
+                            <tr>
+                                <th>Full Name:</th>
+                                <td class="text-secondary">{{ $booking->fullName }}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number:</th>
+                                <td class="text-secondary">{{ $booking->phoneNumber }}</td>
+                            </tr>
+                            <tr>
+                                <th>Address:</th>
+                                <td class="text-secondary">{{ $booking->address }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td class="text-secondary">{{ $booking->email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Gender:</th>
+                                <td class="text-secondary">{{ $booking->gender }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-12 col-lg-6 shadow p-3 mb-5  bg-white ">
+                        {{-- <h4>Product Details</h4> --}}
+                        <table class="table table-striped table-responsive-sm">
+                            <tr>
+                                <th>Booking Number:</th>
+                                <td class="text-secondary">{{ $booking->booking_no }}</td>
+                            </tr>
+                            <tr>
+                                <th>Fabric:</th>
+                                <td class="text-secondary">{{ $booking->fabric->name }}</td>
+                            </tr>
+                            <tr>
+                                <th>Price:</th>
+                                <td class="text-primary font-weight-bold">NGN{{ $booking->fabric->selling_price }}</td>
+                            </tr>
+                            <tr>
+                                <th>Quantity:</th>
+                                <td class="text-secondary">{{ $booking->qty }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td class="text-secondary">{{ $booking->bookingStatus }}</td>
+                            </tr>
+                            <tr>
+                                <th>Pickup Date:</th>
+                                <td class="text-secondary">{{ $booking->pickupDate }}</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
 
-                <div class="col-12  col-lg-12 my-lg-2 my-2">
-                    <h4 class="">Comment</h4>
-                    <p>
-                        {{$booking->comment}}
-                    </p>
+
+
+                <div class="container my-5">
+                    <h5 class="text-underline text-center mb-3">Measurement Details</h5>
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <table class="table table-bordered table-responsive">
+                                <tbody>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Neck</td>
+                                        <td class="text-secondary ">{{ $booking->neck }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Shoulder</td>
+                                        <td class="text-secondary ">{{ $booking->shoulder }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Front Arc</td>
+                                        <td class="text-secondary ">{{ $booking->frontArc }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Waist</td>
+                                        <td class="text-secondary ">{{ $booking->waist }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Hips</td>
+                                        <td class="text-secondary ">{{ $booking->hip }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Top Length</td>
+                                        <td class="text-secondary ">{{ $booking->topLength }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Trouser Length</td>
+                                        <td class="text-secondary ">{{ $booking->trouserLength }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Arm Hole</td>
+                                        <td class="text-secondary ">{{ $booking->armHole }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Round Sleeve</td>
+                                        <td class="text-secondary ">{{ $booking->roundSleeve }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Thigh</td>
+                                        <td class="text-secondary ">{{ $booking->thigh }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Knee</td>
+                                        <td class="text-secondary ">{{ $booking->knee }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-primary font-weight-bold">Crotch</td>
+                                        <td class="text-secondary ">{{ $booking->crotch }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        {{-- @if ($booking->gender == 'female')
+                      <div class="col-12 col-lg-6">
+                        <table class="table table-bordered table-responsive">
+                          <tbody>
+                            <tr> --}}
+                        @if ($booking->gender == 'female')
+                            <div class="col-12 col-lg-6">
+                                <table class="table table-bordered table-responsive">
+                                    <tbody>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">UpperBust:</td>
+                                            <td class="text-secondary ">{{ $booking->upperBust }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Bust:</td>
+                                            <td class="text-secondary ">{{ $booking->bust }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">UnderBust:</td>
+                                            <td class="text-secondary ">{{ $booking->underBust }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">BustPoint:</td>
+                                            <td class="text-secondary ">{{ $booking->bustPoint }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">N-N:</td>
+                                            <td class="text-secondary ">{{ $booking->N_N }}</td>
+                                        </tr>
+
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Half Length:</td>
+                                            <td class="text-secondary ">{{ $booking->halfLength }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Half Length Back:</td>
+                                            <td class="text-secondary ">{{ $booking->halfLengthBack }}</td>
+                                        </tr>
+
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Highwaist:</td>
+                                            <td class="text-secondary ">{{ $booking->highWaist }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Shoulder To Knee:</td>
+                                            <td class="text-secondary ">{{ $booking->shoulderToKnee }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Shoulder To Hip:</td>
+                                            <td class="text-secondary ">{{ $booking->shoulderToHip }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Full Length:</td>
+                                            <td class="text-secondary ">{{ $booking->fullLength }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Dress Length:</td>
+                                            <td class="text-secondary ">{{ $booking->dressLength }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Sleeve Length:</td>
+                                            <td class="text-secondary ">{{ $booking->sleeveLength }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Calf:</td>
+                                            <td class="text-secondary ">{{ $booking->calf }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                        @if ($booking->gender == 'male')
+                            <div class="col-12 col-lg-6">
+                                <table class="table table-bordered table-responsive">
+
+                                    <tbody>
+                                        
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Chest:</td>
+                                            <td class="text-secondary ">{{ $booking->chest }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Stomach:</td>
+                                            <td class="text-secondary ">{{ $booking->stomach }}</td>
+                                        </tr>
+
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Top Hip:</td>
+                                            <td class="text-secondary ">{{ $booking->topHip }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Biceps:</td>
+                                            <td class="text-secondary ">{{ $booking->biceps }}</td>
+                                        </tr>
+                                        <tr class="">
+                                            <td class="text-primary font-weight-bold">Sleeve:</td>
+                                            <td class="text-secondary ">{{ $booking->sleeve }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+
+
+                    </div>
                 </div>
+                <div class="row my-4">
+                  
+                    <div class="col-12 col-lg-6">
+                      <h4 class="text-center">Style Images</h4>
+                      <div id="styleCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                          @foreach ($booking->styles as $key => $img)
+                          <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <img src="{{ asset('images/styles/' . $img->name) }}" alt="{{ $img->name }}" class="img-fluid w-100 rounded">
+                          </div>
+                          @endforeach
+                        </div>
+                        <a class="carousel-control-prev" href="#styleCarousel" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#styleCarousel" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>  
+                    <div class="col-12 col-lg-6">
+                      <h4 class="text-center">Style Description</h4>
+                      <p class="text-justify my-3">{{ $booking->desc }}</p>
+                    </div>
+                  </div>
+                  
+                  
+                  
             </div>
         </div>
     </main>

@@ -45,9 +45,9 @@
                                 @enderror
                                 </div>
                                 <div class="form-group">
-                                <label for="fullname">Full Name(*required)</label>
-                                <input type="text" required class="form-control @error('fullname') is-invalid @enderror" id="fullname" name="fullname" value="{{ $booking->fullname }}" required>
-                                @error('fullname')
+                                <label for="fullName">Full Name(*required)</label>
+                                <input type="text" required class="form-control @error('fullName') is-invalid @enderror" id="fullName" name="fullName" value="{{ $booking->fullName }}" required>
+                                @error('fullName')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
@@ -72,7 +72,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                 <label for="gender">Gender (*required)</label>
                                 <select class="form-control @error('gender') is-invalid @enderror" id="gender" name="gender" required>
                                 <option value="male" {{ $booking->gender == 'male' ? 'selected':'' }}>Male</option>
@@ -81,8 +81,8 @@
                                 @error('gender')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
-                                </div>
-                                @if(Auth::user()->role == 'Admin')
+                                </div> --}}
+                                {{-- @if(Auth::user()->role == 'Admin')
                                 <div class="form-group">
                                 <label for="qty">Quantity (*required)</label>
                                 <input type="number"  required class="form-control @error('qty') is-invalid @enderror" id="qty" name="qty" value="{{ $booking->qty }}" required>
@@ -90,7 +90,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
-                                @endif
+                                @endif --}}
                                 <div class="form-group">
                                 <label for="pickupDate">Pickup Date (*required) </label>
                                 <input type="date" required class="form-control @error('pickupDate') is-invalid @enderror" id="pickupDate" name="pickupDate" value="{{ $booking->pickupDate }}" required>
@@ -99,250 +99,381 @@
                                 @enderror
                                 </div>
                                 <div class="form-group">
-                                <label for="booking_status">Booking Status (*required)</label>
-                                <select class="form-control @error('booking_status') is-invalid @enderror" id="booking_status" name="booking_status">
-                                <option value="pending" {{ $booking->booking_status == 'pending' ? 'selected':'' }}>Pending</option>
-                                <option value="approved" {{ $booking->booking_status == 'approved' ? 'selected':'' }}>Approved</option>
-                                <option value="rejected" {{ $booking->booking_status == 'rejected' ? 'selected':'' }}>Rejected</option>
+                                <label for="bookingStatus">Booking Status (*required)</label>
+                                <select class="form-control @error('bookingStatus') is-invalid @enderror" id="bookingStatus" name="bookingStatus">
+                                <option value="pending" {{ $booking->bookingStatus == 'pending' ? 'selected':'' }}>Pending</option>
+                                <option value="approved" {{ $booking->bookingStatus == 'approved' ? 'selected':'' }}>Approved</option>
+                                <option value="rejected" {{ $booking->bookingStatus == 'rejected' ? 'selected':'' }}>Rejected</option>
                                 </select>
-                                @error('booking_status')
+                                @error('bookingStatus')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
                                 <div class="form-group">
-                                <label for="comment">Comment</label>
-                                <textarea class="form-control @error('comment') is-invalid @enderror" id="comment" name="comment" rows="3">
-                                    {{ $booking->comment }}
+                                <label for="desc">Style Description</label>
+                                <textarea class="form-control @error('desc') is-invalid @enderror" id="desc" name="desc" rows="3">
+                                    {{ $booking->desc }}
                                 </textarea>
-                                @error('comment')
+                                @error('desc')
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                                 </div>
-                                <div class="form-group">
-                                    <label for="order">Order</label>
-                                    <input type="text" class="form-control @error('order') is-invalid @enderror" id="order" name="order" value="{{ old('order', $booking->order) }}">
-                                    @error('order')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="bustFrontArc">Bust Front Arc</label>
-                                    <input type="text" class="form-control @error('bustFrontArc') is-invalid @enderror" id="bustFrontArc" name="bustFrontArc" value="{{ old('bustFrontArc', $booking->bustFrontArc) }}">
-                                    @error('bustFrontArc')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="bustBackArc">Bust Back Arc</label>
-                                    <input type="text" class="form-control @error('bustBackArc') is-invalid @enderror" id="bustBackArc" name="bustBackArc" value="{{ old('bustBackArc', $booking->bustBackArc) }}">
-                                    @error('bustBackArc')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
+
+                                {{-- general measurement --}}
                                 <div class="form-group">
                                     <label for="neck">Neck</label>
-                                    <input type="text" class="form-control @error('neck') is-invalid @enderror" id="neck" name="neck" value="{{ old('neck', $booking->neck) }}">
+                                    <input type="text" class="form-control @error('neck') is-invalid @enderror"
+                                       value="{{$booking->neck}}" id="neck" name="neck">
                                     @error('neck')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
                                     <label for="shoulder">Shoulder</label>
-                                    <input type="text" class="form-control @error('shoulder') is-invalid @enderror" id="shoulder" name="shoulder" value="{{ old('shoulder', $booking->shoulder) }}">
+                                    <input type="text" class="form-control @error('shoulder') is-invalid @enderror"
+                                       value="{{$booking->shoulder}}" id="shoulder" name="shoulder">
                                     @error('shoulder')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="OffShoulder">Off Shoulder</label>
-                                    <input type="text" class="form-control @error('OffShoulder') is-invalid @enderror" id="OffShoulder" name="OffShoulder" value="{{ old('OffShoulder', $booking->OffShoulder) }}">
-                                    @error('OffShoulder')
+                                    <label for="frontArc">Front Arc</label>
+                                    <input type="text"
+                                        class="form-control @error('frontArc') is-invalid @enderror"
+                                        name="frontArc" value="{{ $booking->frontArc }}" required>
+                                    @error('frontArc')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                 <div class="form-group">
+                                    <label for="waist">Waist</label>
+                                    <input type="text" class="form-control @error('waist') is-invalid @enderror"
+                                       value="{{$booking->waist}}" id="waist" name="waist">
+                                    @error('waist')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="upperBust">Upper Bust</label>
-                                    <input type="text" class="form-control @error('upperBust') is-invalid @enderror" id="upperBust" name="upperBust" value="{{ old('upperBust', $booking->upperBust) }}">
-                                    @error('upperBust')
+                                    <label for="hip">Hip</label>
+                                    <input type="text" class="form-control @error('hip') is-invalid @enderror"
+                                       value="{{$booking->hip}}" id="hip" name="hip">
+                                    @error('hip')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="bust">Bust</label>
-                                    <input type="text" class="form-control @error('bust') is-invalid @enderror" id="bust" name="bust" value="{{ old('bust', $booking->bust) }}">
-                                    @error('bust')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <label for="topLength">Top Length</label>
+                                    <input type="text"
+                                        class="form-control @error('topLength') is-invalid @enderror"
+                                        name="topLength" value="{{ $booking->topLength }}" required>
+                                    @error('topLength')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="underBust">Under Bust</label>
-                                    <input type="text" class="form-control @error('underBust') is-invalid @enderror" id="underBust" name="underBust" value="{{ old('underBust', $booking->underBust) }}">
-                                    @error('underBust')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <label for="trouserLength">Trouser Length</label>
+                                    <input type="text"
+                                        class="form-control @error('trouserLength') is-invalid @enderror"
+                                        name="trouserLength" value="{{ $booking->trouserLength }}" required>
+                                    @error('trouserLength')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="neck">Neck</label>
-                                    <input type="text" class="form-control @error('neck') is-invalid @enderror" id="neck" name="neck" value="{{ old('neck', $booking->neck) }}">
-                                    @error('neck')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="bustPoint">Bust Point</label>
-                                    <input type="text" class="form-control @error('bustPoint') is-invalid @enderror" id="bustPoint" name="bustPoint" value="{{ old('bustPoint', $booking->bustPoint) }}">
-                                    @error('bustPoint')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label for="kneeCircumference">Knee Circumference</label>
-                                    <input type="text" class="form-control @error('kneeCircumference') is-invalid @enderror" id="kneeCircumference" name="kneeCircumference" value="{{ old('kneeCircumference', $booking->kneeCircumference) }}">
-                                    @error('kneeCircumference')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="shoulderToHip_knee">Shoulder to Hip/Knee</label>
-                                    <input type="text" class="form-control @error('shoulderToHip_knee') is-invalid @enderror" id="shoulderToHip_knee" name="shoulderToHip_knee" value="{{ old('shoulderToHip_knee', $booking->shoulderToHip_knee) }}">
-                                    @error('shoulderToHip_knee')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="waistToknee">Waist to Knee</label>
-                                    <input type="text" class="form-control @error('waistToknee') is-invalid @enderror" id="waistToknee" name="waistToknee" value="{{ old('waistToknee', $booking->waistToknee) }}">
-                                    @error('waistToknee')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="armhole_hicep">Armhole/Hicep</label>
-                                    <input type="text" class="form-control @error('armhole_hicep') is-invalid @enderror" id="armhole_hicep" name="armhole_hicep" value="{{ old('armhole_hicep', $booking->armhole_hicep) }}">
-                                    @error('armhole_hicep')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="sleeve">Sleeve</label>
-                                    <input type="text" class="form-control @error('sleeve') is-invalid @enderror" id="sleeve" name="sleeve" value="{{ old('sleeve', $booking->sleeve) }}">
-                                    @error('sleeve')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    <label for="armHole">Arm Hole</label>
+                                    <input type="text"
+                                        class="form-control @error('armHole') is-invalid @enderror" name="armHole"
+                                        value="{{ $booking->armHole }}"required>
+                                    @error('armHole')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="roundSleeve">Round Sleeve</label>
-                                    <input type="text" class="form-control @error('roundSleeve') is-invalid @enderror" id="roundSleeve" value="{{ old('roundSleeve', $booking->roundSleeve) }}" name="roundSleeve" >
+                                    <input type="text"
+                                        class="form-control @error('roundSleeve') is-invalid @enderror"
+                                        name="roundSleeve" value="{{ $booking->roundSleeve }}" required>
                                     @error('roundSleeve')
-                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                     @enderror
                                 </div>
-
-                                  <div class="form-group">
-                                    <label for="wrist">Wrist</label>
-                                    <input type="text" class="form-control @error('wrist') is-invalid @enderror" id="wrist" value="{{ old('wrist', $booking->wrist) }}" name="wrist">
-                                    @error('wrist')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="trouserLength">Trouser Length</label>
-                                    <input type="text" class="form-control @error('trouserLength') is-invalid @enderror" id="trouserLength" value="{{ old('trouserLength', $booking->trouserLength) }}" name="trouserLength">
-                                    @error('trouserLength')
-                                    <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="fullLength">Full Length</label>
-                                    <input type="text" class="form-control @error('fullLength') is-invalid @enderror" id="fullLength" value="{{ old('fullLength', $booking->fullLength) }}" name="fullLength">
-                                    @error('fullLength')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="dressLength">Dress Length</label>
-                                    <input type="text" class="form-control @error('dressLength') is-invalid @enderror" id="dressLength" value="{{ old('dressLength', $booking->dressLength) }}" name="dressLength">
-                                    @error('dressLength')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="shirt/Trouser">Shirt/Trouser</label>
-                                    <input type="text" class="form-control @error('shirt/Trouser') is-invalid @enderror" id="shirt/Trouser" value="{{ old('shirt_Trouser', $booking->shirt_Trouser) }}" name="shirt_Trouser">
-                                    @error('shirt/Trouser')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="Length">Length</label>
-                                    <input type="text" class="form-control @error('Length') is-invalid @enderror" id="Length" value="{{ old('Length', $booking->Length) }}" name="Length">
-                                    @error('Length')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="RoundKnee">Round Knee</label>
-                                    <input type="text" class="form-control @error('RoundKnee') is-invalid @enderror" id="RoundKnee" value="{{ old('RoundKnee', $booking->RoundKnee) }}" name="RoundKnee">
-                                    @error('RoundKnee')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="KneeLength">Knee Length</label>
-                                    <input type="text" class="form-control @error('KneeLength') is-invalid @enderror" id="KneeLength" value="{{ old('KneeLength', $booking->KneeLength) }}" name="KneeLength">
-                                    @error('KneeLength')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="waist/hips">Waist/Hips</label>
-                                    <input type="text" class="form-control @error('waist/hips') is-invalid @enderror" id="waist/hips" value="{{ old('waist_hips', $booking->waist_hips) }}" name="waist_hips">
-                                    @error('waist/hips')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <div class="form-group">
+                                 <div class="form-group">
                                     <label for="thigh">Thigh</label>
-                                    <input type="text" class="form-control @error('thigh') is-invalid @enderror" id="thigh" value="{{ old('thigh', $booking->thigh) }}" name="thigh">
+                                    <input type="text" class="form-control @error('thigh') is-invalid @enderror"
+                                       value="{{$booking->thigh}}" id="thigh" name="thigh">
                                     @error('thigh')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
-
                                 <div class="form-group">
-                                    <label for="ankle">Ankle</label>
-                                    <input type="text" class="form-control @error('ankle') is-invalid @enderror" id="ankle" value="{{ old('ankle', $booking->ankle) }}" name="ankle">
-                                    @error('ankle')
+                                    <label for="knee">Knee</label>
+                                    <input type="text" class="form-control @error('knee') is-invalid @enderror"
+                                       value="{{$booking->knee}}" id="knee" name="knee">
+                                    @error('knee')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <label for="crotch">Crotch</label>
+                                    <input type="text" class="form-control @error('crotch') is-invalid @enderror"
+                                       value="{{$booking->crotch}}" id="crotch" name="crotch">
+                                    @error('crotch')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
 
+                                {{-- measurement based on gender --}}
+
+
+                                @if ($booking->gender == 'male' )
+                                <div id="male-form" style="display:block;">
+
+
+
+                                    <div class="form-group">
+                                        <label for="chest">Chest</label>
+                                        <input type="text" class="form-control @error('chest') is-invalid @enderror"
+                                            name="chest" value="{{ old('chest',$booking->chest) }}" required>
+                                        @error('chest')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="stomach">Stomach</label>
+                                        <input type="text" class="form-control @error('stomach') is-invalid @enderror"
+                                            name="stomach" value="{{ old('stomach',$booking->stomach) }}" required>
+                                        @error('stomach')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="topHip">Top Hip</label>
+                                        <input type="text" class="form-control @error('topHip') is-invalid @enderror"
+                                            name="topHip" value="{{ old('topHip',$booking->topHip) }}" required>
+                                        @error('topHip')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="biceps">Biceps</label>
+                                        <input type="text" class="form-control @error('biceps') is-invalid @enderror"
+                                            name="biceps" value="{{ old('biceps',$booking->biceps) }}" required>
+                                        @error('biceps')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="sleeve">Sleeve</label>
+                                        <input type="text" class="form-control @error('sleeve')is-invalid @enderror"
+                                            name="sleeve" value="{{ old('sleeve',$booking->sleeve) }}" required>
+                                        @error('sleeve')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="waistToKnee">Waist to Knee</label>
+                                        <input type="text"
+                                            class="form-control @error('waistToKnee') is-invalid @enderror"
+                                            name="waistToKnee" value="{{ old('waistToKnee',$booking->waistToKnee) }}" required>
+                                        @error('waistToKnee')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+
+                                </div>
+                                @elseif($booking->gender == 'female')
+                                <div>
+
+                                    <div class="form-group">
+                                        <label for="offShoulder">Off Shoulder</label>
+                                        <input type="text"
+                                            class="form-control @error('offShoulder') is-invalid @enderror"
+                                            id="offShoulder" vale="{{$booking->offShoulder}}"name="offShoulder">
+                                        @error('offShoulder')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="upperBust">Upper Bust</label>
+                                        <input type="text" class="form-control @error('upperBust') is-invalid @enderror"
+                                            id="upperBust" vale="{{$booking->upperBust}}"name="upperBust">
+                                        @error('upperBust')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bust">Bust</label>
+                                        <input type="text" class="form-control @error('bust') is-invalid @enderror"
+                                            id="bust" vale="{{$booking->bust}}"name="bust">
+                                        @error('bust')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="N_N">N-N</label>
+                                        <input type="text" class="form-control @error('N_N') is-invalid @enderror"
+                                            id="N_N" vale="{{$booking->N_N}}"name="N_N">
+                                        @error('N_N')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="underBust">Under Bust</label>
+                                        <input type="text"
+                                            class="form-control @error('underBust') is-invalid @enderror" id="underBust"
+                                            vale="{{$booking->underBust}}"name="underBust">
+                                        @error('underBust')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="bustPoint">Bust Point</label>
+                                        <input type="text"
+                                            class="form-control @error('bustPoint') is-invalid @enderror" id="bustPoint"
+                                            vale="{{$booking->bustPoint}}"name="bustPoint">
+                                        @error('bustPoint')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="halfLength">Half Length </label>
+                                        <input type="text"
+                                            class="form-control @error('halfLength') is-invalid @enderror"
+                                            id="halfLength" vale="{{$booking->halfLength}}"name="halfLength">
+                                        @error('halfLength')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="halfLengthBack">Half Length Back </label>
+                                        <input type="text"
+                                            class="form-control @error('halfLengthBack') is-invalid @enderror"
+                                            id="halfLengthBack" vale="{{$booking->halfLengthBack}}"name="halfLengthBack">
+                                        @error('halfLengthBack')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="highWaist">HighWaist</label>
+                                        <input type="text"
+                                            class="form-control @error('highWaist') is-invalid @enderror" id="highWaist"
+                                            vale="{{$booking->highWaist}}"name="highWaist">
+                                        @error('highWaist')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="shoulderToKnee">Shoulder To Knee</label>
+                                        <input type="text"
+                                            class="form-control @error('shoulderToknee') is-invalid @enderror"
+                                            id="shoulderToKnee" vale="{{$booking->shoulderToKnee}}"name="shoulderToKnee">
+                                        @error('shoulderToKnee')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="shoulderToHip">Shoulder To Hip</label>
+                                        <input type="text"
+                                            class="form-control @error('shoulderToHip') is-invalid @enderror"
+                                            id="shoulderToHip" vale="{{$booking->shoulderToHip}}"name="shoulderToHip">
+                                        @error('shoulderToHip')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="fullLength">Full Length</label>
+                                        <input type="text"
+                                            class="form-control @error('fullLength') is-invalid @enderror"
+                                            id="fullLength" vale="{{$booking->fullLength}}"name="fullLength">
+                                        @error('fullLength')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dressLength">Dress Length</label>
+                                        <input type="text"
+                                            class="form-control @error('dressLength') is-invalid @enderror"
+                                            id="dressLength" vale="{{$booking->dressLength}}"name="dressLength">
+                                        @error('dressLength')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sleeveLength"> Sleeve Length</label>
+                                        <input type="text"
+                                            class="form-control @error('sleeveLength') is-invalid @enderror"
+                                            id="sleeveLength" vale="{{$booking->sleeveLength}}"name="sleeveLength">
+                                        @error('sleeveLength')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="calf">Calf</label>
+                                        <input type="text" class="form-control @error('calf') is-invalid @enderror"
+                                            id="calf" vale="{{$booking->calf}}"name="calf">
+                                        @error('calf')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                @else
+
+
+                                @endif
+
                                 <div class="form-group">
-                                    <label for="crotchF/B">Crotch Front/Back</label>
-                                    <input type="text" class="form-control @error('crotchF/B') is-invalid @enderror" id="crotchF/B" value="{{ old('crotchF_B', $booking->crotchF_B) }}" name="crotchF_B">
-                                    @error('crotchF/B')
+
+                                    <label for="image"> Edit Style Images</label>
+
+
+                                    <input  type="file" class="form-control @error('image') is-invalid @enderror"
+                                     id="images" name="images[]"  multiple>
+                                     {{-- <div id="images-container" class="row"></div> --}}
+
+                                    @error('image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
+
+                                  </div>
+                                  <div class="row">
+                                    @foreach($booking->styles as $img)
+                                    <br>
+
+                                    <img src="{{asset('images/products/'.$img->name)}}" alt="{{$img->name}}" class="img-thumbnail w-25 col-6">
+                                    @endforeach
+                                        </div>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Update</button>

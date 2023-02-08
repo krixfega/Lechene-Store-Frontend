@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Models\fibrics;
 use App\Models\Tailor;
+use App\Models\BookingStyles;
 
 class fashionBooking extends Model
 {
@@ -15,7 +17,8 @@ class fashionBooking extends Model
     // protected $table = 'orders';
     // protected $primaryKey = "id";
     protected $fillable = [
-        'fullname',
+        'fabrics_id',
+        'fullName',
         'booking_no',
         'phone_no',
         'address',
@@ -23,51 +26,42 @@ class fashionBooking extends Model
         'gender',
         'qty',
         'income',
-        'price',
-        'booking_status',
-        'comment',
-        'order',
-        'fabrics_id',
-        'bustFrontArc',
-        'bustBackArc',
-        'shortSleeveElbow',
-        'shortSleeveRoundElbow',
-        'shortSleeveFullSleeveLength',
+        'bookingStatus',
+        'desc',
+        'pickupDate',
+        'bookingStatus',
         'neck',
         'shoulder',
-        'OffShoulder',
+        'frontArc',
+        'waist',
+        'hip',
+        'topLength',
+        'trouserLength',
+        'armHole',
+        'roundSleeve',
+        'thigh',
+        'knee',
+        'crotch',
         'upperBust',
         'bust',
+        'N_N',
         'underBust',
         'bustPoint',
-        'N_N',
-        'acrossF_B',
-        'halfLengthF_B',
-        'topLength',
-        'waist_highwaist',
-        'hip_hipLength',
-        'thigh_knee_ankle',
-        'kneeCircumfrence',
-        'shoulderToHip_knee',
-        'waistToknee',
-        'armhole_hicep',
-        'sleeve',
-        'roundSleeve',
-        'wrist',
-        'trouserLength',
+        'halfLength',
+        'halfLengthBack',
+        'highWaist',
+        'shoulderToknee',
+        'shoulderToHip',
         'fullLength',
         'dressLength',
-        'shirt_Trouser',
-        'Length',
-        'RoundKnee',
-        'KneeLength',
-        'waist_hips',
-        'thigh',
-        'ankle',
-        'crotchF_B',
-       ' corsetLength',
-        'Length3_4',
-
+        'sleeveLength',
+        'calf',
+        'chest',
+        'stomach',
+        'topHip',
+        'biceps',
+        'sleeve',
+        'waistToKnee',
 
     ];
     /**
@@ -77,7 +71,7 @@ class fashionBooking extends Model
      */
     public function tailor(): HasOne
     {
-        return $this->hasOne(Tailor::class);
+        return $this->hasOne(Tailor::class,'booking_id');
     }
     /**
      * Get the fabric that owns the fashionBooking
@@ -87,5 +81,14 @@ class fashionBooking extends Model
     public function fabric(): BelongsTo
     {
         return $this->belongsTo(fibrics::class, 'fabrics_id', 'id');
+    }
+    /**
+     * Get all of the styles for the fashionBooking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function styles(): HasMany
+    {
+        return $this->hasMany(BookingStyles::class,'fashion_bookings_id','id');
     }
 }

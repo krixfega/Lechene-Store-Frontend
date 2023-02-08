@@ -62,6 +62,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
     Route::resource('/admin/booking',bookingController::class);
     Route::get('/admin/bookings/history',[bookingController::class,'history'])->name('booking.history');
+    Route::get('/admin/bookings/invoice/{id}',[bookingController::class,'invoice'])->name('booking.invoice');
+
     Route::resource('/admin/fibrics',fibricsController::class);
     Route::post('/admin/shop/add_to_cart/{id}', [shopController::class, 'addToCart'])->name('shop.addToCart');
     Route::patch('/admin/shop/update-cart', [shopController::class, 'updateCart'])->name('shop.updateCart');

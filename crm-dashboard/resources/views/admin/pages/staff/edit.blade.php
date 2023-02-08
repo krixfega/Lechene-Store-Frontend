@@ -30,7 +30,7 @@
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{url('admin/staffs/'.$staff->id )}}">
+                            <form method="POST" action="{{url('admin/staffs/'.$staff->id )}}"  enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">
@@ -105,7 +105,29 @@
                                     @enderror
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+
+                                    <label for="image"> Edit Documents</label>
+
+
+                                    <input  type="file" class="form-control @error('docs') is-invalid @enderror"
+                                     id="docs" name="docs[]"  multiple>
+                                     {{-- <div id="docss-container" class="row"></div> --}}
+
+                                    @error('docs')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+
+                                  </div>
+                                  <div class="row">
+                                    @foreach($staff->staff->Documents as $doc)
+                                    <br>
+
+                                    <a href="{{asset('docs/staffs/'.$doc->name)}}" target="_blank" class="col-6">{{$doc->name}} ({{pathinfo($doc->name, PATHINFO_EXTENSION)}} file)</a>
+                                    @endforeach
+                                        </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </form>
 
                         </div>

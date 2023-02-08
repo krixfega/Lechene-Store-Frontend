@@ -5,10 +5,19 @@ namespace App\Http\Controllers\admin\shop;
 use App\Http\Controllers\Controller;
 use App\Models\fashionBooking;
 use App\Models\fibrics;
+use App\Models\BookingStyles;
 use App\Models\Tailor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Exception;
+use Illuminate\Support\Facades\File;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
+use Illuminate\Support\Facades\Validator;
+
 
 class bookingController extends Controller
 {
@@ -20,7 +29,7 @@ class bookingController extends Controller
     public function index()
     {
         //all booking index page
-        $fashionbookings = fashionBooking::where('booking_status', 'pending')->orderBy('pickupDate', 'asc')->get();
+        $fashionbookings = fashionBooking::where('bookingStatus', 'pending')->orderBy('pickupDate', 'asc')->get();
         return view('admin.pages.booking.index', compact('fashionbookings'));
     }
 
@@ -32,7 +41,7 @@ class bookingController extends Controller
     public function create()
     {
         // create
-        $fabrics = fibrics::all();
+        $fabrics = fibrics::where('qty', '>', 0)->get();
         return view('admin.pages.booking.create', compact('fabrics'));
     }
 
@@ -45,9 +54,9 @@ class bookingController extends Controller
     public function store(Request $request)
     {
         // store booking
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'fabrics_id' => 'required',
-            'fullname' => 'required',
+            'fullName' => 'required',
             'phoneNumber' => 'required',
             'address' => 'required',
             'email' => 'required|email',
@@ -55,116 +64,134 @@ class bookingController extends Controller
             'qty' => 'required',
             // 'price' => 'nullable',
             'pickupDate' => 'required',
-            'comment' => 'nullable',
-            'order' => 'nullable',
-            'bustFrontArc' => 'nullable',
-            'corsetLength' => 'nullable',
-            'Length3_4' => 'nullable',
-            'bustBackArc' => 'nullable',
-            'shortSleeveElbow' => 'nullable',
-            'shortSleeveRoundElbow' => 'nullable',
-            'shortSleeveFullSleeveLength' => 'nullable',
+            'desc' => 'nullable',
+            'images' => 'required|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'neck' => 'nullable',
             'shoulder' => 'nullable',
-            'OffShoulder' => 'nullable',
+            'frontArc' => 'nullable',
+            'waist' => 'nullable',
+            'hip' => 'nullable',
+            'topLength' => 'nullable',
+            'trouserLength' => 'nullable',
+            'armHole' => 'nullable',
+            'roundSleeve' => 'nullable',
+            'thigh' => 'nullable',
+            'knee' => 'nullable',
+            'crotch' => 'nullable',
             'upperBust' => 'nullable',
             'bust' => 'nullable',
+            'N_N' => 'nullable',
             'underBust' => 'nullable',
             'bustPoint' => 'nullable',
-            'N_N' => 'nullable',
-            'acrossF_B' => 'nullable',
-            'halfLengthF_B' => 'nullable',
-            'topLength' => 'nullable',
-            'waist_highwaist' => 'nullable',
-            'hip_hipLength' => 'nullable',
-            'thigh_knee_ankle' => 'nullable',
-            'kneeCircumfrence' => 'nullable',
-            'shoulderToHip_knee' => 'nullable',
-            'waistToknee' => 'nullable',
-            'armhole_hicep' => 'nullable',
-            'sleeve' => 'nullable',
-            'roundSleeve' => 'nullable',
-            'wrist' => 'nullable',
-            'trouserLength' => 'nullable',
+            'halfLength' => 'nullable',
+            'halfLengthBack' => 'nullable',
+            'highWaist' => 'nullable',
+            'shoulderToknee' => 'nullable',
+            'shoulderToHip' => 'nullable',
             'fullLength' => 'nullable',
             'dressLength' => 'nullable',
-            'shirt_Trouser' => 'nullable',
-            'Length' => 'nullable',
-            'RoundKnee' => 'nullable',
-            'KneeLength' => 'nullable',
-            'waist_hips' => 'nullable',
-            'thigh' => 'nullable',
-            'ankle' => 'nullable',
-            'crotchF_B' => 'nullable',
+            'sleeveLength' => 'nullable',
+            'calf' => 'nullable',
+            'chest' => 'nullable',
+            'stomach' => 'nullable',
+            'topHip' => 'nullable',
+            'biceps' => 'nullable',
+            'sleeve' => 'nullable',
+            'waistToKnee' => 'nullable',
+
+
+
+
+
+
 
         ]);
-        $fabric = fibrics::findOrFail($request->fabrics_id);
-        $selling_price = $fabric->selling_price;
-        $cost_price = $fabric->cost_price;
-        $fab_qty = $fabric->qty;
+        if ($validator->fails()) {
+            // Validation failed
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
+        } else {
+            DB::beginTransaction();
+            try {
+                $fabric = fibrics::findOrFail($request->fabrics_id);
+                $selling_price = $fabric->selling_price;
+                $cost_price = $fabric->cost_price;
+                $fab_qty = $fabric->qty;
+                $fashion_booking = new fashionBooking();
+                $fashion_booking->fabrics_id = $request->fabrics_id;
+                $fashion_booking->booking_no = $this->generateOrderNumber();
+                $fashion_booking->fullName = $request->fullName;
+                $fashion_booking->phoneNumber = $request->phoneNumber;
+                $fashion_booking->address = $request->address;
+                $fashion_booking->email = $request->email;
+                $fashion_booking->gender = $request->gender;
+                $fashion_booking->qty = $request->qty;
+                $fashion_booking->income = (($selling_price - $cost_price) * $request->qty);
+                $fashion_booking->pickupDate = $request->pickupDate;
+                $fashion_booking->desc = $request->desc;
+                $fashion_booking->neck = $request->neck;
+                $fashion_booking->shoulder = $request->shoulder;
+                $fashion_booking->frontArc = $request->frontArc;
+                $fashion_booking->waist = $request->waist;
+                $fashion_booking->hip = $request->hip;
+                $fashion_booking->topLength = $request->topLength;
+                $fashion_booking->trouserLength = $request->trouserLength;
+                $fashion_booking->armHole = $request->armHole;
+                $fashion_booking->roundSleeve = $request->roundSleeve;
+                $fashion_booking->thigh = $request->thigh;
+                $fashion_booking->knee = $request->knee;
+                $fashion_booking->crotch = $request->crotch;
+                $fashion_booking->upperBust = $request->upperBust;
+                $fashion_booking->bust = $request->bust;
+                $fashion_booking->N_N = $request->N_N;
+                $fashion_booking->underBust = $request->underBust;
+                $fashion_booking->bustPoint = $request->bustPoint;
+                $fashion_booking->halfLength = $request->halfLength;
+                $fashion_booking->halfLengthBack = $request->halfLengthBack;
+                $fashion_booking->highWaist = $request->highWaist;
+                $fashion_booking->shoulderToknee = $request->shoulderToknee;
+                $fashion_booking->shoulderToHip = $request->shoulderToHip;
+                $fashion_booking->fullLength = $request->fullLength;
+                $fashion_booking->dressLength = $request->dressLength;
+                $fashion_booking->sleeveLength = $request->sleeveLength;
+                $fashion_booking->calf = $request->calf;
+                $fashion_booking->chest = $request->chest;
+                $fashion_booking->stomach = $request->stomach;
+                $fashion_booking->topHip = $request->topHip;
+                $fashion_booking->biceps = $request->biceps;
+                $fashion_booking->sleeve = $request->sleeve;
+                $fashion_booking->waistToKnee = $request->waistToKnee;
 
+                $fashion_booking->saveOrFail();
+                $fabric->qty = $fab_qty - $request->qty;
+                $fabric->save();
 
-        $fashion_booking = new fashionBooking();
-        // $tailor = Tailor::where('booking_id',$fashion_booking->id)->first();
-        // $tailorFee = $tailor->total_price;
-        // dd($tailor);
-        $fashion_booking->fabrics_id = $request->fabrics_id;
-        $fashion_booking->booking_no = $this->generateOrderNumber();
-        $fashion_booking->fullname = $request->fullname;
-        $fashion_booking->phoneNumber = $request->phoneNumber;
-        $fashion_booking->address = $request->address;
-        $fashion_booking->email = $request->email;
-        $fashion_booking->gender = $request->gender;
-        $fashion_booking->qty = $request->qty;
-        $fashion_booking->income = (($selling_price - $cost_price) * $request->qty);
-        $fashion_booking->pickupDate = $request->pickupDate;
-        $fashion_booking->comment = $request->comment;
-        $fashion_booking->order = $request->order;
-        $fashion_booking->bustFrontArc = $request->bustFrontArc;
-        $fashion_booking->corsetLength = $request->corsetLength;
-        $fashion_booking->Length3_4 = $request->Length3_4;
-        $fashion_booking->bustBackArc = $request->bustBackArc;
-        $fashion_booking->shortSleeveElbow = $request->shortSleeveElbow;
-        $fashion_booking->shortSleeveRoundElbow = $request->shortSleeveRoundElbow;
-        $fashion_booking->shortSleeveFullSleeveLength = $request->shortSleeveFullSleeveLength;
-        $fashion_booking->neck = $request->neck;
-        $fashion_booking->shoulder = $request->shoulder;
-        $fashion_booking->OffShoulder = $request->OffShoulder;
-        $fashion_booking->upperBust = $request->upperBust;
-        $fashion_booking->bust = $request->bust;
-        $fashion_booking->underBust = $request->underBust;
-        $fashion_booking->bustPoint = $request->bustPoint;
-        $fashion_booking->N_N = $request->N_N;
-        $fashion_booking->acrossF_B = $request->acrossF_B;
-        $fashion_booking->halfLengthF_B = $request->halfLengthF_B;
-        $fashion_booking->topLength = $request->topLength;
-        $fashion_booking->waist_highwaist = $request->waist_highwaist;
-        $fashion_booking->hip_hipLength = $request->hip_hipLength;
-        $fashion_booking->thigh_knee_ankle = $request->thigh_knee_ankle;
-        $fashion_booking->kneeCircumfrence = $request->kneeCircumfrence;
-        $fashion_booking->shoulderToHip_knee = $request->shoulderToHip_knee;
-        $fashion_booking->waistToknee = $request->waistToknee;
-        $fashion_booking->armhole_hicep = $request->armhole_hicep;
-        $fashion_booking->sleeve = $request->sleeve;
-        $fashion_booking->roundSleeve = $request->roundSleeve;
-        $fashion_booking->wrist = $request->wrist;
-        $fashion_booking->trouserLength = $request->trouserLength;
-        $fashion_booking->fullLength = $request->fullLength;
-        $fashion_booking->dressLength = $request->dressLength;
-        $fashion_booking->shirt_Trouser = $request->shirt_Trouser;
-        $fashion_booking->Length = $request->Length;
-        $fashion_booking->RoundKnee = $request->RoundKnee;
-        $fashion_booking->KneeLength = $request->KneeLength;
-        $fashion_booking->waist_hips = $request->waist_hips;
-        $fashion_booking->thigh = $request->thigh;
-        $fashion_booking->ankle = $request->ankle;
-        $fashion_booking->crotchF_B = $request->crotchF_B;
-        $fashion_booking->saveOrFail();
-        $fabric->qty = $fab_qty - $request->qty;
-        $fabric->save();
-        return redirect()->route('booking.index')->with('success', 'Booking created successfully');
+                if ($request->hasFile('images')) {
+                    $files = $request->file('images');
+                    $upload_path = public_path() . '/images/styles';
+                    foreach ($files as $file) {
+                        $file_name = uniqid() . '.' . $file->getClientOriginalExtension();
+                        $file->move($upload_path, $file_name);
+                        // save into database
+                        $stylesImages = new BookingStyles();
+                        $stylesImages->fashion_bookings_id = $fashion_booking->id;
+                        $stylesImages->name = $file_name;
+
+                        $stylesImages->saveOrFail();
+                        //      return redirect()->route('booking.index')->with('success', 'Booking created successfully');
+                    }
+                }
+                // Commit the transaction
+                DB::commit();
+                return redirect()->route('booking.index')->with('success', 'Booking created successfully');
+            } catch (Exception $e) {
+                DB::rollback();
+                return redirect()->route('booking.create')->with('error', $e->getMessage());
+            }
+        }
     }
-
 
 
 
@@ -196,9 +223,9 @@ class bookingController extends Controller
         // if (Auth::user()->role == 'Admin') {
 
         $fabrics = fibrics::all();
+        // $styleImages = BookingStyles::where('fashion_bookings_id',$id)->get();
         $booking = fashionBooking::findOrFail($id);
         return view('admin.pages.booking.edit', compact('booking', 'fabrics'));
-       
     }
 
     /**
@@ -211,174 +238,156 @@ class bookingController extends Controller
     public function update(Request $request, $id)
     {
         //update booking
-        $validatedData = $request->validate([
+        $validator = Validator::make($request->all(), [
             'fabrics_id' => 'required',
-            'fullname' => 'required',
+            'fullName' => 'required',
             'phoneNumber' => 'required',
             'address' => 'required',
             'email' => 'required|email',
-            'gender' => 'required',
-            'qty' => 'required',
-            'booking_status' => 'required',
+            'bookingStatus'=>'required',
+            // 'gender' => 'required',
+            // 'qty' => 'required',
             // 'price' => 'nullable',
             'pickupDate' => 'required',
-            'comment' => 'nullable',
-            'order' => 'nullable',
-            'bustFrontArc' => 'nullable',
-            'corsetLength' => 'nullable',
-            'Length3_4' => 'nullable',
-            'bustBackArc' => 'nullable',
-            'shortSleeveElbow' => 'nullable',
-            'shortSleeveRoundElbow' => 'nullable',
-            'shortSleeveFullSleeveLength' => 'nullable',
+            'desc' => 'nullable',
+            'images' => 'array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'neck' => 'nullable',
             'shoulder' => 'nullable',
-            'OffShoulder' => 'nullable',
+            'frontArc' => 'nullable',
+            'waist' => 'nullable',
+            'hip' => 'nullable',
+            'topLength' => 'nullable',
+            'trouserLength' => 'nullable',
+            'armHole' => 'nullable',
+            'roundSleeve' => 'nullable',
+            'thigh' => 'nullable',
+            'knee' => 'nullable',
+            'crotch' => 'nullable',
             'upperBust' => 'nullable',
             'bust' => 'nullable',
+            'N_N' => 'nullable',
             'underBust' => 'nullable',
             'bustPoint' => 'nullable',
-            'N_N' => 'nullable',
-            'acrossF_B' => 'nullable',
-            'halfLengthF_B' => 'nullable',
-            'topLength' => 'nullable',
-            'waist_highwaist' => 'nullable',
-            'hip_hipLength' => 'nullable',
-            'thigh_knee_ankle' => 'nullable',
-            'kneeCircumfrence' => 'nullable',
-            'shoulderToHip_knee' => 'nullable',
-            'waistToknee' => 'nullable',
-            'armhole_hicep' => 'nullable',
-            'sleeve' => 'nullable',
-            'roundSleeve' => 'nullable',
-            'wrist' => 'nullable',
-            'trouserLength' => 'nullable',
+            'halfLength' => 'nullable',
+            'halfLengthBack' => 'nullable',
+            'highWaist' => 'nullable',
+            'shoulderToknee' => 'nullable',
+            'shoulderToHip' => 'nullable',
             'fullLength' => 'nullable',
             'dressLength' => 'nullable',
-            'shirt_Trouser' => 'nullable',
-            'Length' => 'nullable',
-            'RoundKnee' => 'nullable',
-            'KneeLength' => 'nullable',
-            'waist_hips' => 'nullable',
-            'thigh' => 'nullable',
-            'ankle' => 'nullable',
-            'crotchF_B' => 'nullable',
+            'sleeveLength' => 'nullable',
+            'calf' => 'nullable',
+            'chest' => 'nullable',
+            'stomach' => 'nullable',
+            'topHip' => 'nullable',
+            'biceps' => 'nullable',
+            'sleeve' => 'nullable',
+            'waistToKnee' => 'nullable',
+
+
+
+
+
+
 
         ]);
-        $fabric = fibrics::findOrFail($request->fabrics_id);
-        $selling_price = $fabric->selling_price;
-        $cost_price = $fabric->cost_price;
-        $fab_qty = $fabric->qty;
-        $fashion_booking = fashionBooking::findOrFail($id);
-
-        if (Auth::user()->role == 'Admin') {
-            $fashion_booking->booking_status = $request->booking_status;
-            $fashion_booking->fabrics_id = $request->fabrics_id;
-            $fashion_booking->fullname = $request->fullname;
-            $fashion_booking->phoneNumber = $request->phoneNumber;
-            $fashion_booking->address = $request->address;
-            $fashion_booking->email = $request->email;
-            $fashion_booking->gender = $request->gender;
-            $fashion_booking->qty = $request->qty;
-            $fashion_booking->pickupDate = $request->pickupDate;
-            $fashion_booking->comment = $request->comment;
-            $fashion_booking->order = $request->order;
-            $fashion_booking->bustFrontArc = $request->bustFrontArc;
-            $fashion_booking->corsetLength = $request->corsetLength;
-            $fashion_booking->Length3_4 = $request->Length3_4;
-            $fashion_booking->bustBackArc = $request->bustBackArc;
-            $fashion_booking->shortSleeveElbow = $request->shortSleeveElbow;
-            $fashion_booking->shortSleeveRoundElbow = $request->shortSleeveRoundElbow;
-            $fashion_booking->shortSleeveFullSleeveLength = $request->shortSleeveFullSleeveLength;
-            $fashion_booking->neck = $request->neck;
-            $fashion_booking->shoulder = $request->shoulder;
-            $fashion_booking->OffShoulder = $request->OffShoulder;
-            $fashion_booking->upperBust = $request->upperBust;
-            $fashion_booking->bust = $request->bust;
-            $fashion_booking->income = (($selling_price - $cost_price) * $request->qty);
-            $fashion_booking->underBust = $request->underBust;
-            $fashion_booking->bustPoint = $request->bustPoint;
-            $fashion_booking->N_N = $request->N_N;
-            $fashion_booking->acrossF_B = $request->acrossF_B;
-            $fashion_booking->halfLengthF_B = $request->halfLengthF_B;
-            $fashion_booking->topLength = $request->topLength;
-            $fashion_booking->waist_highwaist = $request->waist_highwaist;
-            $fashion_booking->hip_hipLength = $request->hip_hipLength;
-            $fashion_booking->thigh_knee_ankle = $request->thigh_knee_ankle;
-            $fashion_booking->kneeCircumfrence = $request->kneeCircumfrence;
-            $fashion_booking->shoulderToHip_knee = $request->shoulderToHip_knee;
-            $fashion_booking->waistToknee = $request->waistToknee;
-            $fashion_booking->armhole_hicep = $request->armhole_hicep;
-            $fashion_booking->sleeve = $request->sleeve;
-            $fashion_booking->roundSleeve = $request->roundSleeve;
-            $fashion_booking->wrist = $request->wrist;
-            $fashion_booking->trouserLength = $request->trouserLength;
-            $fashion_booking->fullLength = $request->fullLength;
-            $fashion_booking->dressLength = $request->dressLength;
-            $fashion_booking->shirt_Trouser = $request->shirt_Trouser;
-            $fashion_booking->Length = $request->Length;
-            $fashion_booking->RoundKnee = $request->RoundKnee;
-            $fashion_booking->KneeLength = $request->KneeLength;
-            $fashion_booking->waist_hips = $request->waist_hips;
-            $fashion_booking->thigh = $request->thigh;
-            $fashion_booking->ankle = $request->ankle;
-            $fashion_booking->crotchF_B = $request->crotchF_B;
-            $fashion_booking->update();
-           
-            return redirect()->route('booking.index')->with('success', 'Booking Updated successfully');
+        if ($validator->fails()) {
+            // Validation failed
+            return redirect()->back()
+                ->withInput()
+                ->withErrors($validator);
         } else {
-            $fashion_booking->fabrics_id = $request->fabrics_id;
-            $fashion_booking->fullname = $request->fullname;
-            $fashion_booking->phoneNumber = $request->phoneNumber;
-            $fashion_booking->address = $request->address;
-            $fashion_booking->email = $request->email;
-            $fashion_booking->gender = $request->gender;
-            // $fashion_booking->qty = $request->qty;
-            $fashion_booking->pickupDate = $request->pickupDate;
-            $fashion_booking->comment = $request->comment;
-            $fashion_booking->order = $request->order;
-            $fashion_booking->bustFrontArc = $request->bustFrontArc;
-            $fashion_booking->corsetLength = $request->corsetLength;
-            $fashion_booking->Length3_4 = $request->Length3_4;
-            $fashion_booking->bustBackArc = $request->bustBackArc;
-            $fashion_booking->shortSleeveElbow = $request->shortSleeveElbow;
-            $fashion_booking->shortSleeveRoundElbow = $request->shortSleeveRoundElbow;
-            $fashion_booking->shortSleeveFullSleeveLength = $request->shortSleeveFullSleeveLength;
-            $fashion_booking->neck = $request->neck;
-            $fashion_booking->shoulder = $request->shoulder;
-            $fashion_booking->OffShoulder = $request->OffShoulder;
-            $fashion_booking->upperBust = $request->upperBust;
-            $fashion_booking->bust = $request->bust;
-            $fashion_booking->underBust = $request->underBust;
-            $fashion_booking->bustPoint = $request->bustPoint;
-            $fashion_booking->N_N = $request->N_N;
-            $fashion_booking->acrossF_B = $request->acrossF_B;
-            $fashion_booking->halfLengthF_B = $request->halfLengthF_B;
-            $fashion_booking->topLength = $request->topLength;
-            $fashion_booking->waist_highwaist = $request->waist_highwaist;
-            $fashion_booking->hip_hipLength = $request->hip_hipLength;
-            $fashion_booking->thigh_knee_ankle = $request->thigh_knee_ankle;
-            $fashion_booking->kneeCircumfrence = $request->kneeCircumfrence;
-            $fashion_booking->shoulderToHip_knee = $request->shoulderToHip_knee;
-            $fashion_booking->waistToknee = $request->waistToknee;
-            $fashion_booking->armhole_hicep = $request->armhole_hicep;
-            $fashion_booking->sleeve = $request->sleeve;
-            $fashion_booking->roundSleeve = $request->roundSleeve;
-            $fashion_booking->wrist = $request->wrist;
-            $fashion_booking->trouserLength = $request->trouserLength;
-            $fashion_booking->fullLength = $request->fullLength;
-            $fashion_booking->dressLength = $request->dressLength;
-            $fashion_booking->shirt_Trouser = $request->shirt_Trouser;
-            $fashion_booking->Length = $request->Length;
-            $fashion_booking->RoundKnee = $request->RoundKnee;
-            $fashion_booking->KneeLength = $request->KneeLength;
-            $fashion_booking->waist_hips = $request->waist_hips;
-            $fashion_booking->thigh = $request->thigh;
-            $fashion_booking->ankle = $request->ankle;
-            $fashion_booking->crotchF_B = $request->crotchF_B;
-            $fashion_booking->update();
-            return redirect()->route('booking.index')->with('success', 'Booking Updated successfully');
-        }
+            DB::beginTransaction();
+            try {
+                $fabric = fibrics::findOrFail($request->fabrics_id);
+                $selling_price = $fabric->selling_price;
+                $cost_price = $fabric->cost_price;
+                $fab_qty = $fabric->qty;
+                $fashion_booking = fashionBooking::findOrFail($id);
+                $fashion_booking->fabrics_id = $request->fabrics_id;
+                $fashion_booking->booking_no = $this->generateOrderNumber();
+                $fashion_booking->fullName = $request->fullName;
+                $fashion_booking->phoneNumber = $request->phoneNumber;
+                $fashion_booking->address = $request->address;
+                $fashion_booking->email = $request->email;
+                $fashion_booking->bookingStatus = $request->bookingStatus;
+                // $fashion_booking->gender = $request->gender;
+                // $fashion_booking->qty = $request->qty;
+                $fashion_booking->income = (($selling_price - $cost_price) * $request->qty);
+                $fashion_booking->pickupDate = $request->pickupDate;
+                $fashion_booking->desc = $request->desc;
+                $fashion_booking->neck = $request->neck;
+                $fashion_booking->shoulder = $request->shoulder;
+                $fashion_booking->frontArc = $request->frontArc;
+                $fashion_booking->waist = $request->waist;
+                $fashion_booking->hip = $request->hip;
+                $fashion_booking->topLength = $request->topLength;
+                $fashion_booking->trouserLength = $request->trouserLength;
+                $fashion_booking->armHole = $request->armHole;
+                $fashion_booking->roundSleeve = $request->roundSleeve;
+                $fashion_booking->thigh = $request->thigh;
+                $fashion_booking->knee = $request->knee;
+                $fashion_booking->crotch = $request->crotch;
+                $fashion_booking->upperBust = $request->upperBust;
+                $fashion_booking->bust = $request->bust;
+                $fashion_booking->N_N = $request->N_N;
+                $fashion_booking->underBust = $request->underBust;
+                $fashion_booking->bustPoint = $request->bustPoint;
+                $fashion_booking->halfLength = $request->halfLength;
+                $fashion_booking->halfLengthBack = $request->halfLengthBack;
+                $fashion_booking->highWaist = $request->highWaist;
+                $fashion_booking->shoulderToknee = $request->shoulderToknee;
+                $fashion_booking->shoulderToHip = $request->shoulderToHip;
+                $fashion_booking->fullLength = $request->fullLength;
+                $fashion_booking->dressLength = $request->dressLength;
+                $fashion_booking->sleeveLength = $request->sleeveLength;
+                $fashion_booking->calf = $request->calf;
+                $fashion_booking->chest = $request->chest;
+                $fashion_booking->stomach = $request->stomach;
+                $fashion_booking->topHip = $request->topHip;
+                $fashion_booking->biceps = $request->biceps;
+                $fashion_booking->sleeve = $request->sleeve;
+                $fashion_booking->waistToKnee = $request->waistToKnee;
+
+                $fashion_booking->update();
+                // $fabric->qty = $fab_qty - $request->qty;
+                
+                if ($request->hasFile('images')) {
+
+                    $files = $request->file('images');
+                    $upload_path = public_path(). '/images/products';
+                    $images =BookingStyles::where('fashion_bookings_id', $fashion_booking->id)->get();
+
+                    // check if there is a old document
+                    if(count($images) > 0) {
+                        // delete all old documents
+                        foreach($images as $image) {
+                            File::delete('images/product/'.$image->name);
+                            $image->delete();
+                        }
+                    }
+
+                    // upload new documents
+                    foreach($files as $key=>$file) {
+                        $file_name = uniqid(). '.' .$file->getClientOriginalExtension();
+                        $file->move($upload_path, $file_name);
+                        $styleImages = new BookingStyles();
+                        $styleImages->fashion_bookings_id = $fashion_booking->id;
+                        $styleImages->name = $file_name;
+                        $styleImages->saveOrFail();
+                    }
+
+                }
+
+                // Commit the transaction
+                DB::commit();
+                return redirect()->route('booking.index')->with('success', 'Booking Updated successfully');
+            } catch (Exception $e) {
+                DB::rollback();
+                return redirect()->route('booking.edit')->with('error', $e->getMessage());
+            }
+    }
     }
 
 
@@ -415,5 +424,16 @@ class bookingController extends Controller
         //booking history
         $booking_history = fashionBooking::orderBy('pickupDate', 'desc')->get();
         return view('admin.pages.booking.history', compact('booking_history'));
+    }
+    public function invoice($id)
+    {
+        //show orders items
+        $booking = fashionBooking::findOrFail($id);
+        $tailor = Tailor::where('booking_id',$id)->first();
+        $pdf = Pdf::loadView('admin.pages.booking.invoice', compact('booking','tailor'));
+        // dd($_dompf_warnings);
+        return $pdf->download($booking->booking_no . '.pdf');
+
+
     }
 }

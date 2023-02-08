@@ -5,10 +5,15 @@ namespace App\Http\Controllers\admin\staff;
 use App\Http\Controllers\Controller;
 use App\Models\staffs;
 use App\Models\User;
+use App\Models\StaffDocuments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use Illuminate\Support\Facades\File;
+
 use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
@@ -21,7 +26,7 @@ class StaffController extends Controller
     public function index()
     {
         //
-        $staffs = User::where('role','Staff')->get();
+        $staffs = User::where('role', 'Staff')->get();
         return view('admin.pages.staff.index', compact('staffs'));
     }
 
@@ -33,12 +38,11 @@ class StaffController extends Controller
     public function create()
     {
         //
-        if(Auth::user()->role == 'Admin'){
-        return view('admin.pages.staff.create');
-        }else{
-            return redirect()->back()->with('error','Access Denialed!!');
+        if (Auth::user()->role == 'Admin') {
+            return view('admin.pages.staff.create');
+        } else {
+            return redirect()->back()->with('error', 'Access Denialed!!');
         }
-
     }
 
     /**
@@ -58,7 +62,7 @@ class StaffController extends Controller
             'phone' => ['required', 'string'],
             'position' => ['required', 'string'],
             'salary' => ['required', 'string'],
-
+            'docs.*' => 'nullable|mimes:jpeg,png,jpg,svg,pdf,doc,docx|max:5000',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -69,31 +73,53 @@ class StaffController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         } else {
-            if(Auth::user()->role == 'Admin'){
-           $user = User::create([
-                'name' => $request['name'],
-                'gender' => $request['gender'],
-                'dob' => $request['dob'],
-                'address' => $request['address'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'role'=>'Staff',
-                'password' => Hash::make($request['password']),
-            ]);
-            $staff = new staffs();
-            $staff->user_id = $user->id;
-            $staff->salary = $request['salary'];
-            $staff->position = $request['position'];
-            $staff->save();
+            DB::beginTransaction();
+            try {
+                if (Auth::user()->role == 'Admin') {
+                    $user = User::create([
+                        'name' => $request['name'],
+                        'gender' => $request['gender'],
+                        'dob' => $request['dob'],
+                        'address' => $request['address'],
+                        'email' => $request['email'],
+                        'phone' => $request['phone'],
+                        'role' => 'Staff',
+                        'password' => Hash::make($request['password']),
+                    ]);
+                    $staff = new staffs();
+                    $staff->user_id = $user->id;
+                    $staff->salary = $request['salary'];
+                    $staff->position = $request['position'];
 
+                    $staff->save();
+                    if ($request->hasFile('docs')) {
+                        $files = $request->file('docs');
+                        $upload_path = public_path() . '/docs/staffs';
+                        foreach ($files as $file) {
+                            $file_name = uniqid() . '.' . $file->getClientOriginalExtension();
+                            $file->move($upload_path, $file_name);
+                            // save into database
+                            $staffdocs = new StaffDocuments();
+                            $staffdocs->staffs_id = $staff->id;
+                            $staffdocs->name = $file_name;
 
-            return redirect('admin/staffs')->with('successs', 'Staff Created Successfully');
-        }else{
-            return redirect()->back()->with('error','Access Denialed!!');
-
+                            $staffdocs->saveOrFail();
+                            //      return redirect()->route('booking.index')->with('success', 'Booking created successfully');
+                        }
+                    }
+                    // Commit the transaction
+                    DB::commit();
+                    return redirect('admin/staffs')->with('successs', 'Staff Created Successfully');
+                } else {
+                    return redirect()->back()->with('error', 'Access Denialed!!');
+                }
+            } catch (Exception $e) {
+                DB::rollback();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
         }
     }
-    }
+
 
     /**
      * Display the specified resource.
@@ -115,13 +141,12 @@ class StaffController extends Controller
     public function edit($id)
     {
         //
-        if(Auth::user()->role == 'Admin'){
+        if (Auth::user()->role == 'Admin') {
 
-        $staff = User::findorfail($id);
-        return view('admin.pages.staff.edit', compact('staff'));
-        }else{
-            return redirect()->back()->with('error','Access Denialed!!');
-
+            $staff = User::findorfail($id);
+            return view('admin.pages.staff.edit', compact('staff'));
+        } else {
+            return redirect()->back()->with('error', 'Access Denialed!!');
         }
     }
 
@@ -144,9 +169,10 @@ class StaffController extends Controller
             'phone' => ['required', 'string'],
             'position' => ['required', 'string'],
             'salary' => ['required', 'string'],
+            'docs.*' => 'nullable|mimes:jpeg,png,jpg,svg,pdf,doc,docx|max:5000',
 
             'email' => ['required', 'string', 'email', 'max:255'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
         ]);
 
         if ($validator->fails()) {
@@ -155,31 +181,65 @@ class StaffController extends Controller
                 ->withInput()
                 ->withErrors($validator);
         } else {
-        if(Auth::user()->role == 'Admin'){
+            DB::beginTransaction();
+            try {
+                if (Auth::user()->role == 'Admin') {
+                    $user = User::findOrFail($id);
+                    $user->name = $request['name'];
+                    $user->gender = $request['gender'];
+                    $user->dob = $request['dob'];
+                    $user->address = $request['address'];
+                    $user->email = $request['email'];
+                    $user->phone = $request['phone'];
+                    if($request['password']) {
+                        $user->password = Hash::make($request['password']);
+                    }
+                    $user->update();
 
-           $user = User::where('id',$id)->update([
-                'name' => $request['name'],
-                'gender' => $request['gender'],
-                'dob' => $request['dob'],
-                'address' => $request['address'],
-                'email' => $request['email'],
-                'phone' => $request['phone'],
-                'role'=>'Staff',
-                // 'password' => Hash::make($request['password']),
-            ]);
-            $staff = staffs::where('user_id',$id)->first();
-            $staff->user_id = $id;
-            $staff->salary = $request['salary'];
-            $staff->position = $request['position'];
-            $staff->update();
+                    $staff = staffs::where('user_id', $user->id)->first();
+                    $staff->salary = $request['salary'];
+                    $staff->position = $request['position'];
 
+                    $staff->update();
+                    if ($request->hasFile('docs')) {
 
-            return redirect('admin/staffs')->with('successs', 'Staff Updated Successfully');
-        }else{
-            return redirect()->back()->with('error','Access Denialed!!');
+                        $files = $request->file('docs');
+                        $upload_path = public_path(). '/docs/staffs';
+                        $images = StaffDocuments::where('staffs_id', $staff->id)->get();
 
+                        // check if there is a old document
+                        if(count($images) > 0) {
+                            // delete all old documents
+                            foreach($images as $image) {
+                                File::delete('docs/staffs/'.$image->name);
+                                $image->delete();
+                            }
+                        }
+
+                        // upload new documents
+                        foreach($files as $key=>$file) {
+                            $file_name = uniqid(). '.' .$file->getClientOriginalExtension();
+                            $file->move($upload_path, $file_name);
+                            $staffdocs = new StaffDocuments();
+                            $staffdocs->staffs_id = $staff->id;
+                            $staffdocs->name = $file_name;
+                            $staffdocs->saveOrFail();
+                        }
+
+                    }
+
+                    // Commit the transaction
+                    DB::commit();
+                    return redirect('admin/staffs')->with('successs', 'Staff Updated Successfully');
+                } else {
+                    return redirect()->back()->with('error', 'Access Denialed!!');
+                }
+            } catch (Exception $e) {
+                DB::rollback();
+                return redirect()->back()->with('error', $e->getMessage());
+            }
         }
-    }
+
     }
 
     /**
@@ -191,15 +251,13 @@ class StaffController extends Controller
     public function destroy($id)
     {
         //
-        if(Auth::user()->role == 'Admin'){
+        if (Auth::user()->role == 'Admin') {
 
-        $user = User::findorfail($id);
-        $user->delete();
-        return redirect('admin/staffs')->with('successs', 'Staff Deleted Successfully');
-        }
-       else{
-        return redirect()->back()->with('error','Access Denialed!!');
-
+            $user = User::findorfail($id);
+            $user->delete();
+            return redirect('admin/staffs')->with('successs', 'Staff Deleted Successfully');
+        } else {
+            return redirect()->back()->with('error', 'Access Denialed!!');
         }
     }
 }

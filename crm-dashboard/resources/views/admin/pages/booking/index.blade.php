@@ -58,6 +58,7 @@
                                                 Created Date</th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
+                                            <th class="text-secondary opacity-7"></th>
                                             @if (Auth::user()->role == 'Admin')
                                                 <th class="text-secondary opacity-7"></th>
                                             @endif
@@ -89,7 +90,7 @@
                                                 </td>
                                                 <td>
                                                     <p class="text-xs font-weight-bold mb-0 text-secondary">
-                                                        {{ $book->fullname }}
+                                                        {{ $book->fullName }}
                                                     </p>
                                                     {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                                 </td>
@@ -119,8 +120,8 @@
                                                 </td>
                                                 <td>
                                                     <p
-                                                        class="text-xs font-weight-bold mb-0 {{ $book->booking_status == 'pending' ? 'text-warning' : ($book->booking_status == 'approved' ? 'text-primary' : 'text-danger') }}">
-                                                        {{ $book->booking_status }}
+                                                        class="text-xs font-weight-bold mb-0 {{ $book->bookingStatus == 'pending' ? 'text-warning' : ($book->bookingStatus == 'approved' ? 'text-primary' : 'text-danger') }}">
+                                                        {{ $book->bookingStatus }}
                                                     </p>
                                                     {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                                 </td>
@@ -142,6 +143,12 @@
 
                                                 </a>
                                             </td> --}}
+                                            <td class="align-middle">
+                                                <a href="{{route('booking.invoice',$book->id)}}" class="text-success font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="download booking">
+                                                    <i class="fa fa-download"></i>Download
+                                                </a>
+                                            </td>
                                                 <td class="align-middle">
                                                     <a href="{{ route('booking.edit', $book->id) }}"
                                                         class="text-success font-weight-bold text-xs" data-toggle="tooltip"

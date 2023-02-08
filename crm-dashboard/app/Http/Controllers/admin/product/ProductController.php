@@ -176,27 +176,36 @@ class ProductController extends Controller
             $product->details = $request->input('details');
             $product->updateOrFail();
 
-            if ($request->hasFile('images')) {
+        
+        if ($request->hasFile('images')) {
+
             $files = $request->file('images');
             $upload_path = public_path(). '/images/products';
             $images = ProductImages::where('products_id', $product->id)->get();
+
+            // check if there is a old document
+            if(count($images) > 0) {
+                // delete all old documents
+                foreach($images as $image) {
+                    File::delete('images/product/'.$image->name);
+                    $image->delete();
+                }
+            }
+
+            // upload new documents
             foreach($files as $key=>$file) {
                 $file_name = uniqid(). '.' .$file->getClientOriginalExtension();
                 $file->move($upload_path, $file_name);
-                // update into database
-                if(isset($images[$key])){
-                    $product_images = $images[$key];
-                    $product_images->name = $file_name;
-                    $product_images->updateOrFail();
-                    // echo($product_images->name);
-                }
+                $productImages = new ProductImages();
+                $productImages->products_id = $product->id;
+                $productImages->name = $file_name;
+                $productImages->saveOrFail();
             }
-                
 
         }
-  return redirect()->route('products.index')->with('success', 'Product updated successfully!'); 
+  return redirect()->route('products.index')->with('success', 'Product updated successfully!');
  }
-    
+
     }
     /**
      * Remove the specified resource from storage.

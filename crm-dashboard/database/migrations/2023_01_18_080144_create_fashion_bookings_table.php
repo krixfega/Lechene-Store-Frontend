@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
          $table->unsignedBigInteger('fabrics_id');
          $table->string('booking_no');
-            $table->string('fullname');
+            $table->string('fullName');
             $table->string('phoneNumber');
             $table->string('address');
             $table->string('email');
@@ -25,54 +25,48 @@ return new class extends Migration
             $table->string('qty');
             $table->integer('income');
             $table->string('pickupDate');
-            $table->string('booking_status')->default('pending');
-            $table->mediumText('comment')->nullable();
-            $table->string('order')->nullable();
-            $table->string('bustFrontArc')->nullable();
-            $table->string('corsetLength')->nullable();
-            $table->string('Length3_4')->nullable();
-            $table->string('bustBackArc')->nullable();
-            $table->string('shortSleeveElbow')->nullable();
-            $table->string('shortSleeveRoundElbow')->nullable();
-            $table->string('shortSleeveFullSleeveLength')->nullable();
+
+            $table->string('bookingStatus')->default('pending');
+            $table->mediumText('desc')->nullable();
             $table->string('neck')->nullable();
             $table->string('shoulder')->nullable();
-            $table->string('OffShoulder')->nullable();
+            $table->string('frontArc')->nullable();
+            $table->string('waist')->nullable();
+            $table->string('hip')->nullable();
+            $table->string('topLength')->nullable();
+            $table->string('trouserLength')->nullable();
+            $table->string('armHole')->nullable();
+            $table->string('roundSleeve')->nullable();
+            $table->string('thigh')->nullable();
+            $table->string('knee')->nullable();
+            $table->string('crotch')->nullable();
             $table->string('upperBust')->nullable();
             $table->string('bust')->nullable();
+            $table->string('N_N')->nullable();
             $table->string('underBust')->nullable();
             $table->string('bustPoint')->nullable();
-            $table->string('N_N')->nullable();
-            $table->string('acrossF_B')->nullable();
-            $table->string('halfLengthF_B')->nullable();
-            $table->string('topLength')->nullable();
-            $table->string('waist_highwaist')->nullable();
-            $table->string('hip_hipLength')->nullable();
-            $table->string('thigh_knee_ankle')->nullable();
-            $table->string('kneeCircumfrence')->nullable();
-            $table->string('shoulderToHip_knee')->nullable();
-            $table->string('waistToknee')->nullable();
-            $table->string('armhole_hicep')->nullable();
-            $table->string('sleeve')->nullable();
-            $table->string('roundSleeve')->nullable();
-            $table->string('wrist')->nullable();
-            $table->string('trouserLength')->nullable();
+            $table->string('halfLength')->nullable();
+            $table->string('halfLengthBack')->nullable();
+            $table->string('highWaist')->nullable();
+            $table->string('shoulderToknee')->nullable();
+            $table->string('shoulderToHip')->nullable();
             $table->string('fullLength')->nullable();
             $table->string('dressLength')->nullable();
-            $table->string('shirt_Trouser')->nullable();
-            $table->string('Length')->nullable();
-            $table->string('RoundKnee')->nullable();
-            $table->string('KneeLength')->nullable();
-            $table->string('waist_hips')->nullable();
-            $table->string('thigh')->nullable();
-            $table->string('ankle')->nullable();
-            $table->string('crotchF_B')->nullable();
+            $table->string('sleeveLength')->nullable();
+            $table->string('calf')->nullable();
+            $table->string('chest')->nullable();
+            $table->string('stomach')->nullable();
+            $table->string('topHip')->nullable();
+            $table->string('biceps')->nullable();
+            $table->string('sleeve')->nullable();
+            $table->string('waistToKnee')->nullable();
             $table->timestamps();
             $table->foreign('fabrics_id')
             ->references('id')
             ->on('fibrics')
             ->onDelete('cascade');
-          
+
+
         });
     }
 

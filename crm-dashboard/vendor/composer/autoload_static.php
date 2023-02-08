@@ -578,6 +578,7 @@ class ComposerStaticInitb5cf403370ab3441765f473d2f312f13
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\BookingStyles' => __DIR__ . '/../..' . '/app/Models/BookingStyles.php',
         'App\\Models\\Orders' => __DIR__ . '/../..' . '/app/Models/Orders.php',
         'App\\Models\\OrdersItems' => __DIR__ . '/../..' . '/app/Models/OrdersItems.php',
         'App\\Models\\ProductImages' => __DIR__ . '/../..' . '/app/Models/ProductImages.php',

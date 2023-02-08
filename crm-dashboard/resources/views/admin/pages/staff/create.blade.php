@@ -30,7 +30,7 @@
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{ route('staffs.store') }}">
+                            <form method="POST" action="{{ route('staffs.store') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group">
@@ -104,6 +104,17 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <label for="docs">Documents:</label>
+                                    <input type="file" required name="docs[]"
+                                        class="form-control @error('docs') is-invalid @enderror" multiple>
+                                    @error('docs')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror"

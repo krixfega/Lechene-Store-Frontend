@@ -17,6 +17,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="{{asset('assets/css/nucleo-svg.css')}}" rel="stylesheet" />
     <!-- CSS Files -->
+   
     {{-- <link  href="assets/css/style.css?v=2.0.4" rel="stylesheet" /> --}}
     <link id="pagestyle" rel="stylesheet" href="{{asset('assets/css/style.css?v=2.0.4')}}">
 <link href="{{ asset('assets/js/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css"  >

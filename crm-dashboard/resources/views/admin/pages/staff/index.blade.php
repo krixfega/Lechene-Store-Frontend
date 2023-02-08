@@ -56,6 +56,8 @@
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                             @endif
+                                            <th class="text-secondary opacity-7"></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -120,9 +122,16 @@
                                                     data-toggle="tooltip" data-original-title="Edit user">
 
                                                 </a>
-                                            </td> --}}
+                                            </td> --}} 
+                                             <td class="align-middle">
+                                                <a href="{{url('admin/staffs/'.$item->id.'/edit')}}" class="text-primary font-weight-bold text-xs"
+                                                    data-toggle="tooltip" data-original-title="view user">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </td>
                                             @if (Auth::user()->role == 'Admin')
 
+                                          
                                             <td class="align-middle">
                                                 <a href="{{url('admin/staffs/'.$item->id.'/edit')}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
