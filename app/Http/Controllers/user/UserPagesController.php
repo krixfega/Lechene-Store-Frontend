@@ -26,6 +26,15 @@ class UserPagesController extends Controller
         return view('user.pages.home',compact('Bestproducts','bispock'));
     }
 
+     public function singleProduct($id)
+    {
+        //
+        $product = Products::findOrFail($id);
+        return view('user.pages.single_product',compact('product'));
+
+    }
+
+
 
 
 }

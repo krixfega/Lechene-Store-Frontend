@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\shop\bookingController;
 use App\Http\Controllers\admin\shop\fibricsController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\user\UserPagesController;
+use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\product\UserProductController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,13 +30,20 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 //normal routes
-Route::get('/', [UserPagesController::class, 'index']);
-Route::resource('/product', UserProductController::class);
+Route::get('/', [UserPagesController::class, 'index'])->name('home');
+Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name('product.show');
+
 
 
 
 // authenticated routes
 Route::middleware('auth')->group(function () {
+    Route::post('/cart',[CartController::class, 'create'])->name('cart.create');
+    Route::get('/cart',[CartController::class, 'show'])->name('cart.show');
+    Route::put('/cart',[CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart',[CartController::class, 'delete'])->name('cart.delete');
+    Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
+
 
 });
 
@@ -81,7 +89,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 
 
   });
- 
+
 
 
 
