@@ -64,10 +64,9 @@ class CartController extends Controller
             $cart_items = CartItems::where('carts_id', $cart->id)->get();
             // dd($cart_items);
             return view('user.pages.cart', compact('cart_items'));
-    //      else {
-    //         return response('info', 'Login to Continue!');
+            //      else {
+            //         return response('info', 'Login to Continue!');
         }
-
     }
     public function update(Request $request)
     {
@@ -99,36 +98,40 @@ class CartController extends Controller
     }
 
     public function delete(Request $request)
-{
-    $itemId = $request->input('item_id');
+    {
+        $itemId = $request->input('item_id');
 
-    if (Auth::check()) {
-        try {
-            DB::beginTransaction();
-            $cart = Cart::where('users_id', Auth::user()->id)->firstOrFail();
-            $item = CartItems::where('carts_id', $cart->id)->where('id', $itemId)->firstOrFail();
-            $item->delete();
-            DB::commit();
-            return response()->json(['success' => 'Item deleted from cart']);
-        } catch (\Exception $e) {
-            DB::rollback();
-            return response()->json(['error' => 'Error deleting item from cart: ' . $e->getMessage()], 500);
+        if (Auth::check()) {
+            try {
+                DB::beginTransaction();
+                $cart = Cart::where('users_id', Auth::user()->id)->firstOrFail();
+                $item = CartItems::where('carts_id', $cart->id)->where('id', $itemId)->firstOrFail();
+                $item->delete();
+                DB::commit();
+                return response()->json(['success' => 'Item deleted from cart']);
+            } catch (\Exception $e) {
+                DB::rollback();
+                return response()->json(['error' => 'Error deleting item from cart: ' . $e->getMessage()], 500);
+            }
+        } else {
+            return response()->json(['error' => 'Login to Continue']);
         }
-    } else {
-        return response()->json(['error' => 'Login to Continue']);
     }
-}
-public function count()
-{
-    if (Auth::check()) {
-        $cart = Cart::where('users_id', Auth::user()->id)->first();
-        $count = $cart ? $cart->cart_items()->count(): 0;
-    } else {
-        $count = 0;
+    public function count()
+    {
+        if (Auth::check()) {
+            $cart = Cart::where('users_id', Auth::user()->id)->first();
+            $count = $cart ? $cart->cart_items()->count() : 0;
+        } else {
+            $count = 0;
+        }
+        return response()->json(['count' => $count]);
     }
-    return response()->json(['count' => $count]);
 
-}
-
-
+    public function checkout()
+    {
+        $cart = Cart::where('users_id', Auth::user()->id)->firstOrFail();
+        $cartitem = CartItems::where('carts_id', $cart->id)->get();
+        return view('user.pages.checkout', compact('cart', 'cartitem'));
+    }
 }

@@ -178,7 +178,7 @@ class accountController extends Controller
                     $total_tailor_fee += $tailor->total_price;
                 }
             }
-         
+
             $net_daily_booking_income = Cache::remember(' net_daily_booking_income', 60, function () use ($total_income, $total_tailor_fee) {
                 return $total_income - $total_tailor_fee;
             });
@@ -229,7 +229,7 @@ class accountController extends Controller
         }
 
 
-        //WEEKLY BOOKING INCOME 
+        //WEEKLY BOOKING INCOME
         $total_income = 0;
         $total_tailor_fee = 0;
         $fashion_bookings = fashionBooking::whereMonth('created_at', Carbon::now()->month)
@@ -244,7 +244,7 @@ class accountController extends Controller
                     $total_tailor_fee += $tailor->total_price;
                 }
             }
-         
+
             $net_weekly_booking_income = Cache::remember(' net_weekly_booking_income', 60, function () use ($total_income, $total_tailor_fee) {
                 return $total_income - $total_tailor_fee;
             });
@@ -319,8 +319,8 @@ class accountController extends Controller
         }else{
             $bookings_percentage_increase = 0;
         }
-        $pending_booking = fashionBooking::where('booking_status','pending')->count();
-        $approved_booking = fashionBooking::where('booking_status','approved')->count();
+        $pending_booking = fashionBooking::where('bookingStatus','pending')->count();
+        $approved_booking = fashionBooking::where('bookingStatus','approved')->count();
         $jan_income = Orders::whereYear('created_at', Carbon::now()->year)
             ->whereMonth('created_at', 1)
             ->sum('total_profit');
@@ -416,7 +416,7 @@ class accountController extends Controller
                 'total_booking_sales',
                  'pending_booking',
                  'approved_booking',
-        
+
 
             )
 

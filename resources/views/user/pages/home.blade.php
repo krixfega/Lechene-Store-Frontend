@@ -130,14 +130,12 @@
                                 @endif
                                 <span class="badges">{{ $prod->Category->name }}</span>
                                 <div class="product-action">
-                                    <button type="button" class="product-action-btn action-btn-quick-view"
-                                        data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
-                                        <i class="fa fa-expand"></i>
+                                    <a href="{{ route('product.show', $prod->id) }}"><button type="button" class="product-action-btn action-btn-quick-view"
+                                       >
+                                        <i class="fa fa-eye"></i>
                                     </button>
-                                    <button type="button" class="product-action-btn add-to-cart-btn action-btn-cart"
-                                        data-bs-toggle="modal" data-bs-target="#action-CartAddModal">
-                                        <i class="fa fa-shopping-cart"></i>
-                                    </button>
+                                    </a>
+
 
                                 </div>
                                 <div class="product-info">
@@ -219,7 +217,7 @@
                                     </div>
                                     <button type="button" class="info-btn-wishlist" data-bs-toggle="modal"
                                         data-bs-target="#action-WishlistModal">
-                                        <i class="fa fa-shopping-cart"></i>
+                                        <i class="fa fa-book"></i>
                                     </button>
                                 </div>
                             </div>

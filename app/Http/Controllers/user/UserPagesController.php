@@ -16,7 +16,7 @@ class UserPagesController extends Controller
     {
         $Bestproducts =Products::withCount('OrderedItems')
         ->orderByDesc('ordered_items_count')
-        ->take(6)
+        ->take(3)
         ->get();
         $products = Products::all();
        $bispock = fibrics::withCount('Bookings')

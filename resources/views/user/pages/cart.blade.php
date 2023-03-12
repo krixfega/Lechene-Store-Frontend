@@ -75,8 +75,9 @@
                                                 <td class="product-total">
                                                     <span>&#8358;{{ $prod->prod->discounted_price * $prod->qty }}</span>
                                                 </td>
-                                                <td class="product-remove"><a href="#" class="btn-delete" data-item-id="{{ $prod->id }}"><i
-                                                            class="fa fa-trash-o"></i></a href="#"></td>
+                                                <td class="product-remove"><a href="#" class="btn-delete"
+                                                        data-item-id="{{ $prod->id }}"><i class="fa fa-trash-o"></i></a
+                                                        href="#"></td>
                                             </tr>
                                         @empty
                                             <h1>Empty</h1>
@@ -87,7 +88,7 @@
                         </div>
                         <div class="cart-shiping-update-wrapper">
                             <div class="cart-shiping-btn continure-btn">
-                                <a class="btn btn-link" href="shop.html"><i class="fa fa-angle-left"></i> Back To Shop</a>
+                                <a class="btn btn-link" href="{{ url('/') }}"><i class="fa fa-angle-left"></i> Back To Shop</a>
                             </div>
                             <div class="col-md-12 col-lg-4">
                                 <div class="grand-total-wrap mt-2 mt-lg-0">
@@ -98,7 +99,7 @@
                                         </div>
                                     </div>
                                     <div class="grand-total-btn">
-                                        <a class="btn btn-link" href="shop-checkout.html">Proceed to checkout</a>
+                                        <a class="btn btn-link" href="{{ route('cart.checkout')  }}">Proceed to checkout</a>
                                     </div>
                                 </div>
                             </div>
@@ -146,87 +147,86 @@
         proQty.append('<div class= "dec qty-btn">-</div>');
         proQty.append('<div class="inc qty-btn">+</div>');
         $('.qty-btn').on('click', function(e) {
-        e.preventDefault();
+            e.preventDefault();
 
-        var $button = $(this);
-        var $proQty = $button.parent('.pro-qty');
-        var oldValue = $proQty.find('input').val();
-        var maxQty = parseInt($proQty.find('input').attr('max'));
-        console.log(maxQty);
-        if ($button.hasClass('inc')) {
-            var newVal = parseFloat(oldValue) + 1;
-            if (newVal > maxQty) {
-                newVal = maxQty;
-            }
-        } else {
-            // Don't allow decrementing below zero
-            if (oldValue > 1) {
-                var newVal = parseFloat(oldValue) - 1;
+            var $button = $(this);
+            var $proQty = $button.parent('.pro-qty');
+            var oldValue = $proQty.find('input').val();
+            var maxQty = parseInt($proQty.find('input').attr('max'));
+            console.log(maxQty);
+            if ($button.hasClass('inc')) {
+                var newVal = parseFloat(oldValue) + 1;
                 if (newVal > maxQty) {
                     newVal = maxQty;
                 }
             } else {
-                newVal = 1;
+                // Don't allow decrementing below zero
+                if (oldValue > 1) {
+                    var newVal = parseFloat(oldValue) - 1;
+                    if (newVal > maxQty) {
+                        newVal = maxQty;
+                    }
+                } else {
+                    newVal = 1;
+                }
             }
-        }
 
-        // $proQty.find('input').val(newVal);
-        $proQty.find('input').val(newVal);
+            // $proQty.find('input').val(newVal);
+            $proQty.find('input').val(newVal);
 
-        var itemId = $proQty.data('item-id');
-        var route_url = "{{ route('cart.update') }}";
-        $.ajax({
-            url: route_url,
-            method: 'PUT',
-            data: {
-                item_id: itemId,
-                qty: newVal,
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(response) {
-    if (response.success) {
-        // Update cart quantity
-       window.location.reload();
-        // Handle success response
-    } else {
-        // Handle failure response
-    }
-},
+            var itemId = $proQty.data('item-id');
+            var route_url = "{{ route('cart.update') }}";
+            $.ajax({
+                url: route_url,
+                method: 'PUT',
+                data: {
+                    item_id: itemId,
+                    qty: newVal,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Update cart quantity
+                        window.location.reload();
+                        // Handle success response
+                    } else {
+                        // Handle failure response
+                    }
+                },
 
-            error: function(jqXHR, textStatus, errorThrown) {
-                // Handle error response
-                alert(errorThrown)
-            }
-        });
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle error response
+                    alert(errorThrown)
+                }
+            });
         });
         $('.btn-delete').on('click', function(e) {
-    e.preventDefault();
+            e.preventDefault();
 
-    var $button = $(this);
-    var itemId = $button.data('item-id');
-    var delete_url = '{{ route("cart.delete") }}';
+            var $button = $(this);
+            var itemId = $button.data('item-id');
+            var delete_url = '{{ route('cart.delete') }}';
 
-    $.ajax({
-        url: delete_url,
-        method: 'Delete',
-        data: {
-            item_id: itemId,
-            _token: '{{ csrf_token() }}'
-        },
-        success: function(response) {
-            // Handle success response
-            if (response.success) {
-        $button.closest('.cart-item').remove();
-        loadcart();
-    } else {
-        // Handle failure response
-    }
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            // Handle error response
-        }
-    });
-});
-
+            $.ajax({
+                url: delete_url,
+                method: 'Delete',
+                data: {
+                    item_id: itemId,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    // Handle success response
+                    if (response.success) {
+                        $button.closest('.cart-item').remove();
+                        loadcart();
+                    } else {
+                        // Handle failure response
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle error response
+                }
+            });
+        });
     </script>
 @endsection

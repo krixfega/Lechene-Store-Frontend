@@ -12,6 +12,7 @@ use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\user\UserPagesController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\product\UserProductController;
+use App\Http\Controllers\user\product\UserShopController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,8 @@ Auth::routes();
 //normal routes
 Route::get('/', [UserPagesController::class, 'index'])->name('home');
 Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name('product.show');
+Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
+Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');
 
 
 
@@ -43,6 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/cart',[CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart',[CartController::class, 'delete'])->name('cart.delete');
     Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
+    Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+
 
 
 });

@@ -13,10 +13,10 @@
              <div class="col-auto d-none d-lg-block">
                  <div class="header-navigation">
                      <ul class="main-nav">
-                         <li class=""><a href="#">Home</a>
+                         <li class=""><a href="{{ url('/') }}">Home</a>
 
                          </li>
-                         <li class=""><a href="#">Shop</a>
+                         <li class=""><a href="{{ route('user.shop.index') }}">Shop</a>
 
                          </li>
                          @auth
