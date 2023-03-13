@@ -20,7 +20,7 @@
                                         <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
                                             typesetting industry. Lorem Ipsum has been the industry.</p>
                                         <div class="hero-slide-meta">
-                                            <a class="btn btn-border-primary" href="shop.html">Shop Now</a>
+                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop Now</a>
                                             <a class="ht-popup-video" data-fancybox data-type="iframe"
                                                 href="https://player.vimeo.com/video/172601404?autoplay=1">
                                                 <i class="fa fa-play icon"></i>
@@ -56,7 +56,7 @@
                                         <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
                                             typesetting industry. Lorem Ipsum has been the industry.</p>
                                         <div class="hero-slide-meta">
-                                            <a class="btn btn-border-primary" href="shop.html">Shop Now</a>
+                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop Now</a>
                                             <a class="ht-popup-video" data-fancybox data-type="iframe"
                                                 href="https://player.vimeo.com/video/172601404?autoplay=1">
                                                 <i class="fa fa-play icon"></i>
@@ -91,15 +91,15 @@
             <div class="container">
                 <div class="swiper banner-slider-container">
                     <div class="swiper-wrapper">
-                        <a href="shop.html" class="swiper-slide product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="swiper-slide product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/01.png') }}" width="370"
                                 height="294" alt="Image-HasTech">
                         </a>
-                        <a href="shop.html" class="swiper-slide product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="swiper-slide product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/02.png') }}" width="370"
                                 height="294" alt="Image-HasTech">
                         </a>
-                        <a href="shop.html" class="swiper-slide product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="swiper-slide product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/03.png') }}" width="370"
                                 height="294" alt="Image-HasTech">
                         </a>
@@ -139,7 +139,7 @@
 
                                 </div>
                                 <div class="product-info">
-                                    <h4 class="title"><a href="shop-single-product.html">{{ $prod->name }}</a></h4>
+                                    <h4 class="title"><a href="{{ route('product.show', $prod->id) }}">{{ $prod->name }}</a></h4>
                                     <div class="price">&#8358;{{ $prod->discounted_price }} <span
                                             class="price-old">&#8358;{{ $prod->selling_price }}</span></div>
 
@@ -165,7 +165,7 @@
                 <div class="row mb-n6 mb-sm-n7">
                     <div class="col-sm-12 col-md-6 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/d1.png') }}" width="570"
                                 height="266" alt="Image-HasTech">
                         </a>
@@ -173,7 +173,7 @@
                     </div>
                     <div class="col-sm-12 col-md-6 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/d2.png') }}" width="570"
                                 height="266" alt="Image-HasTech">
                         </a>
@@ -235,7 +235,7 @@
                 <div class="row mb-n6">
                     <div class="col-sm-6 col-md-3 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/c1.jpg') }}" width="270"
                                 height="419" alt="Image-HasTech">
                         </a>
@@ -243,7 +243,7 @@
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/c2.jpg') }}" width="270"
                                 height="419" alt="Image-HasTech">
                         </a>
@@ -251,7 +251,7 @@
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/c3.png') }}" width="270"
                                 height="419" alt="Image-HasTech">
                         </a>
@@ -259,7 +259,7 @@
                     </div>
                     <div class="col-sm-6 col-md-3 mb-6">
                         <!--== Start Product Banner Item ==-->
-                        <a href="shop.html" class="product-banner-item">
+                        <a href="{{ route('user.shop.index') }}" class="product-banner-item">
                             <img class="icon" src="{{ asset('shop/images/shop/banner/c4.jpg') }}" width="270"
                                 height="419" alt="Image-HasTech">
                         </a>

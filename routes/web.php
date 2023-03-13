@@ -35,6 +35,8 @@ Route::get('/', [UserPagesController::class, 'index'])->name('home');
 Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name('product.show');
 Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
 Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');
+Route::get('/shoplist/category/{id}', [UserShopController::class, 'category'])->name('user.shop.category');
+
 
 
 

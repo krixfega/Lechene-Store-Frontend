@@ -97,4 +97,64 @@
          </div>
      </div>
  </header>
+ <aside class="aside-side-menu-wrapper off-canvas-area offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions">
+    <div class="offcanvas-header" data-bs-dismiss="offcanvas">
+        <h5>Menu</h5>
+        <button type="button" class="btn-close">×</button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Start Mobile Menu Wrapper -->
+        <div class="res-mobile-menu">
+            <nav id="offcanvasNav" class="offcanvas-menu">
+                <ul>
+                   <li class=""><a href="{{ url('/') }}">Home</a></li>
+
+                         
+                   <li class=""><a href="{{ route('user.shop.index') }}">Shop</a>
+
+                         </li>
+                         @auth
+                             <li class="has-submenu"><a href="#">{{ Auth::user()->name }}</a>
+                                 <ul class="submenu-nav">
+
+                                     <li><a href="#">profile</a></li>
+                                     <li>
+                                         <a class=""href="{{ route('logout') }}"
+                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                                             Logout</a>
+
+                                     </li>
+
+                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                         style="display: none;">
+                                         @csrf
+                                     </form>
+                                     {{-- <li><a href="page-not-found.html">Page Not Found</a></li> --}}
+
+                                 </ul>
+                             </li>
+                         @else
+                             <li class="has-submenu"><a href="#">Account</a>
+                                 <ul class="submenu-nav">
+
+                                     <li><a href="{{ route('login') }}">Login</a></li>
+                                     <li><a href="{{ route('register') }}">Register</a></li>
+                                     {{-- <li><a href="page-not-found.html">Page Not Found</a></li> --}}
+
+                                 </ul>
+                             </li>
+
+                         @endauth
+                         <li class="has-submenu"><a href="#">Pages</a>
+                             <ul class="submenu-nav">
+                                 <li><a href="about-us.html">About</a></li>
+                                 <li><a href="contact.html">Contact</a></li>
+                             </ul>
+                         </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- End Mobile Menu Wrapper -->
+    </div>
+</aside>
  <!--== End Header Wrapper ==-->

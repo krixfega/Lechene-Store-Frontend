@@ -45,6 +45,7 @@ class UserShopController extends Controller
      }
 
      if ($price_range) {
+        // get products according to price range
          [$min_price, $max_price] = explode('-', $price_range);
          $products->whereBetween('selling_price', [$min_price, $max_price]);
      }
@@ -60,5 +61,16 @@ class UserShopController extends Controller
     // Apply filters
 
 }
+    public function category(Request $request,$id)
+    {
+
+        $category = ProductsCategory::findOrFail($id);
+        $categoryProd = Products::where('products_categories_id',$id)->get();
+        // dd($categoryProd);
+        return view('user.pages.category',compact('category','categoryProd'));
+
+
+
+    }
 
 }
