@@ -198,7 +198,7 @@
                             <!--== Start Product Item ==-->
                             <div class="product-item product-item-border">
                                 @if ($prod->FibricImages->count() > 0)
-                                    <a class="product-thumb" href="shop-single-product.html">
+                                    <a class="product-thumb" href="#">
                                         <img src="{{ asset('images/fibrics/' . $prod->FibricImages->first()->name) }}"
                                             width="300" height="286" alt="Image-HasTech">
                                     </a>
@@ -212,13 +212,12 @@
 
                                 </div>
                                 <div class="product-info">
-                                    <h4 class="title"><a href="shop-single-product.html">{{ $prod->name }}</a></h4>
+                                    <h4 class="title"><a href="#">{{ $prod->name }}</a></h4>
                                     <div class="price">&#8358;{{ $prod->selling_price }} <span class="price-old"></span>
                                     </div>
-                                    <button type="button" class="info-btn-wishlist" data-bs-toggle="modal"
-                                        data-bs-target="#action-WishlistModal">
+                                    <a href="{{ route('product.booking',$prod->id) }}" type="button" class="info-btn-wishlist">
                                         <i class="fa fa-book"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <!--== End prPduct Item ==-->

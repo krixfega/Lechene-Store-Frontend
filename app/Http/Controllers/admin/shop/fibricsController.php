@@ -54,6 +54,7 @@ class fibricsController extends Controller
             'name' => 'required|string',
             'typeOrColors' => 'required|string',
             'qty' => 'required|numeric',
+            'category' => 'required|string',
             'cost_price' => 'required|numeric',
             'selling_price' => 'required|numeric',
             'details' => 'required|string',
@@ -64,6 +65,7 @@ class fibricsController extends Controller
         $fibrics->name = $request->name;
         $fibrics->typeOrColors = $request->typeOrColors;
         $fibrics->qty = $request->qty;
+        $fibrics->category = $request->category;
         $fibrics->cost_price = $request->cost_price;
         $fibrics->selling_price = $request->selling_price;
         $fibrics->details = $request->details;
@@ -133,6 +135,7 @@ class fibricsController extends Controller
             'name' => 'required|string',
             'typeOrColors' => 'required|string',
             'qty' => 'required|numeric',
+            'category' => 'required|string',
             'cost_price' => 'required|numeric',
             'selling_price' => 'required|numeric',
             'details' => 'required|string',
@@ -144,6 +147,7 @@ class fibricsController extends Controller
             $fibrics->name = $request->name;
             $fibrics->typeOrColors = $request->typeOrColors;
             $fibrics->qty = $request->qty;
+            $fibrics->category = $request->category;
             $fibrics->cost_price = $request->cost_price;
             $fibrics->selling_price = $request->selling_price;
             $fibrics->details = $request->details;

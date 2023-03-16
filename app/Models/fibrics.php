@@ -14,10 +14,11 @@ class fibrics extends Model
     protected $fillable = [
         'name',
         'typeOrColors',
+        'category',
         'qty',
         'cost_price',
         'selling_price',
-        'details'
+        'details',
 
 
     ];

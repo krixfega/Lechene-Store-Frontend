@@ -12,9 +12,10 @@
                 <div class="card-body">
                     <p>Type/Colors: {{ $fibric->typeOrColors }}</p>
                     <p>Quantity: {{ $fibric->qty }}</p>
+                    <p>Category: {{ $fibric->category}}</p>
                     <p>Cost Price: {{ $fibric->cost_price }}</p>
                     <p>Selling Price: {{ $fibric->selling_price }}</p>
-                   
+
                        <h4> Details:</h4>
                          <p>{{ $fibric->details }}</p>
                     <div class="card-subtitle">
@@ -31,7 +32,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
         @endsection
 

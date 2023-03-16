@@ -28,7 +28,7 @@
                                                 Image
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Name 
+                                                Name
                                             </th>
 
                                             <th
@@ -73,7 +73,7 @@
                                             </td> --}}
                                             @if(Auth::user()->role == 'Admin')
 
-                                            
+
                                             <td class="align-middle">
                                                 <a href="{{route('productsCategory.edit',$category->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit user">
@@ -124,12 +124,15 @@
                                 <table class="table w-full align-items-center mb-0" id="example3">
                                     <thead>
                                         <tr>
-                                            
+
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Name 
+                                                Name
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             color/type
+                                            </th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                            Category
                                             </th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             qty
@@ -176,6 +179,12 @@
                                             </td>
                                             <td>
                                                 <p class="text-xs font-weight-bold mb-0 text-secondary">
+                                                    {{$fibric->category}}
+                                                </p>
+                                                {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
+                                            </td>
+                                            <td>
+                                                <p class="text-xs font-weight-bold mb-0 text-secondary">
                                                     {{$fibric->qty}}
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
@@ -186,7 +195,7 @@
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                             </td>
-                                                
+
 
 
                                             <td>
@@ -198,7 +207,7 @@
 
                                                 </a>
                                             </td> --}}
-                                           
+
                                             <td class="align-middle">
                                                 <a href="{{route('fibrics.show',$fibric->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="View More">
@@ -237,7 +246,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <div class="row">
                 <div class="col-12">
@@ -337,7 +346,7 @@
 
                                                 </a>
                                             </td> --}}
-                                            
+
                                             <td class="align-middle">
                                                 <a href="{{route('products.show',$product->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="View More">
@@ -345,7 +354,7 @@
                                                 </a>
                                             </td>
                                             @if(Auth::user()->role == 'Admin')
-                                            
+
                                             <td class="align-middle">
                                                 <a href="{{route('products.edit',$product->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="Edit Product">

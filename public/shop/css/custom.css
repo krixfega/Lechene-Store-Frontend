@@ -1,0 +1,70 @@
+.multiform #regForm {
+    background-color: rgb(228, 228, 228);
+    margin: 0px auto;
+    font-family: Raleway;
+    padding:10px 20px ;
+    width: 100%;
+    /* min-width: 300px; */
+    box-shadow: 5px 6px 10px 10px  rgb(228, 228, 228);
+  }
+
+  .multiform h1 {
+    text-align: center;
+  }
+
+  .multiform input {
+    padding: 10px;
+    width: 100%;
+    font-size: 17px;
+    font-family: Raleway;
+    border: 1px solid #aaaaaa;
+  }
+
+  /* Mark input boxes that gets an error on validation: */
+  .multiform input.invalid {
+    background-color: #ffdddd;
+  }
+
+  /* Hide all steps by default: */
+ .multiform .tab {
+    display: none;
+  }
+
+  .multiform button {
+    background-color: #04AA6D;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+  }
+
+  .multiform button:hover {
+    opacity: 0.8;
+  }
+
+  .multiform #prevBtn {
+    background-color: #bbbbbb;
+  }
+
+  /* Make circles that indicate the steps of the form: */
+  .multiform .step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+  }
+
+  .multiform .step .active {
+    opacity: 1;
+  }
+
+  /* Mark the steps that are finished and valid: */
+  .multiform .step.finish {
+    background-color: #04AA6D;
+  }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('typeOrColors');
+            $table->string('category');
             $table->string('qty');
             $table->string('selling_price');
             $table->string('cost_price');

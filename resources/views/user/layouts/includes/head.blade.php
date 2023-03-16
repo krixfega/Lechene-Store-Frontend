@@ -26,5 +26,6 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('shop/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('shop/css/custom.css') }}">
 
 </head>

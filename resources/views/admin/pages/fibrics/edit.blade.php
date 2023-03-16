@@ -50,6 +50,18 @@
                                     </span>
                                     @enderror
                                 </div>
+
+                                 <div class="form-group">
+                                    <label for="category">category</label>
+                                    <select class="form-control @error('category') is-invalid @enderror" id="category"
+                                        name="category" required>
+                                        <option value="male"  {{ $fibric->category == 'male' ? 'selected': '' }}>Male</option>
+                                        <option value="female" {{ $fibric->category == 'female' ? 'selected': '' }}>Female</option>
+                                    </select>
+                                    @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
                                 <div class="form-group">
                                     <label for="qty">Quantity:</label>
                                     <input type="number" name="qty" class="form-control @error('qty') is-invalid @enderror" value="{{ old('qty') ?? $fibric->qty }}">
@@ -100,11 +112,11 @@
                                         @endforeach
                                         </div>
                                         <button type="submit" class="btn btn-primary">Update</button>
-                                        
+
                                         </form>
-                            
-                            
-                          
+
+
+
 
 
                         </div>

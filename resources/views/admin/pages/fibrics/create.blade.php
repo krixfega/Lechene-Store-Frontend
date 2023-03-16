@@ -41,6 +41,17 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="category">category</label>
+                                    <select class="form-control @error('category') is-invalid @enderror" id="category"
+                                        name="category" required>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                    @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <label for="type/colors">Type/Colors:</label>
                                     <input type="text" required name="typeOrColors" class="form-control @error('type/colors') is-invalid @enderror" value="{{ old('type/colors') }}">
                                     @error('type/colors')
@@ -95,10 +106,10 @@
                                     @enderror
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
-                                    
+
                                     </form>
-                            
-                          
+
+
 
 
                         </div>

@@ -32,6 +32,24 @@
 html, body {
   height: 100%;
 }
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: #333;
+    padding-left: 0;
+    list-style-type: none;
+    text-align: center;
+  }
+  #progressbar li {
+    width: 33.33%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+  }
+  #progressbar .step1:before {
+    font-family: FontAwesome;
+    content: "\f0c0";
+  }
 
 body {
   font-family: "Roboto", sans-serif, Arial, Helvetica, sans-serif;
