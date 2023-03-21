@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\staffs;
 use App\Models\Tailor;
+use App\Models\Orders;
+use App\Models\fashionBooking;
+use App\Models\payment;
 
 
 
@@ -70,5 +74,29 @@ public function staff(): HasOne
 public function tailor(): HasOne
 {
     return $this->hasOne(Tailor::class);
+}
+
+/**
+ * Get all of the bookings for the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function fashion_bookings(): HasMany
+{
+    return $this->hasMany(fashionBooking::class, 'users_id');
+}
+
+/**
+ * Get all of the orders for the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasMany
+ */
+public function orders(): HasMany
+{
+    return $this->hasMany(Orders::class, 'user_id');
+}
+public function payments(): HasMany
+{
+    return $this->hasMany(payment::class, 'users_id');
 }
 }

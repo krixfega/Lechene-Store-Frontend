@@ -211,7 +211,7 @@
                                 <table class="table table-bordered table-responsive">
 
                                     <tbody>
-                                        
+
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Chest:</td>
                                             <td class="text-secondary ">{{ $booking->chest }}</td>
@@ -242,7 +242,7 @@
                     </div>
                 </div>
                 <div class="row my-4">
-                  
+
                     <div class="col-12 col-lg-6">
                       <h4 class="text-center">Style Images</h4>
                       <div id="styleCarousel" class="carousel slide" data-ride="carousel">
@@ -262,15 +262,15 @@
                           <span class="sr-only">Next</span>
                         </a>
                       </div>
-                    </div>  
+                    </div>
                     <div class="col-12 col-lg-6">
                       <h4 class="text-center">Style Description</h4>
                       <p class="text-justify my-3">{{ $booking->desc }}</p>
                     </div>
                   </div>
-                  
-                  
-                  
+
+
+
             </div>
         </div>
     </main>

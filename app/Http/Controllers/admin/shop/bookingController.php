@@ -121,6 +121,7 @@ class bookingController extends Controller
                 $fab_qty = $fabric->qty;
                 $fashion_booking = new fashionBooking();
                 $fashion_booking->fabrics_id = $request->fabrics_id;
+                $fashion_booking->users_id = Auth::user()->id;
                 $fashion_booking->booking_no = $this->generateOrderNumber();
                 $fashion_booking->fullName = $request->fullName;
                 $fashion_booking->phoneNumber = $request->phoneNumber;
@@ -188,7 +189,7 @@ class bookingController extends Controller
                 return redirect()->route('booking.index')->with('success', 'Booking created successfully');
             } catch (Exception $e) {
                 DB::rollback();
-                return redirect()->route('booking.create')->with('error', $e->getMessage());
+                return redirect()->back()->withErrors($e->getMessage());
             }
         }
     }
@@ -305,6 +306,7 @@ class bookingController extends Controller
                 $cost_price = $fabric->cost_price;
                 $fab_qty = $fabric->qty;
                 $fashion_booking = fashionBooking::findOrFail($id);
+                $fashion_booking->users_id = Auth::user()->id;
                 $fashion_booking->fabrics_id = $request->fabrics_id;
                 $fashion_booking->booking_no = $this->generateOrderNumber();
                 $fashion_booking->fullName = $request->fullName;
@@ -352,7 +354,7 @@ class bookingController extends Controller
 
                 $fashion_booking->update();
                 // $fabric->qty = $fab_qty - $request->qty;
-                
+
                 if ($request->hasFile('images')) {
 
                     $files = $request->file('images');
@@ -385,7 +387,7 @@ class bookingController extends Controller
                 return redirect()->route('booking.index')->with('success', 'Booking Updated successfully');
             } catch (Exception $e) {
                 DB::rollback();
-                return redirect()->route('booking.edit')->with('error', $e->getMessage());
+                return redirect()->route('booking.edit')->withErrors('error', $e->getMessage());
             }
     }
     }
@@ -414,7 +416,7 @@ class bookingController extends Controller
         }
     }
 
-    public function generateOrderNumber()
+    protected function generateOrderNumber()
     {
         return 'BKNG' . date('Ymd') . str_pad(rand(1, 99999), 5, 0, STR_PAD_LEFT);
     }

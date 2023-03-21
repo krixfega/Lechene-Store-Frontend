@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('fashion_bookings', function (Blueprint $table) {
             $table->id();
+         $table->unsignedBigInteger('users_id');
          $table->unsignedBigInteger('fabrics_id');
          $table->string('booking_no');
             $table->string('fullName');
@@ -64,6 +65,10 @@ return new class extends Migration
             $table->foreign('fabrics_id')
             ->references('id')
             ->on('fibrics')
+            ->onDelete('cascade');
+            $table->foreign('users_id')
+            ->references('id')
+            ->on('users')
             ->onDelete('cascade');
 
 

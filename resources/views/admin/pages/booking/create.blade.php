@@ -21,14 +21,19 @@
                         </div>
                         <div class="card-body px-2 pt-2 pb-2">
                             @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
                             <form action="{{ route('booking.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">

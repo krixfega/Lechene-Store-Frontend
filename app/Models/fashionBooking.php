@@ -18,6 +18,7 @@ class fashionBooking extends Model
     // protected $primaryKey = "id";
     protected $fillable = [
         'fabrics_id',
+        'users_id',
         'fullName',
         'booking_no',
         'phone_no',
@@ -75,7 +76,7 @@ class fashionBooking extends Model
     }
     /**
      * Get the fabric that owns the fashionBooking
-     *
+     *i
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function fabric(): BelongsTo
@@ -90,5 +91,16 @@ class fashionBooking extends Model
     public function styles(): HasMany
     {
         return $this->hasMany(BookingStyles::class,'fashion_bookings_id','id');
+    }
+
+
+    /**
+     * Get the user that owns the fashionBooking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'users_id', 'id');
     }
 }

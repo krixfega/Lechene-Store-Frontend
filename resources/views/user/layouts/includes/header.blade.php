@@ -23,7 +23,7 @@
                              <li class="has-submenu"><a href="#">{{ Auth::user()->name }}</a>
                                  <ul class="submenu-nav">
 
-                                     <li><a href="#">profile</a></li>
+                                     <li><a href="{{ route('user.account.index') }}">profile</a></li>
                                      <li>
                                          <a class=""href="{{ route('logout') }}"
                                              onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
@@ -109,7 +109,7 @@
                 <ul>
                    <li class=""><a href="{{ url('/') }}">Home</a></li>
 
-                         
+
                    <li class=""><a href="{{ route('user.shop.index') }}">Shop</a>
 
                          </li>

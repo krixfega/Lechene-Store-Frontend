@@ -26,11 +26,13 @@
         <!--== Start Checkout Area Wrapper ==-->
         <section class="section-space shop-checkout-area">
             <div class="container">
-
+            <form action="{{ route('pay') }}" method="post">
+                @csrf
                 <div class="row">
                     <div class="col-lg-7">
                         <div class="billing-info-wrap">
                             <h3>Billing Details</h3>
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="billing-info mb-4">
@@ -113,48 +115,7 @@
                                         <h3>Total <span>${{ $totalPrice }}</span></h3>
                                     </div>
                                 </div>
-                                {{-- <div class="payment-method">
-                                    <div class="pay-top sin-payment">
-                                        <input id="payment_method_1" class="input-radio" type="radio" value="cheque"
-                                            checked="checked" name="payment_method">
-                                        <label for="payment_method_1"> Direct Bank Transfer </label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>Make your payment directly into our bank account. Please use your Order ID as
-                                                the
-                                                payment reference. Your order will not be shipped until the funds have
-                                                cleared
-                                                in our account.</p>
-                                        </div>
-                                    </div>
-                                    <div class="pay-top sin-payment">
-                                        <input id="payment-method-2" class="input-radio" type="radio" value="cheque"
-                                            name="payment_method">
-                                        <label for="payment-method-2">Check payments</label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>Please send a check to Store Name, Store Street, Store Town, Store State /
-                                                County, Store Postcode.</p>
-                                        </div>
-                                    </div>
-                                    <div class="pay-top sin-payment">
-                                        <input id="payment-method-3" class="input-radio" type="radio" value="cheque"
-                                            name="payment_method">
-                                        <label for="payment-method-3">Cash on delivery </label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>Pay with cash upon delivery. </p>
-                                        </div>
-                                    </div>
-                                    <div class="pay-top sin-payment sin-payment-3">
-                                        <input id="payment-method-4" class="input-radio" type="radio" value="cheque"
-                                            name="payment_method">
-                                        <label for="payment-method-4">PayPal <img alt=""
-                                                src="assets/images/photos/paypal.png" width="35" height="23"><a
-                                                href="#">What is PayPal?</a></label>
-                                        <div class="payment-box payment_method_bacs">
-                                            <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
-                                                account.</p>
-                                        </div>
-                                    </div>
-                                </div> --}}
+
                                 <div class="payment-condition">
                                     <p>Your personal data will be used to process your order, support your experience
                                         throughout
@@ -162,12 +123,15 @@
                                             policy</a>.</p>
                                 </div>
                             </div>
-                            <div class="place-order">
-                                <a href="#/">Pay Now</a>
-                            </div>
+                            <div class="d-grid gap-2">
+                            <button type="submit" class="place-order btn btn-primary btn-lg ">
+                                <p>Pay Now</p>
+                            </button>
+                        </div>
                         </div>
                     </div>
                 </div>
+            </form>
             </div>
         </section>
         <!--== End Checkout Area Wrapper ==-->

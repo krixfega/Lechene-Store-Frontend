@@ -15,7 +15,8 @@ class OrdersItems extends Model
         'products_id',
         'name',
            'qty',
-          'price'
+          'price',
+          'd_price'
 
        ];
        /**

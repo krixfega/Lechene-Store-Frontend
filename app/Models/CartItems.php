@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Products;
 use App\Models\ProductImages;
+use App\Models\Cart;
 class CartItems extends Model
 {
     use HasFactory;
@@ -27,6 +28,12 @@ class CartItems extends Model
    {
        return $this->belongsTo(Products::class,'products_id');
    }
+   public function cart(): BelongsTo
+   {
+       return $this->belongsTo(Cart::class,'carts_id');
+   }
+
+
 
 
 }

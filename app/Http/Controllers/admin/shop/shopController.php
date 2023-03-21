@@ -217,6 +217,7 @@ class shopController extends Controller
                     'products_id' => $cart['id'],
                     'qty' => $cart['quantity'],
                     'price' => $cart['selling_price'],
+                    'd_price' => $cart['discounted_price'],
                     'orders_id' => $order->id,
                     'name' => $cart['name'],
                 ]);

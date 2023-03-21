@@ -27,10 +27,12 @@
         <!--== Start Cart Area Wrapper ==-->
         <section class="cart-page-area section-space">
             <div class="container">
+                @if($cart)
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="cart-table-wrap">
                             <div class="cart-table table-responsive">
+
                                 <table>
                                     <thead>
                                         <tr>
@@ -46,7 +48,8 @@
                                         @php
                                             $totalPrice = 0;
                                         @endphp
-                                        @forelse ($cart_items as $prod)
+
+                                        @forelse ($cart->cart_items as $prod)
                                             @php
                                                 $itemTotal = $prod->prod->discounted_price * $prod->qty;
                                                 $totalPrice += $itemTotal;
@@ -80,10 +83,13 @@
                                                         href="#"></td>
                                             </tr>
                                         @empty
+
                                             <h1>Empty</h1>
                                         @endforelse
+
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                         <div class="cart-shiping-update-wrapper">
@@ -108,6 +114,9 @@
                     <div class="col-lg-4">
                     </div>
                 </div>
+                @else
+                                <h1>Empty</h1>
+                                 @endif
                 <div class="row">
                     <div class="col-md-12 col-lg-8">
 

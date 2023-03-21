@@ -10,9 +10,11 @@ use App\Http\Controllers\admin\shop\bookingController;
 use App\Http\Controllers\admin\shop\fibricsController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\user\UserPagesController;
+use App\Http\Controllers\user\PaymentController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\product\UserProductController;
 use App\Http\Controllers\user\product\UserShopController;
+use App\Http\Controllers\user\account\UserAccountController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +38,6 @@ Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name(
 Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
 Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');
 Route::get('/shoplist/category/{id}', [UserShopController::class, 'category'])->name('user.shop.category');
-Route::get('/product/booking/{id}', [UserPagesController::class, 'booking'])->name('product.booking');
 
 
 
@@ -50,7 +51,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/cart',[CartController::class, 'delete'])->name('cart.delete');
     Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
     Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
+    Route::get('account',[UserAccountController::class,'index' ])->name('user.account.index');
+    Route::put('account/profile',[UserAccountController::class,'EditProfile' ])->name('profile');
+    Route::put('account',[UserAccountController::class,'ChangePassword' ])->name('user.account.password.update');
+    Route::get('account/booking/{id}',[UserAccountController::class,'showBooking' ])->name('user.account.booking.show');
+    Route::get('account/orders/{id}',[UserAccountController::class,'showOrder' ])->name('user.account.order.show');
+    Route::get('/product/booking/{id}', [UserPagesController::class, 'booking'])->name('product.booking');
+    Route::post('/product/booking/create', [UserPagesController::class, 'booking_create'])->name('product.booking.create');
+    Route::post('/pay', [PaymentController::class, 'redirectToGateway'])->name('pay');
+    Route::get('/payment/callback', [PaymentController::class, 'handleGatewayCallback']);
 
 
 });

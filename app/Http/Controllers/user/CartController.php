@@ -61,9 +61,7 @@ class CartController extends Controller
             // echo('hi');
             $cart = Cart::where('users_id', Auth::user()->id)->first();
 
-            $cart_items = CartItems::where('carts_id', $cart->id)->get();
-            // dd($cart_items);
-            return view('user.pages.cart', compact('cart_items'));
+            return view('user.pages.cart', compact('cart'));
             //      else {
             //         return response('info', 'Login to Continue!');
         }
@@ -77,12 +75,14 @@ class CartController extends Controller
             try {
                 DB::beginTransaction();
                 $item = CartItems::where('id', $itemId)->first();
+                // $product = Cart
 
                 if (!$item) {
                     return response()->json(['error' => 'Item not found in cart']);
                 }
 
                 $item->qty = $newQty;
+                $item->total_price =  $newQty * $item->prod->discounted_price;
 
                 $item->update();
 
