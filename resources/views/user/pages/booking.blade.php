@@ -11,7 +11,7 @@
                         <div class="page-header-content">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Bispock</li>
+                                <li class="breadcrumb-item active" aria-current="page">Bespoke</li>
                             </ol>
                             <h2 class="page-header-title"> Book {{ $bispock->name }}</h2>
                         </div>
@@ -61,7 +61,7 @@
 
                     <form id="regForm" method="post" action="{{route('product.booking.create')}}" class="mx-0" enctype="multipart/form-data">
                         @csrf
-                        <h1>Bespock Wizard:</h1>
+                        <h1>Bespoke Wizard:</h1>
                         <input type="hidden" name="fabrics_id" value="{{ $bispock->id }}">
 
                         <div class="tab">

@@ -52,7 +52,7 @@
                                                 src="{{ asset('shop/images/slider/shape1.png') }}" width="180"
                                                 height="180" alt="Image"></div>
                                         <h4 class="hero-slide-sub-title">HURRY UP!</h4>
-                                        <h2 class="hero-slide-title">Let’s find your fashion outfit.</h2>
+                                        <h2 class="hero-slide-title">Let's find your style</h2>
                                         <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
                                             typesetting industry. Lorem Ipsum has been the industry.</p>
                                         <div class="hero-slide-meta">
@@ -114,7 +114,7 @@
         <section class="product-area best-product section-space">
             <div class="container">
                 <div class="section-title text-center">
-                    <h2 class="title">Best Products</h2>
+                    <h2 class="title">Classy RTW Designs</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                 </div>
                 <div class="row mb-n6">
@@ -189,7 +189,7 @@
         <section class="product-area section-space">
             <div class="container">
                 <div class="section-title text-center">
-                    <h2 class="title">Bespoke Collections</h2>
+                    <h2 class="title">Explore our Bespoke Collections</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                 </div>
                 <div class="row mb-n6">

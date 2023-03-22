@@ -132,7 +132,7 @@
                         </div>
                         <div class="product-info">
                             <h4 class="title"><a href="shop-single-product.html">Style Modern Dress</a></h4>
-                            <div class="price">$650.00 <span class="price-old">$650.00</span></div>
+                            <div class="price">N650.00 <span class="price-old">N650.00</span></div>
                             <button type="button" class="info-btn-wishlist" data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
                                 <i class="fa fa-heart-o"></i>
                             </button>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="product-info">
                             <h4 class="title"><a href="shop-single-product.html">Modern Race</a></h4>
-                            <div class="price">$650.00 <span class="price-old">$650.00</span></div>
+                            <div class="price">N650.00 <span class="price-old">N650.00</span></div>
                             <button type="button" class="info-btn-wishlist" data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
                                 <i class="fa fa-heart-o"></i>
                             </button>
@@ -188,7 +188,7 @@
                         </div>
                         <div class="product-info">
                             <h4 class="title"><a href="shop-single-product.html">Fit Wool Suit</a></h4>
-                            <div class="price">$650.00 <span class="price-old">$650.00</span></div>
+                            <div class="price">N650.00 <span class="price-old">N650.00</span></div>
                             <button type="button" class="info-btn-wishlist" data-bs-toggle="modal" data-bs-target="#action-WishlistModal">
                                 <i class="fa fa-heart-o"></i>
                             </button>
