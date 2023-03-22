@@ -15,7 +15,7 @@
                             <div class="p-1">
                                 <a href="{{ route('products.index') }}"
                                     class="btn btn-link bg-primary text-white  text-center">
-                                    <h6 class="text-white text-center">All Fibrics</h6>
+                                    <h6 class="text-white text-center">All Fabrics</h6>
                                 </a>
                             </div>
                         </div>

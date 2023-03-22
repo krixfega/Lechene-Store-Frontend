@@ -20,7 +20,7 @@
 
 
                 <div class="col-12  col-lg-8 mt-10 mb-3 ">
-                    <h4 class="">Seller Details</h4>
+                    <h4 class="">Customer Details</h4>
                     <table class="text-primary table-responsive">
                         <tr class="d-flex flex-wrap">
                             <td>Full Name:</td>
