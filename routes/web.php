@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 //normal routes
 Route::get('/', [UserPagesController::class, 'index'])->name('home');
+Route::get('/contact', [UserPagesController::class, 'contact'])->name('contact');
+Route::get('/about', [UserPagesController::class, 'about'])->name('about');
 Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name('product.show');
 Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
 Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');

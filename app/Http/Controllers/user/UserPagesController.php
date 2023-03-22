@@ -35,6 +35,14 @@ class UserPagesController extends Controller
         return view('user.pages.home', compact('Bestproducts', 'bispock'));
     }
 
+    public function about(){
+        return view('user.pages.about');
+    }
+    public function contact(){
+        return view('user.pages.contact');
+    }
+
+
     public function singleProduct($id)
     {
         //
