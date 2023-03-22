@@ -49,7 +49,7 @@
                         </div>
                         <div class="col-sm-12 col-md-3 col-lg-3 offset-lg-1 mb-6">
                             <div class="widget-item">
-                                <h4 class="widget-title">Ecommerce</h4>
+                                <h4 class="widget-title">Shop</h4>
                                 <h4 class="widget-title widget-collapsed-title collapsed" data-bs-toggle="collapse" data-bs-target="#widgetTitleId-1">Ecommerce</h4>
                                 <div id="widgetTitleId-1" class="collapse widget-collapse-body">
                                     <ul class="widget-nav">
@@ -84,7 +84,7 @@
             <div class="footer-bottom">
                 <div class="container pt-0 pb-0">
                     <div class="footer-bottom-content">
-                        <a href="{{ route('user.shop.index') }}"><img src="{{ asset('assets/img/logos/visa.png') }}" alt="Image-HasTech"></a>
+                        <!-- <a href="{{ route('user.shop.index') }}"><img src="{{ asset('assets/img/logos/visa.png') }}" alt="Image-HasTech"></a> -->
                         <p class="copyright">© 2023 lechenne.</p>
                 </div>
             </div>

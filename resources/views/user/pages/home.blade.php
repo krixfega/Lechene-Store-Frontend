@@ -189,7 +189,7 @@
         <section class="product-area section-space">
             <div class="container">
                 <div class="section-title text-center">
-                    <h2 class="title">Bispock</h2>
+                    <h2 class="title">Bespoke Collections</h2>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                 </div>
                 <div class="row mb-n6">
@@ -276,7 +276,7 @@
             <div class="container">
                 <div class="newsletter-content-wrap" data-bg-img="{{ asset('shop/images/photos/bg1.jpg') }}">
                     <div class="newsletter-content">
-                        <h2 class="title">Connect with us | Lechee</h2>
+                        <h2 class="title">Connect with us | Lechene</h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         <div class="newsletter-form">
                             <form>
