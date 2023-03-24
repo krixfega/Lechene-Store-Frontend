@@ -103,9 +103,18 @@
  <script src="{{ asset('shop/js/plugins/fancybox.min.js') }}"></script>
  <script src="{{ asset('shop/js/plugins/jquery.nice-select.min.js') }}"></script>
  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
-
+@if (session('success'))
+    <script>
+        swal("{{ session('success') }}")
+    </script>
+@elseif (session('error'))
+<script>
+    swal("{{ session('error') }}")
+</script>
+@endif(session(status))
  <!-- Custom Main JS -->
  <script src="{{ asset('shop/js/main.js') }}"></script>
  <script>

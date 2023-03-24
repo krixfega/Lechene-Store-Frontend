@@ -109,9 +109,9 @@
                                 </div>
 
                                 <button type="button" class="info-btn-wishlist add-to-cart"
-                                    >
-                                    <i class="fa fa-shopping-cart"></i>
-                                </button>
+                                        data-product-id="{{ $prod->id }}">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </button>
                             </div>
                         </div>
                         <!--== End prPduct Item ==-->
@@ -157,38 +157,46 @@
 @section('scripts')
     <script>
 
-         $(document).on('click', '.add-to-cart', function(e) {
-    e.preventDefault();
-     $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    var productId = $(this).data('product-id');
-    var quantity = 1;
-        $.ajax({
 
-            url: "/cart",
-            method: "POST",
-            data: {
-            product_id: productId,
-            quantity: quantity,
-            _token: '{{ csrf_token() }}'
-            },
-            dataType: "json",
-            success: function (response) {
-                if(response.info){
-                alert(response.info);
-                }else{
-                    alert(response.success);
-                };
-                loadcart();
-            },
-            error: function(response) {
-                alert(response.responseJSON.error);
-            }
-        })
-    });
+        $(document).on('click', '.add-to-cart', function(e) {
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    var productId = $(this).data('product-id');
+                    var quantity = 1;
+                    $.ajax({
+
+                        url: "/cart",
+                        method: "POST",
+                        data: {
+                            product_id: productId,
+                            quantity: quantity,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.info) {
+                                swal(response.info);
+                            } else {
+                                swal(response.success);
+                            };
+                            loadcart();
+                        },
+                        error: function(response) {
+                            console.log(response);
+                            if (response.status == 401) {
+                                swal('Authentication Error', 'Login To Add To Cart !!', 'warning');
+
+                            } else {
+                                swal(response.statusText);
+                            }
+                        }
+                    });
+                    });
+
         $(document).ready(function() {
             // Bind an event handler to the change event of the select elements
             $('.select-shoing').change(function() {

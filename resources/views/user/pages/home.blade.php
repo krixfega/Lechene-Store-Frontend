@@ -20,7 +20,8 @@
                                         <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
                                             typesetting industry. Lorem Ipsum has been the industry.</p>
                                         <div class="hero-slide-meta">
-                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop Now</a>
+                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop
+                                                Now</a>
                                             <a class="ht-popup-video" data-fancybox data-type="iframe"
                                                 href="https://player.vimeo.com/video/172601404?autoplay=1">
                                                 <i class="fa fa-play icon"></i>
@@ -56,7 +57,8 @@
                                         <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
                                             typesetting industry. Lorem Ipsum has been the industry.</p>
                                         <div class="hero-slide-meta">
-                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop Now</a>
+                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop
+                                                Now</a>
                                             <a class="ht-popup-video" data-fancybox data-type="iframe"
                                                 href="https://player.vimeo.com/video/172601404?autoplay=1">
                                                 <i class="fa fa-play icon"></i>
@@ -130,23 +132,25 @@
                                 @endif
                                 <span class="badges">{{ $prod->Category->name }}</span>
                                 <div class="product-action">
-                                    <a href="{{ route('product.show', $prod->id) }}"><button type="button" class="product-action-btn action-btn-quick-view"
-                                       >
-                                        <i class="fa fa-eye"></i>
-                                    </button>
+                                    <a href="{{ route('product.show', $prod->id) }}"><button type="button"
+                                            class="product-action-btn action-btn-quick-view">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
                                     </a>
 
 
                                 </div>
                                 <div class="product-info">
-                                    <h4 class="title"><a href="{{ route('product.show', $prod->id) }}">{{ $prod->name }}</a></h4>
+                                    <h4 class="title"><a
+                                            href="{{ route('product.show', $prod->id) }}">{{ $prod->name }}</a></h4>
                                     <div class="price">&#8358;{{ $prod->discounted_price }} <span
                                             class="price-old">&#8358;{{ $prod->selling_price }}</span></div>
 
 
-                                        <button type="button" class="info-btn-wishlist add-to-cart" data-product-id="{{ $prod->id }}">
-                                            <i class="fa fa-shopping-cart"></i>
-                                        </button>
+                                    <button type="button" class="info-btn-wishlist add-to-cart"
+                                        data-product-id="{{ $prod->id }}">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </button>
 
                                 </div>
                             </div>
@@ -205,17 +209,18 @@
                                 @endif
                                 <span class="badges">{{ $prod->typeOrColors }}</span>
                                 <div class="product-action">
-                                    <button type="button" class="product-action-btn action-btn-quick-view"
-                                        data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
-                                        <i class="fa fa-expand"></i>
+                                    <a href="{{ route('product.booking', $prod->id) }}"><button type="button"
+                                        class="product-action-btn action-btn-quick-view">
+                                        <i class="fa fa-book"></i>
                                     </button>
-
+                                </a>
                                 </div>
                                 <div class="product-info">
                                     <h4 class="title"><a href="#">{{ $prod->name }}</a></h4>
                                     <div class="price">&#8358;{{ $prod->selling_price }} <span class="price-old"></span>
                                     </div>
-                                    <a href="{{ route('product.booking',$prod->id) }}" type="button" class="info-btn-wishlist">
+                                    <a href="{{ route('product.booking', $prod->id) }}" type="button"
+                                        class="info-btn-wishlist">
                                         <i class="fa fa-book"></i>
                                     </a>
                                 </div>
@@ -293,49 +298,44 @@
     </main>
 @endsection
 @section('scripts')
+    <script>
+        $(document).on('click', '.add-to-cart', function(e) {
+                    e.preventDefault();
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    var productId = $(this).data('product-id');
+                    var quantity = 1;
+                    $.ajax({
 
-<script>
+                        url: "/cart",
+                        method: "POST",
+                        data: {
+                            product_id: productId,
+                            quantity: quantity,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        dataType: "json",
+                        success: function(response) {
+                            if (response.info) {
+                                swal(response.info);
+                            } else {
+                                swal(response.success);
+                            };
+                            loadcart();
+                        },
+                        error: function(response) {
+                            console.log(response);
+                            if (response.status == 401) {
+                                swal('Authentication Error', 'Login To Add To Cart !!', 'warning');
 
-
-
-
-    $(document).on('click', '.add-to-cart', function(e) {
-    e.preventDefault();
-     $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    var productId = $(this).data('product-id');
-    var quantity = 1;
-        $.ajax({
-
-            url: "/cart",
-            method: "POST",
-            data: {
-            product_id: productId,
-            quantity: quantity,
-            _token: '{{ csrf_token() }}'
-            },
-            dataType: "json",
-            success: function (response) {
-                if(response.info){
-                alert(response.info);
-                }else{
-                    alert(response.success);
-                };
-                loadcart();
-            },
-            error: function(response) {
-                alert(response.responseJSON.error);
-            }
-
-        });
-
-       });
-
-
-</script>
-
-
+                            } else {
+                                swal(response.statusText);
+                            }
+                        }
+                    });
+                    });
+    </script>
 @endsection

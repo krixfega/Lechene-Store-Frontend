@@ -4,7 +4,7 @@
          <div class="row align-items-center justify-content-between">
              <div class="col-auto">
                  <div class="header-logo">
-                     <a href="index.html">
+                     <a href="{{ url('/') }}">
                          <img class="logo-main" src="{{ asset('assets/img/Le_chene.png') }}" width="100" height="20"
                              alt="Logo">
                      </a>
@@ -19,7 +19,7 @@
                          <li class=""><a href="{{ route('user.shop.index') }}">Shop</a>
 
                          </li>
-                         <li class=""><a href="{{ route('user.shop.index') }}">Bespoke</a>
+                         <li class=""><a href="{{ route('user.bespoke.index') }}">Bespoke</a>
 
                          </li>
 

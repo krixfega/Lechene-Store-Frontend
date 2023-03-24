@@ -39,6 +39,7 @@ Route::get('/contact', [UserPagesController::class, 'contact'])->name('contact')
 Route::get('/about', [UserPagesController::class, 'about'])->name('about');
 Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name('product.show');
 Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
+Route::get('/bespoke',[UserPagesController::class, 'bespoke'])->name('user.bespoke.index');
 Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');
 Route::get('/shoplist/category/{id}', [UserShopController::class, 'category'])->name('user.shop.category');
 Route::get('/search/autocomplete', [SearchController::class,'autoComplete'])->name('search.autocomplete');
@@ -54,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart',[CartController::class, 'create'])->name('cart.create');
     Route::get('/cart',[CartController::class, 'show'])->name('cart.show');
     Route::put('/cart',[CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart',[CartController::class, 'delete'])->name('cart.delete');
+    Route::delete('/cart/{id}',[CartController::class, 'delete'])->name('cart.delete');
     Route::get('/cart/count', [CartController::class, 'count'])->name('cart.count');
     Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('account',[UserAccountController::class,'index' ])->name('user.account.index');

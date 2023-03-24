@@ -49,7 +49,10 @@ class UserPagesController extends Controller
         $product = Products::findOrFail($id);
         return view('user.pages.single_product', compact('product'));
     }
-
+    public function bespoke()
+    {   $bespoke =  fibrics::paginate(16);
+        return view('user.pages.bespoke',compact('bespoke'));
+    }
 
     public function booking(Request $request, $id)
     {

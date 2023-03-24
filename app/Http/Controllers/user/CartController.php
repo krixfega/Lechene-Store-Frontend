@@ -60,8 +60,12 @@ class CartController extends Controller
         if (Auth::check()) {
             // echo('hi');
             $cart = Cart::where('users_id', Auth::user()->id)->first();
+            if($cart){
 
             return view('user.pages.cart', compact('cart'));
+            }else{
+                return redirect()->route('home')->with('error','Cart not Found');
+            }
             //      else {
             //         return response('info', 'Login to Continue!');
         }
@@ -97,24 +101,25 @@ class CartController extends Controller
         }
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request,$id)
     {
-        $itemId = $request->input('item_id');
+
 
         if (Auth::check()) {
             try {
                 DB::beginTransaction();
                 $cart = Cart::where('users_id', Auth::user()->id)->firstOrFail();
-                $item = CartItems::where('carts_id', $cart->id)->where('id', $itemId)->firstOrFail();
+
+                $item = CartItems::where('carts_id', $cart->id)->where('id', $id)->firstOrFail();
                 $item->delete();
                 DB::commit();
-                return response()->json(['success' => 'Item deleted from cart']);
+                return redirect()->back();
             } catch (\Exception $e) {
                 DB::rollback();
-                return response()->json(['error' => 'Error deleting item from cart: ' . $e->getMessage()], 500);
+                return redirect()->back()->with('error' ,'Error deleting item from cart: ' . $e->getMessage());
             }
         } else {
-            return response()->json(['error' => 'Login to Continue']);
+            return redirect()->route('home')->with('error', 'Login to Continue');
         }
     }
     public function count()

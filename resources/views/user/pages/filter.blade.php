@@ -33,9 +33,13 @@
                                 @endif
                             </div>
 
-                            <button type="button" class="info-btn-wishlist add-to-cart">
-                                <i class="fa fa-shopping-cart"></i>
-                            </button>
+                            <button type="button" class="info-btn-wishlist add-to-cart"
+                                        data-product-id="{{ $prod->id }}">
+                                        <i class="fa fa-shopping-cart"></i>
+                                    </button>
+
+
+
                         </div>
                     </div>
                     <!--== End prPduct Item ==-->

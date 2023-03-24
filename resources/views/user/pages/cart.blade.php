@@ -10,7 +10,7 @@
                     <div class="col-sm-8">
                         <div class="page-header-content">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Cart</li>
                             </ol>
                             <h2 class="page-header-title">All Trending Products</h2>
@@ -78,9 +78,18 @@
                                                 <td class="product-total">
                                                     <span>&#8358;{{ $prod->prod->discounted_price * $prod->qty }}</span>
                                                 </td>
-                                                <td class="product-remove"><a href="#" class="btn-delete"
-                                                        data-item-id="{{ $prod->id }}"><i class="fa fa-trash-o"></i></a
-                                                        href="#"></td>
+                                                <td>
+                                                 <form action="{{route('cart.delete',$prod->id)}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="text-danger  border-0 font-weight-bold text-xs"
+                                                        data-toggle="tooltip" data-original-title="Delete cart">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                                </td>
+
                                             </tr>
                                         @empty
 
@@ -115,7 +124,7 @@
                     </div>
                 </div>
                 @else
-                                <h1>Empty</h1>
+
                                  @endif
                 <div class="row">
                     <div class="col-md-12 col-lg-8">
@@ -205,37 +214,11 @@
 
                 error: function(jqXHR, textStatus, errorThrown) {
                     // Handle error response
-                    alert(errorThrown)
+                    swal(errorThrown)
                 }
             });
         });
-        $('.btn-delete').on('click', function(e) {
-            e.preventDefault();
 
-            var $button = $(this);
-            var itemId = $button.data('item-id');
-            var delete_url = '{{ route('cart.delete') }}';
 
-            $.ajax({
-                url: delete_url,
-                method: 'Delete',
-                data: {
-                    item_id: itemId,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    // Handle success response
-                    if (response.success) {
-                        $button.closest('.cart-item').remove();
-                        loadcart();
-                    } else {
-                        // Handle failure response
-                    }
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    // Handle error response
-                }
-            });
-        });
     </script>
 @endsection
