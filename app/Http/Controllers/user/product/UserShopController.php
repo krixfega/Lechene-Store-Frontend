@@ -14,7 +14,7 @@ class UserShopController extends Controller
     public function index()
     {
         $category = ProductsCategory::all();
-        $products = Products::all();
+        $products = Products::paginate(8);
        return view('user.pages.shop',compact('category','products'));
     }
     public function filter(Request $request)
@@ -51,7 +51,7 @@ class UserShopController extends Controller
      }
 
 
-     $filtered_products = $products->get();
+     $filtered_products = $products->paginate(8);
      $category = ProductsCategory::all();
      return view('user.pages.filter',[
          'products' => $filtered_products,
@@ -65,7 +65,7 @@ class UserShopController extends Controller
     {
 
         $category = ProductsCategory::findOrFail($id);
-        $categoryProd = Products::where('products_categories_id',$id)->get();
+        $categoryProd = Products::where('products_categories_id',$id)->paginate(8);
         // dd($categoryProd);
         return view('user.pages.category',compact('category','categoryProd'));
 

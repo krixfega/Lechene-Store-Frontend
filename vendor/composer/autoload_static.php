@@ -576,6 +576,7 @@ class ComposerStaticInitb5cf403370ab3441765f473d2f312f13
         'App\\Http\\Controllers\\admin\\tailor\\TailorController' => __DIR__ . '/../..' . '/app/Http/Controllers/admin/tailor/TailorController.php',
         'App\\Http\\Controllers\\user\\CartController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/CartController.php',
         'App\\Http\\Controllers\\user\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/PaymentController.php',
+        'App\\Http\\Controllers\\user\\SearchController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/SearchController.php',
         'App\\Http\\Controllers\\user\\UserPagesController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/UserPagesController.php',
         'App\\Http\\Controllers\\user\\account\\UserAccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/account/UserAccountController.php',
         'App\\Http\\Controllers\\user\\product\\UserProductController' => __DIR__ . '/../..' . '/app/Http/Controllers/user/product/UserProductController.php',

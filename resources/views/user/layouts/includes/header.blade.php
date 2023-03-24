@@ -35,8 +35,9 @@
              <div class="col-auto">
 
                  <div class="header-action">
-                     <form class="header-search-box d-none d-md-block">
-                         <input class="form-control" type="text" id="search" placeholder="Search">
+                     <form class="header-search-box d-none d-md-block" method="post" action="{{route('search')}}">
+                     @csrf
+                         <input class="form-control" type="search" id="search-input" required name="search" placeholder="Search products">
                          <button type="submit" class="btn-src">
                              <i class="fa fa-search"></i>
                          </button>

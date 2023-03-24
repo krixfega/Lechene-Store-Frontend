@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Controllers\\admin\\tailor\\TailorController' => $baseDir . '/app/Http/Controllers/admin/tailor/TailorController.php',
     'App\\Http\\Controllers\\user\\CartController' => $baseDir . '/app/Http/Controllers/user/CartController.php',
     'App\\Http\\Controllers\\user\\PaymentController' => $baseDir . '/app/Http/Controllers/user/PaymentController.php',
+    'App\\Http\\Controllers\\user\\SearchController' => $baseDir . '/app/Http/Controllers/user/SearchController.php',
     'App\\Http\\Controllers\\user\\UserPagesController' => $baseDir . '/app/Http/Controllers/user/UserPagesController.php',
     'App\\Http\\Controllers\\user\\account\\UserAccountController' => $baseDir . '/app/Http/Controllers/user/account/UserAccountController.php',
     'App\\Http\\Controllers\\user\\product\\UserProductController' => $baseDir . '/app/Http/Controllers/user/product/UserProductController.php',

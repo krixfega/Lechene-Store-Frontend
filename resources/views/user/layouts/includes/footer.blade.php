@@ -94,7 +94,7 @@
 
  <script src="{{ asset('shop/js/vendor/modernizr-3.11.7.min.js') }}"></script>
  <script src="{{ asset('shop/js/vendor/jquery-3.6.0.min.js') }}"></script>
- {{-- <script src="{{ asset('shop/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script> --}}
+ <script src="{{ asset('shop/js/vendor/jquery-migrate-3.3.2.min.js') }}"></script>
  <script src="{{ asset('shop/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
 
@@ -102,9 +102,27 @@
  <script src="{{ asset('shop/js/plugins/swiper-bundle.min.js') }}"></script>
  <script src="{{ asset('shop/js/plugins/fancybox.min.js') }}"></script>
  <script src="{{ asset('shop/js/plugins/jquery.nice-select.min.js') }}"></script>
-
+ <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 
 
  <!-- Custom Main JS -->
  <script src="{{ asset('shop/js/main.js') }}"></script>
+ <script>
+     var availableTags = [];
+    var path = "{{ route('search.autocomplete')}}"
+    $.ajax({
+        method: "GET",
+        url: path,
+
+        success: function (response) {
+
+            startAutoComplete(response);
+        }
+    });
+    function startAutoComplete(availableTags){
+    $( "#search-input").autocomplete({
+      source: availableTags
+    });
+    }
+ </script>

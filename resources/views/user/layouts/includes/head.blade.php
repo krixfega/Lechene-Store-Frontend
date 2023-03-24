@@ -18,6 +18,8 @@
     <!-- Vendor CSS (Bootstrap & Icon Font) -->
     <link rel="stylesheet" href="{{ asset('shop/vendor/bootstrap.min.css') }}">
 
+
+
     <!-- Plugins CSS (All Plugins Files) -->
     <link rel="stylesheet" href="{{ asset('shop/css/plugins/swiper-bundle.min.css') }}">
     <link rel="stylesheet" href="{{ asset('shop/css/plugins/font-awesome.min.css') }}">
@@ -27,5 +29,6 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{ asset('shop/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('shop/css/custom.css') }}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 </head>

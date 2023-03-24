@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\shop\bookingController;
 use App\Http\Controllers\admin\shop\fibricsController;
 use App\Http\Controllers\admin\product\ProductCategoryController;
 use App\Http\Controllers\user\UserPagesController;
+use App\Http\Controllers\user\SearchController;
 use App\Http\Controllers\user\PaymentController;
 use App\Http\Controllers\user\CartController;
 use App\Http\Controllers\user\product\UserProductController;
@@ -40,6 +41,9 @@ Route::get('/product/{id}',[UserPagesController::class, 'singleProduct'])->name(
 Route::get('/shoplist',[UserShopController::class, 'index'])->name('user.shop.index');
 Route::get('/shoplist/filter', [UserShopController::class, 'filter'])->name('user.shop.filter');
 Route::get('/shoplist/category/{id}', [UserShopController::class, 'category'])->name('user.shop.category');
+Route::get('/search/autocomplete', [SearchController::class,'autoComplete'])->name('search.autocomplete');
+Route::post('/search', [SearchController::class,'search'])->name('search');
+
 
 
 

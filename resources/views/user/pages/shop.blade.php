@@ -108,7 +108,7 @@
                                     @endif
                                 </div>
 
-                                <button type="button" class="info-btn-wishlist add-to-cart" 
+                                <button type="button" class="info-btn-wishlist add-to-cart"
                                     >
                                     <i class="fa fa-shopping-cart"></i>
                                 </button>
@@ -119,9 +119,13 @@
                     @empty
 
                     @endforelse
+                    <div class="d-flex justify-content-center">
+                        {{ $products->links('pagination::bootstrap-5') }}
+                    </div>
 
 
                 </div>
+
             </div>
         </section>
         <!--== End Product Area Wrapper ==-->

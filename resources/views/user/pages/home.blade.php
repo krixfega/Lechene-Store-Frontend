@@ -297,14 +297,7 @@
 <script>
 
 
-    // var load_url = "{{ route('cart.count') }}";
-    // $.ajax({
-    //     method: "GET",
-    //     url: load_url,
-    //     success: function (response) {
-    //       console.log(response.count);
-    //     }
-    // });
+
 
     $(document).on('click', '.add-to-cart', function(e) {
     e.preventDefault();
