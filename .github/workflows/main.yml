@@ -1,63 +1,33 @@
+name: Deploy Files
 
 on:
   push:
-    branches: [ 'deployment' ]
+    branches:
+      - main
+  # Enables manually triggering of Workflow with file synchronization option
+  workflow_dispatch:
+    inputs:
+      sync:
+        description: "File synchronization"
+        required: true
+        default: "delta"
 
-name: 🚀 Deployment
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  deploy-master:
+    name: "main branch"
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-
-    - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-
-    - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
-
-    - name: Config Clearing
-      run: php artisan config:clear
-
-    - name: Cache Clearing
-      run: php artisan cache:clear
-
-    - name: Generate App Key
-      run: php artisan key:generate
-
-    - name: Generate storage link
-      run: php artisan storage:link
-
-    - name: Directory Permissions
-      run: chmod -R 777 storage bootstrap/cache
-
-    - name: Install Npm
-      run: npm install
-
-    - name: Compile Css and Js Assets
-      run: npm run build
-
-    - name: Setup PHP with PECL extension
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: '8.1'
-
-#     - name: Create Database
-#       run: |
-#         mkdir -p database
-#         touch database/database.sqlite
-#     - name: Create Database
-#       run: |
-#         mkdir -p database
-#         touch database/foodntrack.mysql
-
-
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: ${{ secrets.FTP_SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /
+      - name: "Checkout"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Deploy"
+        uses: milanmk/actions-file-deployer@main
+        with:
+          remote-protocol: "sftp"
+          remote-host: "ftp.example.com"
+          remote-user: ${{ secrets.ftp_remote_user}}
+          ssh-private-key: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+          remote-path: "/home/lecheene/"
