@@ -22,7 +22,7 @@ class TailorController extends Controller
     public function index()
     {
         //
-        $datas = Tailor::all();
+        $datas = Tailor::with('booking')->all();
         return view('admin.pages.tailor.index',compact('datas'));
     }
 
@@ -55,7 +55,7 @@ class TailorController extends Controller
             'total_price' => 'required',
             'paid_price' => 'required',
             'balance_price' => 'required',
-        ]); 
+        ]);
         if ($validator->fails()) {
             // Validation failed
             return redirect()->back()
@@ -72,7 +72,7 @@ class TailorController extends Controller
         $tailor->save();
 
         return redirect()->route('tailor.index')->with('success', 'Tailor Assigned successfully');
-  
+
     }
     }
     /**
@@ -87,7 +87,7 @@ class TailorController extends Controller
         $tailor = Tailor::findOrFail($id);
         return view('admin.pages.tailor.view',compact('tailor'));
 
-        
+
     }
 
     /**
@@ -128,7 +128,7 @@ return redirect()->back()->with('error','Access Denied!!');
             'total_price' => 'required',
             'paid_price' => 'required',
             'balance_price' => 'required',
-        ]); 
+        ]);
         if ($validator->fails()) {
             // Validation failed
             return redirect()->back()
@@ -167,7 +167,7 @@ return redirect()->back()->with('error','Access Denied!!');
     {
         //
         if(Auth::user()->role == 'Admin'){
-        
+
         $tailor = Tailor::findOrFail($id);
         $tailor->delete();
 

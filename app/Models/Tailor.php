@@ -38,7 +38,7 @@ class Tailor extends Model
      */
     public function booking(): BelongsTo
     {
-        return $this->belongsTo(fashionBooking::class, 'booking_id', 'id');
+        return $this->belongsTo(fashionBooking::class, 'booking_id');
     }
 
 }
