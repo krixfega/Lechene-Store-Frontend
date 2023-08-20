@@ -1,33 +1,64 @@
-name: Deploy Files
 
 on:
   push:
-    branches:
-      - main
-  # Enables manually triggering of Workflow with file synchronization option
-  workflow_dispatch:
-    inputs:
-      sync:
-        description: "File synchronization"
-        required: true
-        default: "delta"
+    branches: [ 'deployment' ]
 
+name: 🚀 Deployment
 jobs:
-  deploy-master:
-    name: "main branch"
-    if: ${{ github.ref == 'refs/heads/main' }}
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: "Deploy"
-        uses: milanmk/actions-file-deployer@master
-        with:
-          remote-protocol: "sftp"
-          remote-host:  ftp.lecheene.com
-          remote-user: lecheene@lecheene.com
-          ssh-private-key: VbCgoN43owOXRwwBCm4ICFz/fcITko4aelBKOnwGYwgRlgd2cJS2m8kRhG2XtMF2uMHD+uDIYwRLjKoitX9pVwS4bjOPbUHdFT758dVTMmqK9rl1ZNpUQ240eXs/fG5brmCk2I0R8jCpnkcwo1hxQczEdxn9OKBMbRu+YtFrXNxxsXh+iBzbfHo9wVmVRCrtpxTBVC4Y4szRpOKqtNLqAbppxfWZRtx+ncrKbSPsQf8nysxxpq7S5QCqV7uuR5axvWaqfiJNj4S/b2XzWAUbcVgh78c3HKWIQZ4LhcTv2Y30HupBy5E+enZqc9DqK1Iyzz+bqQsllTiQifHVZOBFheIiTt4/7gqAKULTG06e83gVPYyd2503sl33mdONCQkliv1yh1oIGmXoj0WXnNmbKC2WDq8HWhlCkUcMsJ1k55ptNhrnLIGhJ4T3ldVNiJMrSpxPDpRDOuRq7eAGPKyxxUDtgSiDeSAh2+7YE9KKRUcR3aPH2hVvPeQl7PnGKGjoa1DY/AiKY7DVn1meRAN0uwI8ho23UGppCAgG+54sHoWilnsf0bd3BUzYLxZY1EqnyAXL5NOBnH29i7cgxKbQ4hJ37MLGCuMc27Nn4IgLFeObvnqbP2+2XceJev4mDG4CvoidPuD8aLsbaJPM8Y54P1149G44qpvoCIdMVhHXkqAytsciheV0hT28/s10saMfpnkN9X5w2tUO7nCJNCZ5b7z7MMbH8tBgWx1JnLkcE/U9o3lm9EEbWGLSvvtsudwwGrNA4Y2e/itf6X1dYkaEhNTPNdf46uSSJkL7bnBL95lqxT1FGf5Fsxn57jKDoH/vMoQyJEikM0vS9BQzZ8xVB4Wot2K1SYTotfuqTXrualvFTZePmMmAR/vjCITcocBx3m8o/ImsMlDbPRgvVXrc4QgeE/dULgzmkdA+5EbdMFNmRX1z4HXs0tVoJTLeq8ygdxoe6FUjY/Cn3WBQXuPx65cXZ5JQOddzlxrJmet1el5kMeAA+7Rd7qoDJDeQI/e1rJEvTsWeeGFqazBpYKLjCYPpsQANV4meDp75TRppLHUDuTqG2Bk/pQIZ3XCQi28TvieejjYReX6mxu5CPt461FQsmrF/yPUFs5elDOMBOJJ2YP85NpaF57AeSZtmJr3ZqwoQj7K113eqbof9jktEip9cYqcNDpYpOEgfsJ0F0DB9b+5Xguxphq6Elp/RHSIFfsrs+Zqqrcrc5VKeJIq+M+09djfsT6qdDNNHHNVT3atM0AH1d0nicHbMkKBxsElrbZecSarb2m7vXUZaCGCfMgSQ6FRM73ITNkF8rUUg8uIQCMz+ZPtBtcyWFSy2nlQlyUnkqr/ASZjo32pUtaoSO99MzaJb1VAGyw7lsqPiwaNP1GPc9T/xitZRMVG9HoldBNtaO7QwoCBZkf9F7ZPApNSLS3SYj/eh+8AQ94AEHxD2Zu57wjHtsargCGSboBXT0O7zoMbsHpHqDjgb+64MSpnXR1BiL2m9rFjCN1jtES6Xn321l3j4vfwIxzOv5A8VNq87dqEOZNWVP6icybqIqDIJ+qtDcIMSxIrcf/3gOsXdJz0vfaSEuXyo8IY14Yve
-          remote-path: /home/lecheen1/lecheene.com/lecheene
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+
+    - name: Config Clearing
+      run: php artisan config:clear
+
+    - name: Cache Clearing
+      run: php artisan cache:clear
+
+    - name: Generate App Key
+      run: php artisan key:generate
+
+    - name: Generate storage link
+      run: php artisan storage:link
+
+    - name: Directory Permissions
+      run: chmod -R 777 storage bootstrap/cache
+
+    - name: Install Npm
+      run: npm install
+
+    - name: Compile Css and Js Assets
+      run: npm run build
+
+    - name: Setup PHP with PECL extension
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'
+
+#     - name: Create Database
+#       run: |
+#         mkdir -p database
+#         touch database/database.sqlite
+#     - name: Create Database
+#       run: |
+#         mkdir -p database
+#         touch database/foodntrack.mysql
+
+
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.3
+      with:
+        server: ${{ secrets.FTP_SERVER }}
+        username: ${{ secrets.FTP_USERNAME }}
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: /
+
