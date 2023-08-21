@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin\product;
 
 use App\Http\Controllers\Controller;
+use App\Models\fibrics;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\RedirectResponse;
@@ -21,10 +23,13 @@ class ProductCategoryController extends Controller
     public function index()
     {
         //
-        $categories = ProductsCategory::all();
 
-        return view('admin.pages.products.index',compact('categories'));
+         $fibrics = fibrics::all();
+        $categories = ProductsCategory::all();
+        $products = Products::with('Category')->get();
+        return view('admin.pages.products.index', compact('categories', 'products', 'fibrics'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +39,7 @@ class ProductCategoryController extends Controller
     public function create()
     {
         //
-        
+
         return view('admin.pages.products.category.create');
 
     }
@@ -64,12 +69,14 @@ class ProductCategoryController extends Controller
 
             // Save the image
             $image = $request->file('image');
-            $image->move(public_path('images/categories'), $image->getClientOriginalName());
+            $image_name = date('YmdHis') . '-' . $image->getClientOriginalName();
+            $image->move(public_path('images/categories'),$image_name );
+            $category->image = $image_name;
+
             $category->name = $request->name;
-            $category->image = $image->getClientOriginalName();
             $category->save();
 
-            return redirect('admin/productsCategory')->with('success', 'Products Category Created Successfully');
+            return redirect()->back()->with('success', 'Products Category Created Successfully');
         }
     }
 
@@ -114,7 +121,7 @@ class ProductCategoryController extends Controller
     {
         //
         if(Auth::user()->role == 'Admin'){
-        
+
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'image' => ['image'],
@@ -133,8 +140,9 @@ $category = ProductsCategory::find($id);
 if ($request->hasFile('image')) {
     // Save the new image
     $image = $request->file('image');
-    $image->move(public_path('images/categories'), $image->getClientOriginalName());
-    $category->image = $image->getClientOriginalName();
+    $image_name = date('YmdHis') . '-' . $image->getClientOriginalName();
+    $image->move(public_path('images/categories'),$image_name );
+    $category->image = $image_name;
 }
 
 $category->name = $request->name;
@@ -162,7 +170,7 @@ return redirect('admin/productsCategory')->with('success', 'Products Category Up
 
         $category = ProductsCategory::findOrFail($id);
 
-       
+
      File::delete(public_path('images/categories/' . $category->image));
       $category->delete();
         return redirect('admin/productsCategory')->with('success', 'Category deleted successfully');

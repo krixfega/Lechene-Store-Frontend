@@ -153,7 +153,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($fibrics as $fibric)
+                                        @if($fibrics)
+                                        @forelse ($fibrics as $fibric)
 
 
                                         <tr>
@@ -238,7 +239,9 @@
 
 
                                         </tr>
-                                        @endforeach
+                                        @empty
+                                        @endforelse
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>

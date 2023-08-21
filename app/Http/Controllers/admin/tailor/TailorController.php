@@ -22,7 +22,7 @@ class TailorController extends Controller
     public function index()
     {
         //
-        $datas = Tailor::with('booking')->all();
+        $datas = Tailor::with('booking')->get();
         return view('admin.pages.tailor.index',compact('datas'));
     }
 

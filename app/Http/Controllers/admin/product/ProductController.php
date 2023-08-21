@@ -93,7 +93,7 @@ class ProductController extends Controller
                 $product_images->saveOrFail();
                 // echo($product_images->name);
             }
-            return redirect()->route('products.index')->with('success', 'Product added successfully!');
+            return redirect()->back()->with('success', 'Product added successfully!');
         }
         else{
             echo('no image');
@@ -176,7 +176,7 @@ class ProductController extends Controller
             $product->details = $request->input('details');
             $product->updateOrFail();
 
-        
+
         if ($request->hasFile('images')) {
 
             $files = $request->file('images');

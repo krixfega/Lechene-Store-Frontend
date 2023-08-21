@@ -12,18 +12,18 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex flex-row justify-content-between align-items-center pb-0">
                             <div class="p-1">
-                                <h6>All Assigned Bookings</h6>
+                                <h6>All Tailor Assigned Booking</h6>
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
                                       <li class="breadcrumb-item"><a href="{{url('/admin')}}">Home</a></li>
-                                      <li class="breadcrumb-item"><a href="{{route('shop.index')}}">All Booking</a></li>
-                                      <li class="breadcrumb-item active" aria-current="page">Assigned Bookings</li>
+                                      <li class="breadcrumb-item"><a href="{{route('shop.index')}}">All Tailors Booking/a></li>
+                                      <li class="breadcrumb-item active" aria-current="page">Assigned Tailors</li>
                                     </ol>
                                   </nav>
                             </div>
                             <div class="p-1">
                                 <a href="{{route('tailor.index')}}" class="btn btn-link bg-primary text-white  text-center">
-                                    <h6 class="text-white text-center">Assigned Bookings</h6>
+                                    <h6 class="text-white text-center">Assigned Tailors</h6>
                                 </a>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                                 </p>
                                                 {{-- <p class="text-xs text-secondary mb-0 text-secondary">Organization</p> --}}
                                             </td>
-                                           
+
 
                                             <td>
                                                 <span class="text-secondary text-xs font-weight-bold">
@@ -113,7 +113,7 @@
 
                                                 </a>
                                             </td> --}}
-                                            
+
                                             <td class="align-middle">
                                                 <a href="{{route('tailor.show',$data->id)}}" class="text-success font-weight-bold text-xs"
                                                     data-toggle="tooltip" data-original-title="View More">

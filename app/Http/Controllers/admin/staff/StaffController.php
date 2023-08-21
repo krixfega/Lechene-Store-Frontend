@@ -61,7 +61,7 @@ class StaffController extends Controller
             'address' => ['required', 'string'],
             'phone' => ['required', 'string'],
             'position' => ['required', 'string'],
-            'salary' => ['required', 'string'],
+            'salary' => ['string'],
             'docs.*' => 'nullable|mimes:jpeg,png,jpg,svg,pdf,doc,docx|max:5000',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],

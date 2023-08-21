@@ -37,7 +37,7 @@ class fibricsController extends Controller
         //
 
 
-        return view('admin.pages.fibrics.create');
+        return view('admin.pages.fabrics.create');
     }
 
     /**

@@ -15,7 +15,7 @@
                             <div class="p-1">
                                 <a href="{{ route('products.index') }}"
                                     class="btn btn-link bg-primary text-white  text-center">
-                                    <h6 class="text-white text-center">All Products/h6>
+                                    <h6 class="text-white text-center">All Products</h6>
                                 </a>
                             </div>
                         </div>
@@ -29,7 +29,11 @@
                                     </ul>
                                 </div>
                             @endif
-
+                            @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
                             <form action="{{url('admin/products')}}" method="post" enctype="multipart/form-data" >
                                 @csrf
                                 <div class="form-group">
