@@ -68,7 +68,7 @@ class StaffController extends Controller
         ]);
 
         if ($validator->fails()) {
-            // Validation failed
+            // Validation failedg
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validator);
