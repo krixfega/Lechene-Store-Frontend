@@ -31,38 +31,7 @@ class fashionBooking extends Model
         'desc',
         'pickupDate',
         'bookingStatus',
-        'neck',
-        'shoulder',
-        'frontArc',
-        'waist',
-        'hip',
-        'topLength',
-        'trouserLength',
-        'armHole',
-        'roundSleeve',
-        'thigh',
-        'knee',
-        'crotch',
-        'upperBust',
-        'bust',
-        'N_N',
-        'underBust',
-        'bustPoint',
-        'halfLength',
-        'halfLengthBack',
-        'highWaist',
-        'shoulderToknee',
-        'shoulderToHip',
-        'fullLength',
-        'dressLength',
-        'sleeveLength',
-        'calf',
-        'chest',
-        'stomach',
-        'topHip',
-        'biceps',
-        'sleeve',
-        'waistToKnee',
+       'customer_id',
 
     ];
     /**
@@ -103,4 +72,14 @@ class fashionBooking extends Model
     {
         return $this->belongsTo(User::class, 'users_id', 'id');
     }
+    /**
+     * Get the user that owns the fashionBooking
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function customer(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'customer_id', 'id');
+    }
+
 }

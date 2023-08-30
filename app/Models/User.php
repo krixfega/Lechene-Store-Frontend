@@ -14,6 +14,7 @@ use App\Models\Tailor;
 use App\Models\Orders;
 use App\Models\fashionBooking;
 use App\Models\payment;
+use App\Models\Measurement;
 
 
 
@@ -98,5 +99,15 @@ public function orders(): HasMany
 public function payments(): HasMany
 {
     return $this->hasMany(payment::class, 'users_id');
+}
+
+/**
+ * Get the measurement associated with the User
+ *
+ * @return \Illuminate\Database\Eloquent\Relations\HasOne
+ */
+public function measurement(): HasOne
+{
+    return $this->hasOne(Measurement::class, 'users_id', 'id');
 }
 }

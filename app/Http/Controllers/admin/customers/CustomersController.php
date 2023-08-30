@@ -43,7 +43,7 @@ class CustomersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate Store User  Request
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'gender' => ['required', 'string'],
@@ -54,13 +54,14 @@ class CustomersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
-
+        // Dislay validation error messsage on fail
         if ($validator->fails()) {
             // Validation failed
             return redirect()->back()
                 ->withInput()
                 ->withErrors($validator);
         } else {
+            // store User Data
             User::create([
                 'name' => $request['name'],
                 'gender' => $request['gender'],
@@ -70,7 +71,7 @@ class CustomersController extends Controller
                 'phone' => $request['phone'],
                 'password' => Hash::make($request['password']),
             ]);
-            return redirect('admin/customers')->with('successs', 'Customer Created Successfully');
+            return redirect()->back()->with('success', 'Customer Created Successfully');
         }
     }
 

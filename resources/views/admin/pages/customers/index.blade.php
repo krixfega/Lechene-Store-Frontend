@@ -21,6 +21,25 @@
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive  p-0">
+                                 {{-- display Session message --}}
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        @if (session()->has('success'))
+                        <div class="alert alert-success" role="alert">
+
+                                {{session()->get('success')}}
+
+
+
+                        </div>
+                        @endif
                                 <table class="table w-full align-items-center mb-0" id="example3">
                                     <thead>
                                         <tr>
@@ -36,9 +55,12 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Phone</th>
+
+
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Date Joined</th>
+                                            <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                             <th class="text-secondary opacity-7"></th>
                                         </tr>
@@ -78,21 +100,21 @@
                                                     <p class="text-xs font-weight-bold mb-0 text-secondary">
                                                         {{ $customer->phone }}</p>
                                                 </td>
+
                                                 <td>
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">{{ $customer->created_at->format('F j, Y') }}</span>
                                                 </td>
-                                                {{-- <td class="align-middle">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-toggle="tooltip" data-original-title="Edit user">
-
-                                                </a>
-                                            </td> --}}
+                                                <td>
+                                                    <a href="{{route('measurement.show',$customer->id)}}" class="text-xs text-primary font-weight-bold mb-0 text-decoration-undeline">
+                                                    measurement
+                                                    </a>
+                                                </td>
                                                 <td class="align-middle">
                                                     <a href="{{ url('/admin/customers/' . $customer->id . '/edit') }}"
                                                         class="text-success font-weight-bold text-xs" data-toggle="tooltip"
                                                         data-original-title="Edit user">
-                                                       <i class="fa fa-pen"></i>
+                                                      edit
                                                     </a>
                                                 </td>
                                                 @if (Auth::user()->role == 'Admin')
@@ -104,7 +126,7 @@
                                                         @method('DELETE')
                                                         <button type="submit" class="text-danger  border-0 font-weight-bold text-xs"
                                                             data-toggle="tooltip" data-original-title="Delete user">
-                                                            <i class="fa fa-trash"></i>
+                                                            delete
                                                         </button>
                                                     </form>
                                                 </td>
@@ -120,7 +142,7 @@
                     </div>
                 </div>
             </div>
-          
+
         </div>
     </main>
 @endsection

@@ -48,6 +48,7 @@ return array(
     'App\\Models\\BookingStyles' => $baseDir . '/app/Models/BookingStyles.php',
     'App\\Models\\Cart' => $baseDir . '/app/Models/Cart.php',
     'App\\Models\\CartItems' => $baseDir . '/app/Models/CartItems.php',
+    'App\\Models\\Measurement' => $baseDir . '/app/Models/Measurement.php',
     'App\\Models\\Orders' => $baseDir . '/app/Models/Orders.php',
     'App\\Models\\OrdersItems' => $baseDir . '/app/Models/OrdersItems.php',
     'App\\Models\\ProductImages' => $baseDir . '/app/Models/ProductImages.php',

@@ -9,7 +9,7 @@
             <div class="row">
 
 
-                <h2>Booking Details</h2>
+                <h2>Booking Details for Customer {{ $booking->customer->email}}</h2>
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{ url('/admin') }}">Home</a></li>
@@ -23,6 +23,7 @@
                     <div class="col-12 col-lg-6 mb-3 shadow p-3 mb-5  bg-white ">
                         {{-- <h4>User Details</h4> --}}
                         <table class="table  table-striped table-responsive-sm">
+
                             <tr>
                                 <th>Full Name:</th>
                                 <td class="text-secondary">{{ $booking->fullName }}</td>
@@ -86,51 +87,51 @@
                                 <tbody>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Neck</td>
-                                        <td class="text-secondary ">{{ $booking->neck }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->neck }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Shoulder</td>
-                                        <td class="text-secondary ">{{ $booking->shoulder }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->shoulder }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Front Arc</td>
-                                        <td class="text-secondary ">{{ $booking->frontArc }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->frontArc }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Waist</td>
-                                        <td class="text-secondary ">{{ $booking->waist }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->waist }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Hips</td>
-                                        <td class="text-secondary ">{{ $booking->hip }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->hip }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Top Length</td>
-                                        <td class="text-secondary ">{{ $booking->topLength }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->topLength }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Trouser Length</td>
-                                        <td class="text-secondary ">{{ $booking->trouserLength }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->trouserLength }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Arm Hole</td>
-                                        <td class="text-secondary ">{{ $booking->armHole }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->armHole }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Round Sleeve</td>
-                                        <td class="text-secondary ">{{ $booking->roundSleeve }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->roundSleeve }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Thigh</td>
-                                        <td class="text-secondary ">{{ $booking->thigh }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->thigh }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Knee</td>
-                                        <td class="text-secondary ">{{ $booking->knee }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->knee }}</td>
                                     </tr>
                                     <tr>
                                         <td class="text-primary font-weight-bold">Crotch</td>
-                                        <td class="text-secondary ">{{ $booking->crotch }}</td>
+                                        <td class="text-secondary ">{{ $booking->customer->crotch }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -140,73 +141,73 @@
                         <table class="table table-bordered table-responsive">
                           <tbody>
                             <tr> --}}
-                        @if ($booking->gender == 'female')
+                        @if ($booking->customer->gender == 'female')
                             <div class="col-12 col-lg-6">
                                 <table class="table table-bordered table-responsive">
                                     <tbody>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">UpperBust:</td>
-                                            <td class="text-secondary ">{{ $booking->upperBust }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->upperBust }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Bust:</td>
-                                            <td class="text-secondary ">{{ $booking->bust }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->bust }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">UnderBust:</td>
-                                            <td class="text-secondary ">{{ $booking->underBust }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->underBust }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">BustPoint:</td>
-                                            <td class="text-secondary ">{{ $booking->bustPoint }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->bustPoint }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">N-N:</td>
-                                            <td class="text-secondary ">{{ $booking->N_N }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->N_N }}</td>
                                         </tr>
 
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Half Length:</td>
-                                            <td class="text-secondary ">{{ $booking->halfLength }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->halfLength }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Half Length Back:</td>
-                                            <td class="text-secondary ">{{ $booking->halfLengthBack }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->halfLengthBack }}</td>
                                         </tr>
 
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Highwaist:</td>
-                                            <td class="text-secondary ">{{ $booking->highWaist }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->highWaist }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Shoulder To Knee:</td>
-                                            <td class="text-secondary ">{{ $booking->shoulderToKnee }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->shoulderToKnee }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Shoulder To Hip:</td>
-                                            <td class="text-secondary ">{{ $booking->shoulderToHip }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->shoulderToHip }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Full Length:</td>
-                                            <td class="text-secondary ">{{ $booking->fullLength }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->fullLength }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Dress Length:</td>
-                                            <td class="text-secondary ">{{ $booking->dressLength }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->dressLength }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Sleeve Length:</td>
-                                            <td class="text-secondary ">{{ $booking->sleeveLength }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->sleeveLength }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Calf:</td>
-                                            <td class="text-secondary ">{{ $booking->calf }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->calf }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         @endif
-                        @if ($booking->gender == 'male')
+                        @if ($booking->customer->gender == 'male')
                             <div class="col-12 col-lg-6">
                                 <table class="table table-bordered table-responsive">
 
@@ -214,24 +215,24 @@
 
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Chest:</td>
-                                            <td class="text-secondary ">{{ $booking->chest }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->chest }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Stomach:</td>
-                                            <td class="text-secondary ">{{ $booking->stomach }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->stomach }}</td>
                                         </tr>
 
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Top Hip:</td>
-                                            <td class="text-secondary ">{{ $booking->topHip }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->topHip }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Biceps:</td>
-                                            <td class="text-secondary ">{{ $booking->biceps }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->biceps }}</td>
                                         </tr>
                                         <tr class="">
                                             <td class="text-primary font-weight-bold">Sleeve:</td>
-                                            <td class="text-secondary ">{{ $booking->sleeve }}</td>
+                                            <td class="text-secondary ">{{ $booking->customer->sleeve }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

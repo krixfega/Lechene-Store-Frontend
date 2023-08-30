@@ -26,6 +26,7 @@
             <span class="nav-link-text ms-1">Customers Management</span>
           </a>
         </li>
+
         <li class="nav-item dropdown position-relative" id=" ">
             <span class="nav-link dropdown-toggle"  id="BookingDropdown" role="button"  data-bs-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
               <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
