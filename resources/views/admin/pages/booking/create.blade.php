@@ -37,7 +37,7 @@
                             <form action="{{ route('booking.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="fabrics_id">Fabrics/design</label>
+                                    <label for="fabrics_id">Fabrics/Design</label>
                                     <select class="form-control @error('fabrics_id') is-invalid @enderror" id="fabrics_id"
                                         name="fabrics_id" required>
                                         @foreach ($fabrics as $fabric)

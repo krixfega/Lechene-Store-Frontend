@@ -10,7 +10,7 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex flex-row justify-content-between align-items-center pb-0">
                             <div class="p-1">
-                                <h6>Create Fibric</h6>
+                                <h6>Add Fabric</h6>
                             </div>
                             <div class="p-1">
                                 <a href="{{ route('products.index') }}"

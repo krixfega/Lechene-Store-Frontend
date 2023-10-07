@@ -7,21 +7,21 @@
         <div class="container-fluid py-4 box-shadow-10-10-20-0">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ $fibric->name }}</h3>
+                    <h3>{{ $fabric->name }}</h3>
                 </div>
                 <div class="card-body">
-                    <p>Type/Colors: {{ $fibric->typeOrColors }}</p>
-                    <p>Quantity: {{ $fibric->qty }}</p>
-                    <p>Category: {{ $fibric->category}}</p>
-                    <p>Cost Price: {{ $fibric->cost_price }}</p>
-                    <p>Selling Price: {{ $fibric->selling_price }}</p>
+                    <p>Type/Colors: {{ $fabric->typeOrColors }}</p>
+                    <p>Quantity: {{ $fabric->qty }}</p>
+                    <p>Category: {{ $fabric->category}}</p>
+                    <p>Cost Price: {{ $fabric->cost_price }}</p>
+                    <p>Selling Price: {{ $fabric->selling_price }}</p>
 
                        <h4> Details:</h4>
-                         <p>{{ $fibric->details }}</p>
+                         <p>{{ $fabric->details }}</p>
                     <div class="card-subtitle">
                         <h4>Images:</h4>
                         <div class="row">
-                            @foreach($fibric->FibricImages as $image)
+                            @foreach($fabric->FabricImages as $image)
                                 <div class="col-md-3">
                                     <img src="{{ asset('images/fibrics/'.$image->name) }}" width="100">
                                 </div>
