@@ -12,16 +12,16 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="page-header-content">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Product Detail</li>
-                            </ol>
-                            <h2 class="page-header-title">Beat deal with best product.</h2>
+                            </ol> -->
+                            <h2 class="page-header-title">Best deal with best product.</h2>
                         </div>
                     </div>
-                    <div class="col-sm-4 d-sm-flex justify-content-end align-items-end">
+                    <!-- <div class="col-sm-4 d-sm-flex justify-content-end align-items-end">
                         <h5 class="showing-pagination-results">Product Detail</h5>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -206,8 +206,8 @@
             <div class="container">
                 <div class="newsletter-content-wrap" data-bg-img="assets/images/photos/bg1.jpg">
                     <div class="newsletter-content">
-                        <h2 class="title">Connect with us | merier</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2 class="title">Connect with us today</h2>
+                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
                         <div class="newsletter-form">
                             <form>
                                 <input type="email" class="form-control" placeholder="Email address">

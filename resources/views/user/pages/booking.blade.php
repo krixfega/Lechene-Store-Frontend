@@ -9,10 +9,10 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="page-header-content">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Bespoke</li>
-                            </ol>
+                            </ol> -->
                             <h2 class="page-header-title"> Book {{ $bispock->name }}</h2>
                         </div>
                     </div>
@@ -61,11 +61,11 @@
 
                     <form id="regForm" method="post" action="{{route('product.booking.create')}}" class="mx-0" enctype="multipart/form-data">
                         @csrf
-                        <h1>Bespoke Wizard:</h1>
+                        <h1>Custom Outfit Form</h1>
                         <input type="hidden" name="fabrics_id" value="{{ $bispock->id }}">
 
                         <div class="tab">
-                            <p class="">Personal details</p>
+                            <p class="">Kindly Enter Your Personal Details</p>
                             <div class="form-group">
                                 <label for="fullName">Full Name (*required)</label>
                                 <input type="text" required class="form-control @error('fullName') is-invalid @enderror"
