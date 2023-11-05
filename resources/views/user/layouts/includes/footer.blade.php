@@ -38,7 +38,7 @@
                                     <a class="widget-logo" href="{{ url('/') }}">
                                         <img src="{{ asset('assets/img/Le_chene.png') }}" alt="Logo" width="153" height="30">
                                     </a>
-                                    <p class="desc">Lechene  fashion is simply dummy text of the printing and typesetting industry.</p>
+                                    <p class="desc">Lechene  fashion brand with expertise in satifying customers fashion needs</p>
                                 </div>
                                 <div class="widget-social">
                                     <a href="https://www.facebook.com/" target="_blank" rel="noopener"><i class="fa fa-facebook"></i></a>

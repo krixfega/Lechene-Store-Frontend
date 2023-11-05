@@ -8,10 +8,10 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="page-header-content">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                                 <li class="breadcrumb-item active" aria-current="page">Products</li>
-                            </ol>
+                            </ol> -->
                             <h2 class="page-header-title">All Trending Products</h2>
                         </div>
                     </div>
@@ -135,8 +135,8 @@
             <div class="container">
                 <div class="newsletter-content-wrap" data-bg-img="assets/images/photos/bg1.jpg">
                     <div class="newsletter-content">
-                        <h2 class="title">Connect with us | merier</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2 class="title">Connect with us today</h2>
+                        <!-- <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
                         <div class="newsletter-form">
                             <form>
                                 <input type="email" class="form-control" placeholder="Email address">

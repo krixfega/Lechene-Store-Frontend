@@ -7,10 +7,10 @@
     <section class="page-header-area">
         <div class="container">
             <div class="page-header-content">
-                <ol class="breadcrumb">
+                <!-- <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Contact</li>
-                </ol>
+                </ol> -->
             </div>
         </div>
         <h6 class="visually-hidden">Contact Page Header Area</h6>
@@ -24,9 +24,9 @@
                 <div class="col-sm-12 col-md-7 col-lg-6">
                     <div class="contact-form-area">
                         <h3>Get in touch</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis</p>
+                        <p>We're here to answer your questions, hear your feedback, and assist you on your fashion journey. Feel free to contact us through any of the following means:</p>
                         <!--== Start Contact Form ==-->
-                        <form class="contact-form" id="contact-form" action="https://whizthemes.com/mail-php/raju/arden/mail.php" method="post">
+                        <form class="contact-form" id="contact-form" action="#" method="post">
                             <div class="form-input-item">
                                 <input type="text" class="form-control" name="con_name" id="name" placeholder="Enter Your Name">
                             </div>
@@ -62,10 +62,10 @@
                 <div class="col-sm-6 col-md-4 mb-6">
                     <!--== Start Contact Info Item ==-->
                     <div class="contact-info-item">
-                        <h4>Phone</h4>
+                        <h4>Call Us</h4>
                         <div class="content">
-                            <a href="tel://+11215562222 ">+11 21556 2222 </a>
-                            <a href="tel://+12454555545">+12 4545 55545</a>
+                            <a href="tel://+11215562222 ">+2348037183004 </a>
+                            <a href="tel://+12454555545">+2348079466033</a>
                         </div>
                     </div>
                     <!--== End Contact Info Item ==-->
@@ -73,10 +73,10 @@
                 <div class="col-sm-6 col-md-4 mb-6">
                     <!--== Start Contact Info Item ==-->
                     <div class="contact-info-item">
-                        <h4>E-mail</h4>
+                        <h4>Send us an Email</h4>
                         <div class="content">
-                            <a href="mailto://demo@example.com">demo@example.com</a>
-                            <a href="mailto://example@demo.info">example@demo.info</a>
+                            <a href="mailto://info@lecheene.com">info@lecheene.com</a>
+                            <a href="mailto://hello@lecheene.com">hello@lecheene.com</a>
                         </div>
                     </div>
                     <!--== End Contact Info Item ==-->
@@ -84,9 +84,9 @@
                 <div class="col-sm-6 col-md-4 mb-6">
                     <!--== Start Contact Info Item ==-->
                     <div class="contact-info-item">
-                        <h4>Address</h4>
+                        <h4>Find Us</h4>
                         <div class="content">
-                            <p>98 Winn St, Woburn, MA 01801, USA</p>
+                            <p>Lekki Gardens Horizon 2 Extension. D3F1</p>
                         </div>
                     </div>
                     <!--== End Contact Info Item ==-->

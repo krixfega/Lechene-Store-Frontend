@@ -5,7 +5,7 @@
              <div class="col-auto">
                  <div class="header-logo">
                      <a href="{{ url('/') }}">
-                         <img class="logo-main" src="{{ asset('assets/img/Le_chene.png') }}" width="100" height="20"
+                         <img class="logo-main" src="{{ asset('assets/img/Le_chene.png') }}" width="80" height="20"
                              alt="Logo">
                      </a>
                  </div>
@@ -23,7 +23,7 @@
 
                          </li>
 
-                         <li class="has-submenu"><a href="#">Pages</a>
+                         <li class="has-submenu"><a href="#">The Brand</a>
                              <ul class="submenu-nav">
                                  <li><a href="{{ route('about') }}">About</a></li>
                                  <li><a href="{{ route('contact') }}">Contact</a></li>
@@ -35,13 +35,13 @@
              <div class="col-auto">
 
                  <div class="header-action">
-                     <form class="header-search-box d-none d-md-block" method="post" action="{{route('search')}}">
+                     <!-- <form class="header-search-box d-none d-md-block" method="post" action="{{route('search')}}">
                      @csrf
                          <input class="form-control" type="search" id="search-input" required name="search" placeholder="Search products">
                          <button type="submit" class="btn-src">
                              <i class="fa fa-search"></i>
                          </button>
-                     </form>
+                     </form> -->
                     <ul class="main-nav">
                         @auth
                         <li class="has-submenu"><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -50,7 +50,7 @@
                           </svg> </a>
                             <ul class="submenu-nav">
 
-                                <li><a href="{{ route('user.account.index') }}">profile</a></li>
+                                <li><a href="{{ route('user.account.index') }}">Profile</a></li>
                                 <li>
                                     <a class=""href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
@@ -74,7 +74,7 @@
                             <ul class="submenu-nav">
 
                                 <li><a href="{{ route('login') }}">Login</a></li>
-                                <li><a href="{{ route('register') }}">Register</a></li>
+                                <li><a href="{{ route('register') }}">Create Account</a></li>
                                 {{-- <li><a href="page-not-found.html">Page Not Found</a></li> --}}
 
                             </ul>

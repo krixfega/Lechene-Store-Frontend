@@ -12,21 +12,20 @@
                             <div class="row align-items-center position-relative">
                                 <div class="col-12 col-sm-6">
                                     <div class="hero-slide-content">
-                                        <div class="hero-slide-shape-img"><img
+                                        <!-- <div class="hero-slide-shape-img"><img
                                                 src="{{ asset('shop/images/slider/slider1.png') }}" width="180"
-                                                height="180" alt="Image"></div>
-                                        <h4 class="hero-slide-sub-title">HURRY UP!</h4>
-                                        <h1 class="hero-slide-title">Let’s find your fashion outfit.</h1>
-                                        <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry.</p>
+                                                height="180" alt="Image"></div> -->
+                                        <h4 class="hero-slide-sub-title">Welcome to LeChene </h4>
+                                        <h1 class="hero-slide-title">Where Style Meets Elegance</h1>
+                                        <p class="hero-slide-desc">Discover a world where fashion knows no bounds. Explore our curated collection of ready-to-wear outfits that redefine style, and let your unique personality shine.</p>
                                         <div class="hero-slide-meta">
                                             <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop
                                                 Now</a>
-                                            <a class="ht-popup-video" data-fancybox data-type="iframe"
+                                            <!-- <a class="ht-popup-video" data-fancybox data-type="iframe"
                                                 href="https://player.vimeo.com/video/172601404?autoplay=1">
                                                 <i class="fa fa-play icon"></i>
                                                 <span>Play Now</span>
-                                            </a>
+                                            </a> -->
                                         </div>
                                     </div>
                                 </div>
@@ -44,43 +43,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide hero-slide-item">
-                        <div class="container">
-                            <div class="row align-items-center position-relative">
-                                <div class="col-12 col-sm-6">
-                                    <div class="hero-slide-content">
-                                        <div class="hero-slide-shape-img"><img
-                                                src="{{ asset('shop/images/slider/shape1.png') }}" width="180"
-                                                height="180" alt="Image"></div>
-                                        <h4 class="hero-slide-sub-title">HURRY UP!</h4>
-                                        <h2 class="hero-slide-title">Let's find your style</h2>
-                                        <p class="hero-slide-desc">Lorem Ipsum is simply dummy text of the printing and
-                                            typesetting industry. Lorem Ipsum has been the industry.</p>
-                                        <div class="hero-slide-meta">
-                                            <a class="btn btn-border-primary" href="{{ route('user.shop.index') }}">Shop
-                                                Now</a>
-                                            <a class="ht-popup-video" data-fancybox data-type="iframe"
-                                                href="https://player.vimeo.com/video/172601404?autoplay=1">
-                                                <i class="fa fa-play icon"></i>
-                                                <span>Play Now</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6">
-                                    <div class="hero-slide-thumb">
-                                        <img src="{{ asset('shop/images/slider/slider1-man2.png') }}" width="555"
-                                            height="550" alt="Image">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero-social">
-                                <a href="https://www.facebook.com/" target="_blank" rel="noopener">fb</a>
-                                <a href="https://www.twitter.com/" target="_blank" rel="noopener">tw</a>
-                                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">in</a>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <!--== Add Pagination ==-->
                 <div class="hero-slider-pagination"></div>
@@ -116,8 +79,8 @@
         <section class="product-area best-product section-space">
             <div class="container">
                 <div class="section-title text-center">
-                    <h2 class="title">Classy RTW Designs</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <h2 class="title">Classy Ready To Wear Designs</h2>
+                    <p>From Quality Fabrics to Neatly crafted Designs</p>
                 </div>
                 <div class="row mb-n6">
                     @foreach ($Bestproducts as $prod)
@@ -194,7 +157,7 @@
             <div class="container">
                 <div class="section-title text-center">
                     <h2 class="title">Explore our Bespoke Collections</h2>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <p>Dive into the realm of bespoke fashion, where we craft tailor-made dreams into reality.</p>
                 </div>
                 <div class="row mb-n6">
                     @foreach ($bispock as $prod)
@@ -281,8 +244,8 @@
             <div class="container">
                 <div class="newsletter-content-wrap" data-bg-img="{{ asset('shop/images/photos/bg1.jpg') }}">
                     <div class="newsletter-content">
-                        <h2 class="title">Connect with us | Lechene</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                        <h2 class="title">Connect with us today</h2>
+                        <!-- <p>We don't spam</p> -->
                         <div class="newsletter-form">
                             <form>
                                 <input type="email" class="form-control" placeholder="Email address">

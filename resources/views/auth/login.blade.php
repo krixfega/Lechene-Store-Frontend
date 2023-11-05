@@ -12,7 +12,7 @@
       </div>
     </nav>
         <section>
-          <div class="page-header min-vh-100">
+          <div class="page-header min-vh-80">
             <div class="container">
               <div class="row">
                 <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
@@ -84,17 +84,17 @@
                 <div class="row">
                     <div class="col-sm-8">
                         <div class="page-header-content">
-                            <ol class="breadcrumb">
+                            <!-- <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Home</a></li>
                                 <li class="breadcrumb-item active">Account</li>
-                            </ol>
-                            <h2 class="page-header-title">My Account</h2>
+                            </ol> -->
+                            <!-- <h2 class="page-header-title">My Account</h2> -->
                         </div>
                     </div>
-                    <div class="col-sm-4 d-sm-flex justify-content-end align-items-end">
+                    <!-- <div class="col-sm-4 d-sm-flex justify-content-end align-items-end">
                         <h5 class="showing-pagination-results">
                           <a href="{{ route('register') }}">  Register</a> </h5>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>
@@ -103,11 +103,11 @@
         <!--== Start Login Wrapper ==-->
         <section class="login-register-area section-space">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12 login-register-border">
+                <div class="row justify-content-center">
+                    <div class="col-md-6 ">
                         <div class="login-register-content">
                             <div class="login-register-title mb-30">
-                                <h2>Login</h2>
+                                <!-- <h2>Login</h2> -->
                                 <p>Welcome back! Please enter your email and password to login. </p>
                             </div>
                             <div class="login-register-style login-register-pr">
@@ -144,7 +144,7 @@
                                         <div>
                                          <label>Dont Have an Account?</label> <a href="{{ route('register') }}" class="text-primary">  Register</a>
                                         </div>
-                                         <div class="btn-register">
+                                         <div class="btn-register text-center">
                                             <button type="submit" class="btn-register-now"
                                             >Login</button>
                                         </div>
@@ -159,22 +159,7 @@
             <!--== End Login Wrapper ==-->
 
             <!--== Start News Letter Area Wrapper ==-->
-            <section class="news-letter-area section-bottom-space">
-                <div class="container">
-                    <div class="newsletter-content-wrap" data-bg-img="assets/images/photos/bg1.jpg">
-                        <div class="newsletter-content">
-                            <h2 class="title">Connect with us | merier</h2>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            <div class="newsletter-form">
-                                <form>
-                                    <input type="email" class="form-control" placeholder="Email address">
-                                    <button class="btn-submit" type="submit"><i class="fa fa-paper-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
             <!--== End News Letter Area Wrapper ==-->
 
         </main>

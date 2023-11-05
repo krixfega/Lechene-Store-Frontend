@@ -9,36 +9,36 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
                         <h1 class="text-white mb-2 mt-5">Le Chene</h1>
-                        <p class="text-lead text-white">Account Creation Page</p>
+                        <p class="text-lead text-white">Create Account</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="container">
-            <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+            <div class="row mt-lg-n10 mt-md-n11 mt-n10 my   -10 justify-content-center">
                 <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                     <div class="card z-index-0">
                         <div class="card-header text-center pt-4">
-                            <h5>Register</h5>
+                            <h5>Create New Account</h5>
                         </div>
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('register') }}">
                                 @csrf
                                 @if($errors->any())
-    <div class="alert alert-danger text-secondary">
-        <ul>
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-                                <div class="mb-3">
-                                    Fullname
+                                    <div class="alert alert-danger text-secondary">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                    <div class="mb-3">
+                                    Full Name
                                     <input type="text" name="name" required
                                         class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                        placeholder="Fullname" aria-label="Name" value="{{ old('name') }}">
+                                        placeholder="Full Name" aria-label="Name" value="{{ old('name') }}">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -79,17 +79,19 @@
                                         </span>
                                     @enderror
                                 </div>
-                                    <div class="mb-3">
-                                        Date Of Birth
-                                      <input type="date" name="dob" required class="form-control form-control-lg @error('date_of_birth') is-invalid @enderror" placeholder="Date of Birth" aria-label="Date of Birth" value="{{ old('date_of_birth') }}">
-                                      @error('date_of_birth')
-                                        <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
-                                        </span>
-                                      @enderror
+                                <div class="mb-3">
+                                        <input type="date" name="dob" class="form-control form-control-lg @error('dob') is-invalid @enderror"
+                                            placeholder="Date of Birth" aria-label="Date of Birth" value="{{ old('dob') }}">
+                                        @error('dob')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                                    <div class="mb-3">
-                                        <select name="gender" class="form-control form-control-lg w-100 @error('gender') is-invalid @enderror" value="{{ old('gender') }}">
+
+                                    <div class="my-3">
+                                        Gender
+                                        <select name="gender" class="form-control form-control-lg mb-3 w-100 @error('gender') is-invalid @enderror" value="{{ old('gender') }}">
                                             <option value="male">Male</option>
                                             <option value="female">Female</option>
                                         </select>
@@ -123,8 +125,7 @@
                                             class="text-dark font-weight-bolder">Terms and Conditions</a></label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign
-                                        up</button>
+                                    <button type="submit" class="btn btn-lg btn-primary btn-lg w-50 mt-4 mb-4">Create</button>
                                 </div>
                             </form>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
